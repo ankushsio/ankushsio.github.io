@@ -1,0 +1,128 @@
+---
+import Base from "../../layouts/Base.astro";
+import career from "../../data/career.json";
+
+const company = career.companies[0];
+
+const projects = [...company.projects].sort((a, b) =>
+  (b.period.end ?? "9999").localeCompare(a.period.end ?? "9999") ||
+  b.period.start.localeCompare(a.period.start)
+);
+
+const fmt = (p: { start: string; end: string | null }) =>
+  `${p.start.slice(0, 4)} — ${p.end ? p.end.slice(0, 4) : "present"}`;
+
+const headline = (p: (typeof projects)[number]) =>
+  p.highlights.find((h) => h.metric) ?? p.highlights[0];
+---
+
+<Base
+  title="Work"
+  description="Professional work at Apra Labs — clinical trial platforms, surgical imaging, video infrastructure, document AI and medical imaging research."
+  path="/work"
+>
+  <section class="section">
+    <div class="sec-head">
+      <h2>Professional work</h2>
+      <span class="fill"></span>
+      <span class="mono">{company.name} · 2023—</span>
+    </div>
+
+    <p class="intro measure">
+      {company.name} is an engineering services company, so this is client work. The
+      clients themselves are not named — what follows is the engineering, the systems and
+      the results.
+    </p>
+
+    {
+      projects.map((p) => {
+        const h = headline(p);
+        return (
+          <article class="entry">
+            <div class="meta mono">
+              <div>{fmt(p.period)}</div>
+              <div>{p.domain}</div>
+            </div>
+            <div>
+              <h3>
+                <a href={`/work/${p.slug}`}>{p.title}</a>
+              </h3>
+              <p class="domain">{p.summary}</p>
+              {h?.metric && (
+                <p class="result">
+                  <b>{h.text}</b>
+                </p>
+              )}
+              <ul class="stack">
+                {p.tech.slice(0, 8).map((t) => (
+                  <li>{t}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        );
+      })
+    }
+  </section>
+</Base>
+
+<style>
+  .intro {
+    color: var(--muted);
+    margin: 0 0 30px;
+  }
+  .entry {
+    display: grid;
+    grid-template-columns: 152px 1fr;
+    gap: 30px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .entry:last-of-type {
+    border-bottom: 0;
+  }
+  .entry h3 {
+    font-size: 1.42rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+  .entry h3 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .entry h3 a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .entry .domain {
+    color: var(--muted);
+    font-style: italic;
+    margin: 0;
+  }
+  .entry .meta {
+    padding-top: 6px;
+  }
+  .entry .meta div + div {
+    margin-top: 6px;
+  }
+  .entry .result b {
+    font-weight: 600;
+  }
+
+  @media (max-width: 700px) {
+    .entry {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .entry .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-top: 0;
+    }
+    .entry .meta div + div {
+      margin-top: 0;
+    }
+  }
+</style>

@@ -1,0 +1,100 @@
+---
+import Base from "../layouts/Base.astro";
+import career from "../data/career.json";
+
+const projects = career.personal_projects;
+---
+
+<Base
+  title="Personal"
+  description="Personal projects — EnterToEscape, a browser game built, deployed and maintained end to end on Cloudflare."
+  path="/personal"
+>
+  <section class="section">
+    <div class="sec-head">
+      <h2>Personal</h2>
+      <span class="fill"></span>
+    </div>
+
+    <p class="intro measure">
+      Client work is described without naming clients, which means you have to take my word
+      for most of it. This is the part you can go and press.
+    </p>
+
+    {
+      projects.map((p) => (
+        <article class="entry">
+          <div class="meta mono">
+            <div>{p.period.start.slice(0, 4)} — {p.period.end ?? "present"}</div>
+          </div>
+          <div>
+            <h3>{p.title}</h3>
+            <p class="measure">{p.summary}</p>
+            <p class="measure why">{p.why_it_matters}</p>
+            <ul class="stack">
+              {p.tech.map((t) => (
+                <li>{t}</li>
+              ))}
+            </ul>
+            <p class="links mono">
+              {p.links
+                .filter((l) => !(p.repo_is_private && l.label === "Source"))
+                .map((l) => (
+                  <a href={l.url} rel="noopener">
+                    {l.label} →
+                  </a>
+                ))}
+            </p>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</Base>
+
+<style>
+  .intro {
+    color: var(--muted);
+    margin: 0 0 34px;
+  }
+  .entry {
+    display: grid;
+    grid-template-columns: 152px 1fr;
+    gap: 30px;
+    padding: 8px 0 28px;
+  }
+  .entry h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+  .entry .meta {
+    padding-top: 8px;
+  }
+  .why {
+    color: var(--muted);
+    font-style: italic;
+  }
+  .links {
+    margin-top: 22px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .links a {
+    text-decoration: none;
+  }
+  .links a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 700px) {
+    .entry {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .entry .meta {
+      padding-top: 0;
+    }
+  }
+</style>

@@ -1,0 +1,25 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Not found" description="That page does not exist." path="/404">
+  <section class="section notfound">
+    <p class="mono">404</p>
+    <h1>That page isn&rsquo;t here.</h1>
+    <p class="measure">
+      It may have been renamed, or it may never have existed. The
+      <a href="/work">work</a> is probably what you were after.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .notfound {
+    padding: clamp(60px, 12vw, 130px) 0;
+  }
+  .notfound h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 600;
+    margin: 12px 0 16px;
+  }
+</style>

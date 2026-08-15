@@ -1,0 +1,203 @@
+---
+import Base from "../layouts/Base.astro";
+import career from "../data/career.json";
+
+const person = career.person;
+const company = career.companies[0];
+const prior = career.prior_experience;
+const hasPrior = prior.full_time.length > 0 || prior.internships.length > 0;
+
+/** Résumé bullets: metric-bearing highlights first, then the rest, capped per project. */
+const bulletsFor = (p: (typeof company.projects)[number], max = 3) => {
+  const metrics = p.highlights.filter((h) => h.metric);
+  const others = p.highlights.filter((h) => !h.metric);
+  return [...metrics, ...others].slice(0, max);
+};
+
+const featured = company.projects.filter((p) => p.featured);
+const others = company.projects.filter((p) => !p.featured);
+
+const skillGroups: [string, string[]][] = [
+  ["Languages", career.skills.languages],
+  ["Backend & messaging", career.skills.backend],
+  ["Cloud & DevOps", career.skills.cloud_devops],
+  ["Healthcare & standards", career.skills.domain],
+  ["Security", career.skills.security],
+  ["ML & imaging", career.skills.ml_imaging],
+];
+
+const fmt = (p: { start: string; end: string | null }) =>
+  `${p.start} — ${p.end ?? "present"}`;
+---
+
+<Base
+  title="Résumé"
+  description="Ankush Jain's résumé — backend engineer, five years across clinical research platforms, medical devices, imaging and video infrastructure."
+  path="/resume"
+>
+  <section class="section">
+    <div class="sec-head">
+      <h2>Résumé</h2>
+      <span class="fill"></span>
+      <span class="mono">Updated {career.meta.last_updated}</span>
+    </div>
+
+    <p class="lede measure">{person.summary}</p>
+
+    <p class="dl mono">
+      <a href="/ankush-jain-resume.pdf">Download PDF →</a>
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="sec-head"><h2>Experience</h2><span class="fill"></span></div>
+
+    <div class="job">
+      <div class="job-head">
+        <h3>{company.name}</h3>
+        <span class="mono">{company.role} · May 2023 — present</span>
+      </div>
+      <p class="measure job-note">{company.context}</p>
+
+      {
+        featured.map((p) => (
+          <div class="proj">
+            <h4>
+              {p.title} <span class="mono when">{fmt(p.period)}</span>
+            </h4>
+            <ul class="bullets measure">
+              {bulletsFor(p).map((h) => (
+                <li>{h.text}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+
+      <div class="proj">
+        <h4>Earlier projects</h4>
+        <ul class="bullets measure">
+          {
+            others.map((p) => (
+              <li>
+                <strong>{p.title}</strong> ({fmt(p.period)}) — {p.highlights[0].text}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    {
+      !hasPrior && (
+        <div class="job pending">
+          <div class="job-head">
+            <h3>Earlier roles</h3>
+            <span class="mono">2021 — 2023</span>
+          </div>
+          <p class="measure job-note">
+            Two engineering roles and three internships between graduating in 2021 and
+            joining {company.name}. Being written up.
+          </p>
+        </div>
+      )
+    }
+  </section>
+
+  <section class="section">
+    <div class="sec-head"><h2>Skills</h2><span class="fill"></span></div>
+    <dl class="skills">
+      {
+        skillGroups.map(([label, items]) => (
+          <div>
+            <dt class="mono">{label}</dt>
+            <dd>{items.join(" · ")}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+</Base>
+
+<style>
+  .lede {
+    font-size: clamp(1.04rem, 2vw, 1.2rem);
+    color: var(--muted);
+    margin: 0 0 22px;
+  }
+  .dl {
+    margin: 0;
+  }
+  .dl a {
+    text-decoration: none;
+  }
+  .dl a:hover {
+    text-decoration: underline;
+  }
+
+  .job {
+    margin-bottom: 34px;
+  }
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .job-head h3 {
+    font-size: 1.32rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .job-note {
+    color: var(--muted);
+    margin: 0 0 22px;
+  }
+  .pending .job-note {
+    font-style: italic;
+  }
+
+  .proj {
+    margin-bottom: 22px;
+  }
+  .proj h4 {
+    font-size: 1.06rem;
+    font-weight: 600;
+    margin: 0 0 8px;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .when {
+    font-weight: 400;
+  }
+
+  .skills > div {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: 20px;
+    padding: 12px 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .skills > div:last-child {
+    border-bottom: 0;
+  }
+  .skills dt {
+    padding-top: 3px;
+  }
+  .skills dd {
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    .skills > div {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

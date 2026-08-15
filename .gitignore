@@ -7,6 +7,13 @@ evals/
 data/raw/
 resume-source/
 
+# Extraction scripts encode client names and internal codenames in their column
+# mappings, so they stay local. They are documented in README.md and run against the
+# gitignored source data. privacy_gate.py and sync-content.mjs are safe and committed.
+scripts/extract_timesheets.py
+scripts/extract_evals.py
+scripts/classify_projects.py
+
 # Build output
 node_modules/
 site/dist/

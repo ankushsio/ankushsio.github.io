@@ -1,0 +1,105 @@
+---
+import Base from "../layouts/Base.astro";
+import career from "../data/career.json";
+import CareerTimeline from "../components/CareerTimeline.astro";
+
+const company = career.companies[0];
+const prior = career.prior_experience;
+const hasPrior = prior.full_time.length > 0 || prior.internships.length > 0;
+---
+
+<Base
+  title="Path"
+  description="Ankush Jain's career path — five years of backend engineering across clinical research, medical devices, imaging and video infrastructure."
+  path="/about"
+>
+  <section class="section">
+    <div class="sec-head">
+      <h2>Path</h2>
+      <span class="fill"></span>
+      <span class="mono">2021 — present</span>
+    </div>
+
+    <p class="lede measure">
+      {career.person.summary}
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="sec-head">
+      <h2>Three years at {company.name}, drawn out</h2>
+      <span class="fill"></span>
+    </div>
+    <CareerTimeline />
+  </section>
+
+  <section class="section">
+    <div class="sec-head">
+      <h2>Beyond the projects</h2>
+      <span class="fill"></span>
+    </div>
+    <ul class="bullets measure">
+      {company.cross_project_highlights.map((h) => <li>{h.text}</li>)}
+    </ul>
+  </section>
+
+  {
+    !hasPrior && (
+      <section class="section">
+        <div class="sec-head">
+          <h2>Before {company.name}</h2>
+          <span class="fill"></span>
+          <span class="mono">2021 — 2023</span>
+        </div>
+        <p class="measure muted-note">
+          Two engineering roles and three internships between graduating in 2021 and
+          joining {company.name} in May 2023. This section is still being written up.
+        </p>
+      </section>
+    )
+  }
+
+  <section class="section">
+    <div class="sec-head">
+      <h2>How I work</h2>
+      <span class="fill"></span>
+    </div>
+    <div class="measure">
+      <p>
+        I like problems where the constraint is real — a licence that expires, a frame
+        budget that will not stretch, a record that must only be visible to the right
+        person. Those force a decision rather than a preference, and the decision is
+        usually the interesting part.
+      </p>
+      <p>
+        Most of my work has been in regulated or safety-adjacent domains, which has made
+        me careful in a specific way: I would rather flesh out the end-to-end scope of a
+        change and name its risks up front than discover them halfway through. That is a
+        lesson learned the hard way on an access-control project that was scoped
+        optimistically and had to be reshaped mid-flight.
+      </p>
+      <p>
+        I also spend real time on the things around the code — onboarding people onto
+        projects, reviewing designs rather than only diffs, and making setup simple enough
+        that a new developer needs the source and nothing else.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lede {
+    font-size: clamp(1.06rem, 2vw, 1.22rem);
+    color: var(--muted);
+    margin: 0;
+  }
+  .muted-note {
+    color: var(--muted);
+  }
+  .measure p {
+    margin: 0 0 18px;
+  }
+  .measure p:last-child {
+    margin-bottom: 0;
+  }
+</style>

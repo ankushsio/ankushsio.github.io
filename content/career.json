@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "note": "Single source of truth for the portfolio site, master resume, tailored resumes and LinkedIn copy. PUBLIC FILE - committed to a public repo.",
+    "confidentiality": "Apra Labs is the only employer named. No client name, internal codename, or colleague name appears anywhere in this file. Projects are described by work, tech and generic domain only.",
+    "sources": "Every highlight carries a `source` pointing at a self-evaluation review period (eval:YYYY-MM) or a timesheet month (timesheet:YYYY-MM). Wording may be tailored per job; facts and metrics may not.",
+    "generated_from": "data/raw/ (gitignored) via scripts/extract_timesheets.py, scripts/extract_evals.py, scripts/classify_projects.py",
+    "last_updated": "2026-08-16"
+  },
+
+  "person": {
+    "name": "Ankush Jain",
+    "title": "Backend Engineer",
+    "tagline": "TODO - finalize after design direction is chosen",
+    "location": "TODO - city, country",
+    "email": "TODO - public contact email",
+    "links": {
+      "github": "https://github.com/ankushsio",
+      "linkedin": "TODO - LinkedIn profile URL",
+      "website": "https://me.entertoescape.com"
+    },
+    "summary": "Backend engineer with ~5 years building distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control, and AI/ML pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it."
+  },
+
+  "positioning": {
+    "level": "mid-to-senior backend engineer",
+    "years_experience": 5,
+    "graduated": 2021,
+    "themes": [
+      "Distributed backends in regulated domains (healthcare, clinical research, medical devices)",
+      "Systems integration - EHR/FHIR, message brokers, event-driven services",
+      "Security and access control - RBAC, auth hardening, static-analysis remediation",
+      "Performance and delivery engineering - pipeline and image-size optimization, CI/CD",
+      "Applied research to production - imaging, signal processing, AI/OCR"
+    ],
+    "seeking": "A role with real ownership and systems depth, at a company worth staying at for years."
+  },
+
+  "companies": [
+    {
+      "id": "apra-labs",
+      "name": "Apra Labs",
+      "nameable": true,
+      "role": "Software Engineer",
+      "start": "2023-05-24",
+      "end": null,
+      "current": true,
+      "context": "Engineering services company. Work is delivered for external clients across healthcare, medical devices and imaging; clients are not named. Also contributed to Apra Labs' own products and open source.",
+      "total_logged_hours": 5736,
+      "projects": [
+        {
+          "slug": "clinical-trial-platform",
+          "title": "Clinical Trial Management Platform",
+          "domain": "Clinical research / healthcare",
+          "period": { "start": "2024-11", "end": null },
+          "hours": 2305,
+          "featured": true,
+          "role": "Backend engineer - integration, cloud infrastructure, access control",
+          "summary": "A multi-service platform connecting clinical trial study teams and participants to hospital electronic health record systems. My longest-running project and the one where I moved from writing features to shaping design.",
+          "problem": "Trial data lives inside hospital EHR systems that each expose different APIs, standards and quirks. Every new data source risked becoming a bespoke integration, and a platform handling patient data needed access control and auditability that could survive scrutiny - neither of which existed when I joined.",
+          "approach": "Built the integration hub's base adapter modules so that every new EHR adapter follows one predictable shape, then implemented the first EHR adapter as the reference others were built from. Moved inter-service communication onto managed pub/sub with asynchronous subscriptions, dead-letter handling and retry logic. Wrote infrastructure as code for the cloud APIs, serverless service instances, topics and subscriptions. Designed and implemented role-based access control across both the study-team and participant applications - identifying admin-only endpoints, filtering responses per role, and adding pre-authorization checks for resources a user cannot reach. Added server-sent events for real-time feedback, hardened authentication, remediated static-analysis findings, and rebuilt the CI/CD pipelines.",
+          "impact": "Phase 1 delivered on schedule. Deployments got meaningfully faster, container images meaningfully smaller, and the platform gained an access-control story it previously lacked.",
+          "tech": ["Java", "Spring Boot", "Kotlin", "Ktor", "Go", "Google Cloud Pub/Sub", "Cloud Run", "Terraform", "FHIR / HAPI", "Docker", "Server-Sent Events", "RBAC", "Microsoft Graph API", "Flyway", "GraalVM", "Gradle"],
+          "highlights": [
+            { "id": "ctp-deploy", "text": "Cut the backend deployment pipeline from 26 min 33 s to 18 min 07 s (-32%), shortening every developer's feedback loop", "metric": true, "source": "eval:2026-04" },
+            { "id": "ctp-rbac", "text": "Designed and shipped a full role-based access control system across two applications, covering admin and basic access - admin-only endpoint restriction, per-role response filtering, and pre-authorization checks", "metric": false, "source": "eval:2025-11" },
+            { "id": "ctp-adapters", "text": "Built the integration hub's base adapter modules, turning each new EHR integration from a bespoke build into a repeatable pattern; implemented the first adapter as the reference implementation", "metric": false, "source": "eval:2025-05" },
+            { "id": "ctp-pubsub", "text": "Re-architected inter-service connectivity on managed pub/sub with async subscriptions, dead-letter handling and retry enhancement", "metric": false, "source": "eval:2026-04" },
+            { "id": "ctp-iac", "text": "Wrote infrastructure as code for cloud APIs, serverless instances, topics and subscriptions, making environment setup reproducible", "metric": false, "source": "eval:2025-05" },
+            { "id": "ctp-image", "text": "Reduced a service container image from 450 MB to 290 MB (-36%) by eliminating unneeded dependencies while clearing technical debt", "metric": true, "source": "timesheet:2025-02" },
+            { "id": "ctp-cost", "text": "Identified unnoticed idle cloud spend and shut the service down, saving the project $200+ and prompting a billing-review habit", "metric": true, "source": "eval:2025-05" },
+            { "id": "ctp-security", "text": "Remediated security findings from static analysis reports and led a security overhaul separating study-team and participant application concerns", "metric": false, "source": "eval:2025-11" },
+            { "id": "ctp-sse", "text": "Introduced server-sent events for real-time product feedback, a pattern later adopted by other teams in the organization", "metric": false, "source": "eval:2026-04" },
+            { "id": "ctp-delivery", "text": "Delivered phase 1 features end to end: diagnostics smoke tests, participant deletion APIs, retry enhancements, build-info endpoints and integration test updates", "metric": false, "source": "eval:2026-04" }
+          ]
+        },
+        {
+          "slug": "ar-surgical-navigation",
+          "title": "AR Surgical Navigation",
+          "domain": "Medical devices / augmented reality",
+          "period": { "start": "2023-08", "end": "2024-04" },
+          "hours": 1237,
+          "featured": true,
+          "role": "Engineer - 3D pipeline, performance, team lead in practice",
+          "summary": "A research system reconstructing 3D anatomy from intra-operative video for augmented-reality surgical guidance. I took it from a file-based research prototype toward something that could run in real conditions.",
+          "problem": "The reconstruction pipeline wrote intermediate results to disk between every stage, which made it slow and fragile. Worse, a signed distance field computation ran per frame and bottlenecked the entire operation - no amount of tuning elsewhere mattered while it dominated the frame budget.",
+          "approach": "Read the literature and open-source implementations to understand the geometry properly, then migrated the file-based pipeline to in-memory - which meant understanding every module's inputs and outputs and refactoring the connections between them. For the bottleneck, I worked out that the signed distance field did not need recomputing per frame and devised a technique to compute it once and reuse it. Added multi-inference passes, multi-mesh views, error calculation, and robustness across different input data types.",
+          "impact": "Removed the dominant per-frame cost, cutting more than 80% of the time it consumed. Onboarded two junior engineers onto the project and led it through a period when senior engineers were unavailable.",
+          "tech": ["C++", "Python", "VTK", "3D meshes & point clouds", "Signed distance fields", "Neural reconstruction", "Computer vision"],
+          "highlights": [
+            { "id": "ars-sdf", "text": "Identified the signed distance field computation as the pipeline's bottleneck and devised a compute-once-and-reuse technique, saving over 80% of the time it took per frame", "metric": true, "source": "eval:2024-05" },
+            { "id": "ars-inmemory", "text": "Migrated the reconstruction pipeline from file-based to in-memory, requiring a full refactor of module boundaries and data flow", "metric": false, "source": "eval:2023-11" },
+            { "id": "ars-features", "text": "Shipped pipeline features weekly - multi-inference passes, multi-mesh views, error calculation, and robust handling of varied input data", "metric": false, "source": "eval:2023-11" },
+            { "id": "ars-onboard", "text": "Onboarded two junior engineers and led the project through a stretch when senior engineers were unavailable, having become its most familiar contributor", "metric": false, "source": "eval:2024-05" },
+            { "id": "ars-research", "text": "Brought graphics and geometry knowledge into a team new to it, sharing VTK and 3D fundamentals through internal brainstorming sessions", "metric": false, "source": "eval:2023-11" }
+          ]
+        },
+        {
+          "slug": "headless-nvr",
+          "title": "Headless Video Recording Platform",
+          "domain": "Video infrastructure / edge computing",
+          "period": { "start": "2024-04", "end": "2024-10" },
+          "hours": 849,
+          "featured": true,
+          "nameable_product": true,
+          "role": "Backend engineer - C++ and Node services, state, real-time",
+          "summary": "An Apra Labs network video recorder running headless on edge devices. Built on ApraPipes, the company's open-source video and image processing pipeline framework. I joined when it was unstable and worked on getting it to a dependable state.",
+          "problem": "The recorder was in an unstable state - segmentation faults in the decoder, unreliable behaviour across edge hardware, and no coherent story for how the C++ core, the web layer and the UI shared state.",
+          "approach": "Refactored the C++ backend and wrote the Node backend from scratch, then made Redis the single source of ground truth connecting them and the frontend. Integrated server-sent events for real-time notifications, which unlocked a set of features that polling could not serve well. Added proper logging across both the C++ and Node sides - which is what finally made the intermittent decoder crashes diagnosable rather than guessable. Debugged segmentation faults in frame decoding and tested aggressively across edge device targets.",
+          "impact": "Brought the platform from unstable to a dependable state and integrated the previously disconnected modules into one controllable system with consistent state.",
+          "tech": ["C++", "Node.js", "Redis", "hiredis", "redis-plus-plus", "Server-Sent Events", "ApraPipes", "NVIDIA Jetson (AGX/NX)", "Video decoding", "OpenCV"],
+          "links": [
+            { "label": "ApraPipes (Apra Labs open source, C++)", "url": "https://github.com/Apra-Labs/ApraPipes", "note": "Public repo the recorder is built on; listed contributor. Do not overstate the contribution - it is one merged commit plus day-to-day work against the framework." }
+          ],
+          "highlights": [
+            { "id": "nvr-stability", "text": "Took the recorder from an unstable state to a dependable one, debugging intermittent segmentation faults in frame decoding across edge hardware", "metric": false, "source": "eval:2024-05" },
+            { "id": "nvr-node", "text": "Wrote the Node backend from scratch and connected it to Redis, the C++ core and the frontend, giving the system one consistent source of truth", "metric": false, "source": "eval:2025-05" },
+            { "id": "nvr-sse", "text": "Integrated server-sent events for real-time notifications, enabling functionality that polling could not serve cleanly", "metric": false, "source": "eval:2025-05" },
+            { "id": "nvr-logging", "text": "Built proper logging across both the C++ and Node backends, converting intermittent, hard-to-reproduce crashes into diagnosable failures", "metric": false, "source": "eval:2025-05" },
+            { "id": "nvr-integration", "text": "Integrated the previously separate modules with fine-grained control and correct handling of edge cases, with ground truth maintained in Redis", "metric": false, "source": "eval:2025-05" }
+          ]
+        },
+        {
+          "slug": "document-ai-pipeline",
+          "title": "Document AI / Handwriting Recognition Pipeline",
+          "domain": "Applied AI / document processing",
+          "period": { "start": "2025-05", "end": "2025-11" },
+          "hours": 414,
+          "featured": true,
+          "role": "Engineer and designer - end-to-end system, owned HLD and LLD",
+          "summary": "An end-to-end system turning scanned handwritten documents into structured data, built around a licensed third-party handwriting-recognition model. The first project where I owned both the high- and low-level design.",
+          "problem": "The recognition model came as a large third-party artifact with a time-limited licence. Wrapping it naively would have produced an enormous deployment, coupled our code to someone else's release cycle, and made licence renewal a redeployment emergency.",
+          "approach": "Took the vendor's model and code, worked out how it actually functioned, and adapted it to our use case until there was a working end-to-end system. Then designed the codebase so it packages and deploys alongside the model with the licence swappable on expiry rather than baked in. Set up a RabbitMQ message broker connecting the document pipeline to the partner backend, adding the features and usability the integration needed. Produced the high- and low-level design independently with minimal supervision.",
+          "impact": "Cut the deployable image from 19 GB to 5.28 GB - a 72% reduction - and delivered the system within its timeline. My design reviews and guidance then enabled the team to build the LLM-based successor.",
+          "tech": ["Python", "Docker", "RabbitMQ", "Handwriting recognition (HTR/OCR)", "System design (HLD/LLD)", "Message brokers"],
+          "highlights": [
+            { "id": "p2p-image", "text": "Reduced the deployable image from 19 GB to 5.28 GB (-72%) through deliberate packaging design", "metric": true, "source": "eval:2025-11" },
+            { "id": "p2p-license", "text": "Designed the codebase so the third-party model packages and deploys with the system and its licence can be swapped on expiry, instead of requiring a rebuild", "metric": false, "source": "eval:2025-11" },
+            { "id": "p2p-e2e", "text": "Took an unfamiliar vendor model and codebase to a working end-to-end AI system adapted to our use case", "metric": false, "source": "eval:2025-11" },
+            { "id": "p2p-design", "text": "Produced the high- and low-level design independently with minimal supervision", "metric": false, "source": "eval:2025-11" },
+            { "id": "p2p-broker", "text": "Built out the RabbitMQ message broker connecting the document pipeline to the partner backend", "metric": false, "source": "eval:2025-11" },
+            { "id": "p2p-mentor", "text": "Reviewed code and design and guided the team, enabling them to build the LLM-based successor system", "metric": false, "source": "eval:2025-11" }
+          ]
+        },
+        {
+          "slug": "regenerative-medicine-platform",
+          "title": "Regenerative Medicine Data Platform",
+          "domain": "Healthcare data / clinical standards",
+          "period": { "start": "2026-05", "end": null },
+          "hours": 411,
+          "featured": true,
+          "current": true,
+          "role": "Engineer - architecture, FHIR modelling, AI-assisted delivery",
+          "summary": "Current project. A FHIR-native platform for clinical protocols and surveys, modelled on healthcare terminology standards, being migrated off a legacy application. My work here is as much architecture and requirements as implementation.",
+          "problem": "A legacy application needed replacing with something modelled properly on healthcare standards rather than ad-hoc structures, with requirements arriving as slide decks, whiteboard sessions and client calls rather than as a spec.",
+          "approach": "Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Researched SMART on FHIR to decide where the access-control layer belonged, and produced a permission matrix across roles. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and user stories, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.",
+          "impact": "Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows with explicit user stories.",
+          "tech": ["FHIR", "OMOP", "LOINC", "SMART on FHIR", "RBAC", "Docker Compose", "Playwright", "AI-assisted development", "Requirements & architecture design"],
+          "highlights": [
+            { "id": "rm-fhir", "text": "Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC terminology, and implemented change logs purely through FHIR provenance", "metric": false, "source": "timesheet:2026-06" },
+            { "id": "rm-questionbank", "text": "Built a question bank letting users explore questions against standard clinical terminology instead of free-text entry", "metric": false, "source": "timesheet:2026-06" },
+            { "id": "rm-rbac", "text": "Produced a permission matrix across roles and researched SMART on FHIR to determine the correct layer for access control", "metric": false, "source": "timesheet:2026-07" },
+            { "id": "rm-requirements", "text": "Drove requirements with the client directly - converting whiteboard sessions and slide feedback into wireframed workflows and user stories", "metric": false, "source": "timesheet:2026-07" },
+            { "id": "rm-ai", "text": "Used AI-assisted and agent-orchestrated development for legacy-to-new migration and phased delivery, supervising and correcting output rather than accepting it", "metric": false, "source": "timesheet:2026-05" },
+            { "id": "rm-onboarding", "text": "Simplified environment setup so a new developer needs only the source and terminology files, with everything else provisioned automatically", "metric": false, "source": "timesheet:2026-06" }
+          ]
+        },
+        {
+          "slug": "retinal-video-biomarkers",
+          "title": "Retinal Video Biomarker Research",
+          "domain": "Medical imaging / signal processing",
+          "period": { "start": "2023-06", "end": "2023-09" },
+          "hours": 236,
+          "featured": false,
+          "role": "Research engineer",
+          "summary": "Applied-research work extracting a physiological signal from retinal video - establishing whether a usable signal was present at all before anyone built a product on the assumption.",
+          "problem": "Retinal video is noisy and subject to motion; it was an open question whether a reliable pulse signal could be recovered from it, and which region of the frame carried it.",
+          "approach": "Read the underlying papers and open-source implementations, then experimented across different frame regions, pixel-value conditions, histograms and illumination to find where correlation actually held. Built an image-registration pipeline producing stable, registered video, and worked in the frequency domain using FFT/DFT to extract beats-per-minute values from the registered signal.",
+          "impact": "Established the presence of a valid physiological signal and produced a working registration pipeline. The image-registration code was durable enough to be revived and reused on a new image set nearly two years later.",
+          "tech": ["Python", "Computer vision", "Image registration", "FFT/DFT", "Signal processing", "Research literature"],
+          "highlights": [
+            { "id": "ret-bpm", "text": "Implemented published algorithms to extract beats-per-minute from retinal video, establishing that a valid physiological signal was present", "metric": false, "source": "eval:2023-11" },
+            { "id": "ret-registration", "text": "Built an image-registration pipeline producing stable registered video, after experimenting across frame regions to find where correlation held", "metric": false, "source": "eval:2023-11" },
+            { "id": "ret-reuse", "text": "Wrote the registration code well enough that it was revived and applied to a different image set nearly two years later", "metric": false, "source": "timesheet:2025-06" }
+          ]
+        },
+        {
+          "slug": "hyperspectral-imaging",
+          "title": "Hyperspectral Imaging Analysis",
+          "domain": "Medical imaging / early disease indicators",
+          "period": { "start": "2024-08", "end": "2024-10" },
+          "hours": 196,
+          "featured": false,
+          "role": "Research engineer - camera, tooling, pipeline",
+          "summary": "Establishing hyperspectral imaging capability from scratch: standing up the camera, learning the domain, and leaving behind a library and pipeline the team could actually use.",
+          "problem": "Nobody on the team had used a hyperspectral camera. Captured images came out faint under our lighting, and it was unclear whether that was the room, the calibration procedure, or a misunderstanding of what the data meant.",
+          "approach": "Read the research on hyperspectral imaging for early disease indicators, set up the camera physically with measured positioning, and worked through lighting conditions until images were usable - the breakthrough being that calibration captures had been misread as needing extra brightness. Wrote a helper library on top of the camera SDK providing region-of-interest selection, cleaning and preprocessing for downstream analysis, plus a data-generation pipeline covering feature extraction, brightness extraction, and normalization against a dark reference.",
+          "impact": "Turned an unfamiliar instrument into a documented, repeatable capability - camera setup, helper library, data pipeline and written documentation for teams in other locations.",
+          "tech": ["Python", "Jupyter", "Hyperspectral imaging", "Spectral calibration", "Feature extraction", "NumPy", "Data pipelines"],
+          "highlights": [
+            { "id": "hsi-library", "text": "Wrote a helper library over the camera SDK for region-of-interest selection, cleaning and preprocessing of captured spectral data", "metric": false, "source": "eval:2025-05" },
+            { "id": "hsi-setup", "text": "Set up the hyperspectral camera and worked out the lighting and calibration conditions that produced usable captures, then shared the know-how with the team", "metric": false, "source": "eval:2025-05" },
+            { "id": "hsi-pipeline", "text": "Built a data-generation pipeline covering feature extraction, brightness extraction and dark-reference normalization", "metric": false, "source": "timesheet:2024-09" },
+            { "id": "hsi-docs", "text": "Documented the setup and workflow for a team in another location to reproduce", "metric": false, "source": "timesheet:2024-09" }
+          ]
+        },
+        {
+          "slug": "access-control-platform",
+          "title": "Access Control & Security Platform",
+          "domain": "Physical security / access control",
+          "period": { "start": "2023-06", "end": "2023-07" },
+          "hours": 63,
+          "featured": false,
+          "role": "Engineer - serialization migration, reliability",
+          "summary": "My first project. Migrating a command protocol off protobuf and hardening how the service handled malformed input.",
+          "problem": "Commands arrived in batches, and a single bad command could take down processing for the whole batch. The system also carried protobuf serialization that was being retired.",
+          "approach": "Migrated commands and tests from protobuf to gzip and removed the leftover artifacts, verifying the service stayed stable without them. Made command processing resilient so one bad command no longer prevented the rest of the batch from being handled, and worked through schema and command dependency issues alongside the testing team.",
+          "impact": "Completed the serialization migration and made batch command processing fault-tolerant rather than all-or-nothing.",
+          "tech": ["protobuf", "gzip", "Debian packaging", "Schema design", "Access control domain"],
+          "highlights": [
+            { "id": "aic-proto", "text": "Migrated commands and tests from protobuf to gzip and removed the retired artifacts, verifying service stability afterwards", "metric": false, "source": "eval:2023-11" },
+            { "id": "aic-resilience", "text": "Made batch command processing resilient so one malformed command no longer blocked the remaining commands in the batch", "metric": false, "source": "timesheet:2023-06" }
+          ]
+        }
+      ],
+      "cross_project_highlights": [
+        { "id": "x-mentor", "text": "Onboarded and mentored junior engineers across multiple projects, and served as a tech buddy for new joiners", "source": "eval:2026-04" },
+        { "id": "x-interviews", "text": "Conducted technical interviews for the company", "source": "eval:2025-11" },
+        { "id": "x-knowledge", "text": "Spread server-sent events and message-broker patterns across teams; both are now used by multiple teams and people", "source": "eval:2026-04" },
+        { "id": "x-reviews", "text": "Regular code, design and pair-review contributor across teams, including for projects outside my own", "source": "eval:2026-04" },
+        { "id": "x-techmeet", "text": "Presented internal tech talks, including one on federated learning", "source": "eval:2025-05" }
+      ]
+    }
+  ],
+
+  "prior_experience": {
+    "_TODO": "BLOCKED on receiving Ankush's current resume. Needs: 2 full-time roles (2021-2023), 3 internships (pre-2021), with company names, titles, dates and achievements.",
+    "full_time": [],
+    "internships": []
+  },
+
+  "education": {
+    "_TODO": "BLOCKED on resume. Needs: degree, institution, graduation year (2021), and any honors/coursework worth listing."
+  },
+
+  "skills": {
+    "languages": ["Python", "C++", "Java", "Kotlin", "Go", "JavaScript/Node.js", "C#", "TypeScript"],
+    "backend": ["Spring Boot", "Ktor", "REST APIs", "Server-Sent Events", "RabbitMQ", "Google Cloud Pub/Sub", "Redis", "Message brokers", "Event-driven architecture"],
+    "cloud_devops": ["Google Cloud Platform", "Cloud Run", "Terraform", "Docker", "Docker Compose", "CI/CD pipelines", "Infrastructure as code", "AWS (exposure)"],
+    "domain": ["FHIR / HAPI", "OMOP", "LOINC", "SMART on FHIR", "EHR integration", "Clinical trial systems", "HIPAA-adjacent data handling"],
+    "security": ["Role-based access control", "OAuth / token-based auth", "Microsoft Graph API", "Static analysis remediation", "Security hardening"],
+    "ml_imaging": ["Computer vision", "Image registration", "Signal processing (FFT/DFT)", "Hyperspectral imaging", "OCR / handwriting recognition", "3D meshes & point clouds", "VTK"],
+    "practices": ["High- and low-level design", "Code review", "Mentoring", "Technical interviewing", "AI-assisted development", "Requirements gathering"]
+  },
+
+  "personal_projects": [
+    {
+      "slug": "enter-to-escape",
+      "title": "EnterToEscape",
+      "period": { "start": "2026-06", "end": null },
+      "repo_is_private": true,
+      "_TODO": "Repo github.com/ankushsio/entertoescape is PRIVATE - the source link will 404 for visitors. Either make it public or ship only the play link.",
+      "summary": "A browser game I built and ship myself, live on my own domain. Written in TypeScript with Phaser, deployed as a Cloudflare Worker serving static assets plus a leaderboard API backed by D1, with CI on every push and preview URLs per branch.",
+      "why_it_matters": "The one project I can hand someone the source for. It is also where I own the whole stack - game loop, backend, database, auth, deployment pipeline and DNS.",
+      "tech": ["TypeScript", "Phaser", "Vite", "Cloudflare Workers", "Cloudflare D1", "Google OAuth", "CI/CD"],
+      "links": [
+        { "label": "Play", "url": "https://entertoescape.com" },
+        { "label": "Source", "url": "https://github.com/ankushsio/entertoescape" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,354 @@
+/* ==========================================================================
+   Design direction: "Registration"
+   Editorial / typographic, drawn from the scientific plate. Cool archival
+   paper, serif text at a real reading measure, calibration-tick structure,
+   and a single oxblood accent spent only on measured results and on the
+   security boundary in diagrams.
+
+   Theme handling covers all three viewer states:
+     :root                                    -> complete light palette
+     @media (prefers-color-scheme: dark)      -> unstamped viewers on dark OS
+     :root[data-theme="dark"]                 -> explicit dark choice
+   Every colour is a token. Nothing sets a colour only inside a media block.
+   ========================================================================== */
+
+:root {
+  --paper: #edeef1;
+  --surface: #f7f8fa;
+  --ink: #14181d;
+  --muted: #5a6470;
+  --rule: #c7ccd3;
+  --rule-soft: #dcdfe4;
+  --accent: #8a2b3b;
+  --accent-wash: #8a2b3b14;
+  --focus: #8a2b3b;
+
+  --serif: "Sitka Text", "Iowan Old Style", Charter, "Bitstream Charter",
+    Cambria, Georgia, serif;
+  --mono: "Cascadia Mono", "SF Mono", ui-monospace, Consolas, "Liberation Mono",
+    monospace;
+
+  --measure: 63ch;
+  --page: 1080px;
+  --gutter: clamp(20px, 5vw, 64px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1216;
+    --surface: #161a20;
+    --ink: #e6e9ed;
+    --muted: #98a2ae;
+    --rule: #2a3138;
+    --rule-soft: #21272d;
+    --accent: #db8390;
+    --accent-wash: #db839018;
+    --focus: #db8390;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #0f1216;
+  --surface: #161a20;
+  --ink: #e6e9ed;
+  --muted: #98a2ae;
+  --rule: #2a3138;
+  --rule-soft: #21272d;
+  --accent: #db8390;
+  --accent-wash: #db839018;
+  --focus: #db8390;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  /* explicit background: the viewer paints its own ground behind the page */
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 700px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+/* --- links & focus -------------------------------------------------- */
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px 16px;
+  border: 1px solid var(--rule);
+  z-index: 50;
+}
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+/* --- layout --------------------------------------------------------- */
+
+.wrap {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.measure {
+  max-width: var(--measure);
+}
+
+main {
+  display: block;
+}
+
+/* --- utility type ---------------------------------------------------- */
+
+.mono {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+  letter-spacing: -0.015em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* --- masthead & footer ----------------------------------------------- */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.masthead .brand {
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.masthead nav {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.masthead nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.masthead nav a:hover,
+.masthead nav a[aria-current="page"] {
+  color: var(--accent);
+}
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 72px;
+  padding: 36px 0 64px;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+.site-footer .rows {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+/* --- sections --------------------------------------------------------- */
+
+.section {
+  padding: 58px 0;
+  border-top: 1px solid var(--rule);
+}
+.section:first-of-type {
+  border-top: 0;
+}
+
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+.sec-head h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+}
+.sec-head .fill {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* --- results: the one place colour is spent --------------------------- */
+
+.result {
+  border-left: 2px solid var(--accent);
+  background: var(--accent-wash);
+  padding: 11px 16px;
+  margin: 16px 0 0;
+}
+.result b {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* --- tech stack chips -------------------------------------------------- */
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin-top: 16px;
+  padding: 0;
+  list-style: none;
+}
+.stack li {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 3px 7px;
+}
+
+/* --- figures ----------------------------------------------------------- */
+
+figure {
+  margin: 0;
+}
+.figbox {
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  padding: 26px 20px;
+  overflow-x: auto;
+}
+.figbox svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--ink);
+}
+/* SVG presentation attributes cannot take var(), so set the face in CSS */
+.figbox svg text {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+figcaption {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-top: 14px;
+  max-width: 70ch;
+}
+figcaption b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* the single meaningful hue inside diagrams, tokenised for both themes */
+.figbox rect.hl,
+.figbox line.hl,
+.figbox path.hl {
+  stroke: var(--accent);
+}
+.figbox text.hl {
+  fill: var(--accent);
+}
+.figbox .hlfill {
+  fill: var(--accent);
+}
+.figbox .bar-major {
+  fill: var(--accent);
+}
+.figbox .bar-minor {
+  fill: var(--muted);
+  opacity: 0.4;
+}
+.figbox .grid-line {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.figbox .axis-text {
+  fill: var(--muted);
+}
+
+/* --- prose lists -------------------------------------------------------- */
+
+.bullets {
+  margin: 0;
+  padding-left: 1.15em;
+}
+.bullets li {
+  margin-bottom: 9px;
+}
+.bullets li::marker {
+  color: var(--muted);
+}

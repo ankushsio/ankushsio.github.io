@@ -1,0 +1,373 @@
+<title>Provenance</title>
+<style>
+  /* ============================================================
+     DIRECTION B — "Provenance"
+     Warm minimal, sans-forward. Warmth comes from a green-biased
+     neutral rather than cream, and the accent is a deep pine-teal
+     with ochre reserved for measured results. Deliberately not
+     the cream + serif + terracotta look.
+     ============================================================ */
+
+  :root {
+    --ground:  #F2F4F0;
+    --surface: #FBFCFA;
+    --ink:     #1A211C;
+    --muted:   #5E6B62;
+    --rule:    #D8DFD6;
+    --accent:  #1F5F55;
+    --accent-wash: #1f5f5514;
+    --gold:    #96681A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0E1210;
+      --surface: #151A17;
+      --ink:     #E7EDE8;
+      --muted:   #94A199;
+      --rule:    #252C27;
+      --accent:  #6CC0AC;
+      --accent-wash: #6cc0ac16;
+      --gold:    #DCA945;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:  #0E1210;
+    --surface: #151A17;
+    --ink:     #E7EDE8;
+    --muted:   #94A199;
+    --rule:    #252C27;
+    --accent:  #6CC0AC;
+    --accent-wash: #6cc0ac16;
+    --gold:    #DCA945;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: 'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+  .measure { max-width: 66ch; }
+
+  .label {
+    font-family: 'Cascadia Mono', 'SF Mono', ui-monospace, Consolas, monospace;
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+
+  header.top {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 20px; padding: 26px 0;
+  }
+  header.top nav { display: flex; gap: 26px; }
+  header.top a { color: var(--muted); text-decoration: none; }
+  header.top a:hover, header.top a:focus-visible { color: var(--accent); }
+
+  /* --- hero -------------------------------------------------------- */
+  .hero { padding: clamp(40px, 7vw, 78px) 0 26px; }
+  .hero h1 {
+    font-size: clamp(2.3rem, 5.6vw, 3.7rem);
+    font-weight: 650; line-height: 1.08; letter-spacing: -0.028em;
+    margin: 0 0 22px; text-wrap: balance;
+  }
+  .hero p {
+    font-size: clamp(1.05rem, 1.9vw, 1.22rem); color: var(--muted);
+    margin: 0; text-wrap: pretty;
+  }
+  .hero p strong { color: var(--ink); font-weight: 600; }
+
+  /* --- timeline figure --------------------------------------------- */
+  .panel {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 24px; margin: 42px 0 0; overflow-x: auto;
+  }
+  .panel svg { display: block; width: 100%; min-width: 660px; height: auto; color: var(--ink); }
+  .bar-major { fill: var(--accent); }
+  .bar-minor { fill: var(--muted); opacity: 0.42; }
+  .grid-line { stroke: var(--rule); stroke-width: 1; }
+  .axis-text { fill: var(--muted); }
+
+  figure { margin: 0; }
+  figcaption { color: var(--muted); font-size: 0.92rem; margin-top: 14px; max-width: 70ch; }
+  figcaption b { color: var(--ink); font-weight: 600; }
+
+  /* --- sections ---------------------------------------------------- */
+  section { padding: 62px 0 0; }
+  .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; margin-bottom: 28px; }
+  .sec-head h2 { font-size: 1.45rem; font-weight: 650; letter-spacing: -0.02em; margin: 0; }
+
+  /* --- work cards -------------------------------------------------- */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 20px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 26px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .card.wide { grid-column: 1 / -1; }
+  .card h3 { font-size: 1.28rem; font-weight: 650; letter-spacing: -0.018em; margin: 0; }
+  .card .row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: baseline; }
+  .card p { margin: 0; color: var(--muted); }
+  .card p.body { color: var(--ink); }
+
+  .results { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .result {
+    background: var(--accent-wash); border: 1px solid var(--rule);
+    border-radius: 7px; padding: 9px 13px; display: flex; flex-direction: column;
+  }
+  .result b {
+    font-family: 'Cascadia Mono', ui-monospace, Consolas, monospace;
+    font-size: 0.95rem; color: var(--gold); font-variant-numeric: tabular-nums;
+  }
+  .result span { font-size: 0.76rem; color: var(--muted); }
+
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+  .stack span {
+    font-size: 0.74rem; color: var(--muted);
+    border: 1px solid var(--rule); border-radius: 20px; padding: 3px 10px;
+  }
+
+  footer { margin-top: 70px; border-top: 1px solid var(--rule); padding: 32px 0 60px; color: var(--muted); }
+  footer a { color: var(--accent); }
+
+  @media (max-width: 640px) { body { font-size: 16px; } .card { padding: 20px; } }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <span class="label">Ankush Jain</span>
+    <nav class="label">
+      <a href="#work">Work</a>
+      <a href="#systems">Systems</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Backend engineer, mostly in rooms where the data is somebody&rsquo;s health record.</h1>
+    <p class="measure">
+      Five years building clinical trial platforms, surgical imaging pipelines and the
+      infrastructure underneath them. <strong>Currently at Apra Labs</strong>, where I have spent
+      the last two years on a platform that connects trial teams to hospital record systems.
+    </p>
+
+    <div class="panel">
+      <figure>
+        <svg viewBox="0 0 1000 250" role="img"
+             aria-label="Timeline of eight projects between June 2023 and August 2026, showing the clinical trial platform running continuously from November 2024 to the present while shorter imaging and AI projects run before and alongside it.">
+          <g font-family="'Cascadia Mono', ui-monospace, Consolas, monospace" font-size="11.5">
+
+            <line class="grid-line" x1="200" y1="18"  x2="200" y2="214" />
+            <line class="grid-line" x1="343" y1="18"  x2="343" y2="214" />
+            <line class="grid-line" x1="590" y1="18"  x2="590" y2="214" />
+            <line class="grid-line" x1="836" y1="18"  x2="836" y2="214" />
+
+            <text class="axis-text" x="200" y="236">2023</text>
+            <text class="axis-text" x="343" y="236">2024</text>
+            <text class="axis-text" x="590" y="236">2025</text>
+            <text class="axis-text" x="836" y="236">2026</text>
+
+            <text x="190" y="40"  text-anchor="end" fill="currentColor">Access control</text>
+            <rect class="bar-minor" x="200" y="30" width="22"  height="12" rx="3" />
+
+            <text x="190" y="64"  text-anchor="end" fill="currentColor">Retinal research</text>
+            <rect class="bar-minor" x="200" y="54" width="62"  height="12" rx="3" />
+
+            <text x="190" y="88"  text-anchor="end" fill="currentColor">AR surgery</text>
+            <rect class="bar-major" x="241" y="78" width="164" height="12" rx="3" />
+
+            <text x="190" y="112" text-anchor="end" fill="currentColor">Video recorder</text>
+            <rect class="bar-major" x="405" y="102" width="123" height="12" rx="3" />
+
+            <text x="190" y="136" text-anchor="end" fill="currentColor">Hyperspectral</text>
+            <rect class="bar-minor" x="487" y="126" width="41"  height="12" rx="3" />
+
+            <text x="190" y="160" text-anchor="end" fill="currentColor">Trial platform</text>
+            <rect class="bar-major" x="549" y="150" width="410" height="12" rx="3" />
+
+            <text x="190" y="184" text-anchor="end" fill="currentColor">Document AI</text>
+            <rect class="bar-major" x="672" y="174" width="123" height="12" rx="3" />
+
+            <text x="190" y="208" text-anchor="end" fill="currentColor">Regen. medicine</text>
+            <rect class="bar-major" x="918" y="198" width="41"  height="12" rx="3" />
+          </g>
+        </svg>
+      </figure>
+      <figcaption>
+        <b>Three years, eight projects, two that ran long.</b>
+        The overlaps are the honest part — imaging research and platform work ran in
+        parallel more often than not, and the trial platform has been continuous since
+        late 2024.
+      </figcaption>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="sec-head">
+      <h2>Selected work</h2>
+      <span class="label">Apra Labs · 2023 &ndash; present</span>
+    </div>
+
+    <div class="cards">
+
+      <article class="card wide">
+        <div class="row">
+          <h3>Clinical Trial Management Platform</h3>
+          <span class="label">2024 &ndash; present · Clinical research</span>
+        </div>
+        <p class="body measure">
+          Trial data lives inside hospital EHR systems that each expose different APIs and
+          standards, so every new source risked becoming a bespoke integration. I built the
+          integration hub&rsquo;s base adapter modules so each new connection follows one
+          predictable shape, then wrote the reference adapter the others were built from.
+        </p>
+        <p class="body measure">
+          The platform also handled patient data without a real access-control story. I
+          designed and shipped role-based access across both applications &mdash; admin-only
+          endpoint restriction, per-role response filtering, and pre-authorization checks.
+        </p>
+        <div class="results">
+          <div class="result"><b>26m33s &rarr; 18m07s</b><span>deploy pipeline</span></div>
+          <div class="result"><b>450 &rarr; 290 MB</b><span>service image</span></div>
+          <div class="result"><b>$200+</b><span>idle cloud spend stopped</span></div>
+        </div>
+        <div class="stack">
+          <span>Java</span><span>Spring Boot</span><span>Kotlin</span><span>Go</span><span>GCP Pub/Sub</span>
+          <span>Cloud Run</span><span>Terraform</span><span>FHIR</span><span>RBAC</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="row">
+          <h3>AR Surgical Navigation</h3>
+          <span class="label">2023 &ndash; 2024</span>
+        </div>
+        <p class="body">
+          A signed distance field computation ran per frame and dominated the budget &mdash; no
+          tuning elsewhere mattered while it sat there. I worked out it did not need
+          recomputing per frame at all, and devised a way to compute it once and reuse it.
+          Also migrated the pipeline off disk into memory.
+        </p>
+        <div class="results">
+          <div class="result"><b>&minus;80%</b><span>time on the bottleneck</span></div>
+        </div>
+        <div class="stack"><span>C++</span><span>VTK</span><span>Python</span><span>Point clouds</span></div>
+      </article>
+
+      <article class="card">
+        <div class="row">
+          <h3>Document AI Pipeline</h3>
+          <span class="label">2025</span>
+        </div>
+        <p class="body">
+          A licensed handwriting-recognition model arrived as a huge artifact with an
+          expiring licence. I designed the packaging so the model ships alongside the code
+          with the licence swappable on expiry, rather than renewal becoming a redeployment
+          emergency. Owned the high- and low-level design.
+        </p>
+        <div class="results">
+          <div class="result"><b>19 GB &rarr; 5.28 GB</b><span>deployable image</span></div>
+        </div>
+        <div class="stack"><span>Python</span><span>Docker</span><span>RabbitMQ</span><span>HTR / OCR</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="systems">
+    <div class="sec-head">
+      <h2>How the trial platform moves data</h2>
+      <span class="label">Figure 1</span>
+    </div>
+    <div class="panel">
+      <figure>
+        <svg viewBox="0 0 920 250" role="img"
+             aria-label="Hospital EHR systems are read by per-source adapters built from a shared base module, which publish to a Pub/Sub topic; backend services subscribe asynchronously with dead-letter handling, and a role-based access layer filters responses before they reach the study team and participant apps.">
+          <defs>
+            <marker id="b-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+            </marker>
+            <marker id="b-arhl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="hlfill" d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+          </defs>
+          <g font-family="'Cascadia Mono', ui-monospace, Consolas, monospace" font-size="12" fill="currentColor">
+
+            <rect x="8"   y="86" width="118" height="58" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="67"  y="110" text-anchor="middle">Hospital</text>
+            <text x="67"  y="127" text-anchor="middle">EHR</text>
+
+            <rect x="186" y="86" width="118" height="58" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="245" y="110" text-anchor="middle">Adapter</text>
+            <text x="245" y="127" text-anchor="middle" opacity="0.6">shared base</text>
+
+            <rect x="364" y="86" width="118" height="58" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="423" y="110" text-anchor="middle">Pub/Sub</text>
+            <text x="423" y="127" text-anchor="middle" opacity="0.6">topic</text>
+
+            <rect x="542" y="86" width="118" height="58" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="601" y="110" text-anchor="middle">Backend</text>
+            <text x="601" y="127" text-anchor="middle" opacity="0.6">services</text>
+
+            <rect class="hl" x="716" y="76" width="58" height="78" rx="7" fill="none" stroke-width="1.7" />
+            <text class="hl" x="745" y="107" text-anchor="middle">RBAC</text>
+            <text class="hl" x="745" y="124" text-anchor="middle" opacity="0.75">gate</text>
+
+            <rect x="812" y="50" width="100" height="46" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="862" y="70" text-anchor="middle">Study team</text>
+            <text x="862" y="86" text-anchor="middle">app</text>
+
+            <rect x="812" y="146" width="100" height="46" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="862" y="166" text-anchor="middle">Participant</text>
+            <text x="862" y="182" text-anchor="middle">app</text>
+
+            <line x1="126" y1="115" x2="180" y2="115" stroke="currentColor" stroke-width="1.2" marker-end="url(#b-ar)" />
+            <text x="153" y="104" text-anchor="middle" font-size="10.5" opacity="0.7">FHIR</text>
+
+            <line x1="304" y1="115" x2="358" y2="115" stroke="currentColor" stroke-width="1.2" marker-end="url(#b-ar)" />
+            <text x="331" y="104" text-anchor="middle" font-size="10.5" opacity="0.7">publishes</text>
+
+            <line x1="482" y1="115" x2="536" y2="115" stroke="currentColor" stroke-width="1.2" marker-end="url(#b-ar)" />
+            <text x="509" y="104" text-anchor="middle" font-size="10.5" opacity="0.7">subscribes</text>
+            <text x="509" y="137" text-anchor="middle" font-size="10.5" opacity="0.52">async + DLQ</text>
+
+            <line x1="660" y1="115" x2="710" y2="115" stroke="currentColor" stroke-width="1.2" marker-end="url(#b-ar)" />
+
+            <line class="hl" x1="774" y1="103" x2="806" y2="78"  stroke-width="1.5" marker-end="url(#b-arhl)" />
+            <line class="hl" x1="774" y1="127" x2="806" y2="164" stroke-width="1.5" marker-end="url(#b-arhl)" />
+            <text class="hl" x="798" y="122" text-anchor="middle" font-size="10.5" opacity="0.85">filtered by role</text>
+          </g>
+        </svg>
+      </figure>
+      <figcaption>
+        <b>Every hospital connection follows one shape.</b>
+        Adapters come from a shared base module rather than being written from scratch, so a
+        new EHR source is closer to configuration than integration. Access control sits at
+        the last hop &mdash; which is how one backend serves both the clinical staff view and
+        the participant view without leaking between them.
+      </figcaption>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p class="label">Direction B &mdash; &ldquo;Provenance&rdquo; · sample layout, real content</p>
+    <p class="measure" style="margin:10px 0 0">
+      Warm neutral biased green rather than cream, pine-teal accent, ochre reserved for
+      measured results. System sans throughout with Cascadia Mono for data.
+      <a href="#work">Back to work</a>.
+    </p>
+  </footer>
+
+</div>
+
+<style>
+  .panel rect.hl, .panel line.hl { stroke: var(--accent); }
+  .panel text.hl { fill: var(--accent); }
+  .panel .hlfill { fill: var(--accent); }
+</style>

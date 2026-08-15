@@ -1,0 +1,98 @@
+---
+import "../styles/global.css";
+import career from "../data/career.json";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Page-specific path for the canonical URL, e.g. "/work" */
+  path?: string;
+}
+
+const { title, description, path = Astro.url.pathname } = Astro.props;
+
+const site = "https://me.entertoescape.com";
+const canonical = new URL(path, site).href;
+const person = career.person;
+const fullTitle = path === "/" ? `${person.name} — ${person.title}` : `${title} — ${person.name}`;
+
+const nav = [
+  { href: "/work", label: "Work" },
+  { href: "/personal", label: "Personal" },
+  { href: "/about", label: "Path" },
+  { href: "/resume", label: "Résumé" },
+];
+
+const current = (href: string) =>
+  path === href || (href !== "/" && path.startsWith(href));
+
+// schema.org Person — helps search engines associate the site with him by name.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: person.name,
+  jobTitle: person.title,
+  url: site,
+  description: person.summary,
+  worksFor: { "@type": "Organization", name: career.companies[0].name },
+  knowsAbout: career.positioning.themes,
+  sameAs: [person.links.github].filter((u) => u && !u.startsWith("TODO")),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={person.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="wrap">
+      <header class="masthead">
+        <a class="brand" href="/">{person.name} — {person.title}</a>
+        <nav aria-label="Primary">
+          {
+            nav.map((item) => (
+              <a href={item.href} aria-current={current(item.href) ? "page" : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </header>
+
+      <main id="main">
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        <div class="rows">
+          <span class="mono">{person.name} · {career.companies[0].name} · 2023—</span>
+          <span class="mono">
+            <a href="https://github.com/ankushsio">GitHub</a>
+          </span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

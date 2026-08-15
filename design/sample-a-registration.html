@@ -1,0 +1,376 @@
+<title>Registration</title>
+<style>
+  /* ============================================================
+     DIRECTION A — "Registration"
+     Editorial / typographic. Reference world: the scientific plate.
+     Cool archival paper, serif text at a real reading measure,
+     figure numbers and calibration ticks as structure, oxblood
+     reserved for measured results only.
+     ============================================================ */
+
+  :root {
+    --paper:   #EDEEF1;
+    --surface: #F7F8FA;
+    --ink:     #14181D;
+    --muted:   #5A6470;
+    --rule:    #C7CCD3;
+    --accent:  #8A2B3B;
+    --accent-soft: #8a2b3b1f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:   #0F1216;
+      --surface: #161A20;
+      --ink:     #E6E9ED;
+      --muted:   #98A2AE;
+      --rule:    #2A3138;
+      --accent:  #DB8390;
+      --accent-soft: #db839022;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:   #0F1216;
+    --surface: #161A20;
+    --ink:     #E6E9ED;
+    --muted:   #98A2AE;
+    --rule:    #2A3138;
+    --accent:  #DB8390;
+    --accent-soft: #db839022;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Sitka Text', 'Iowan Old Style', Charter, 'Bitstream Charter', Cambria, Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); }
+  .measure { max-width: 63ch; }
+
+  /* --- utility type ------------------------------------------------ */
+  .mono {
+    font-family: 'Cascadia Mono', 'SF Mono', ui-monospace, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- masthead ---------------------------------------------------- */
+  header.masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 0;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+  }
+  header.masthead nav { display: flex; gap: 22px; }
+  header.masthead a { color: var(--muted); text-decoration: none; }
+  header.masthead a:hover, header.masthead a:focus-visible { color: var(--accent); }
+
+  /* --- hero -------------------------------------------------------- */
+  .hero { padding: clamp(56px, 9vw, 104px) 0 44px; }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6.4vw, 4.3rem);
+    line-height: 1.04;
+    font-weight: 600;
+    margin: 0 0 0.5em;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+  }
+  .hero .lede {
+    font-size: clamp(1.12rem, 2.1vw, 1.34rem);
+    color: var(--muted);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .hero .lede em { color: var(--ink); font-style: normal; }
+
+  .trace { margin: 40px 0 0; display: block; width: 100%; height: auto; color: var(--accent); }
+
+  /* --- section scaffolding ----------------------------------------- */
+  section { padding: 60px 0; border-top: 1px solid var(--rule); }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 34px; }
+  .sec-head h2 {
+    font-size: 1.05rem; font-weight: 600; margin: 0;
+    letter-spacing: 0.01em;
+  }
+  .sec-head .fill { flex: 1; height: 1px; background: var(--rule); }
+
+  /* --- work entries ------------------------------------------------ */
+  .entry { display: grid; grid-template-columns: 132px 1fr; gap: 30px; padding: 30px 0; border-bottom: 1px solid var(--rule); }
+  .entry:last-of-type { border-bottom: 0; }
+  .entry h3 { font-size: 1.5rem; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.012em; }
+  .entry .domain { color: var(--muted); font-style: italic; margin: 0 0 14px; }
+  .entry p { margin: 0 0 14px; }
+  .entry .meta { padding-top: 7px; }
+  .entry .meta div + div { margin-top: 6px; }
+
+  .stack { display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: 16px; }
+  .stack span {
+    font-family: 'Cascadia Mono', ui-monospace, Consolas, monospace;
+    font-size: 0.7rem; color: var(--muted);
+    border: 1px solid var(--rule); border-radius: 2px; padding: 3px 7px;
+  }
+
+  /* result: the one place colour is spent */
+  .result {
+    border-left: 2px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 11px 16px; margin: 16px 0 0;
+  }
+  .result b { color: var(--accent); font-variant-numeric: tabular-nums; }
+
+  /* --- figure ------------------------------------------------------ */
+  figure { margin: 0; }
+  .figbox { border: 1px solid var(--rule); background: var(--surface); padding: 26px 20px; overflow-x: auto; }
+  .figbox svg { display: block; width: 100%; min-width: 620px; height: auto; color: var(--ink); }
+  /* the one meaningful hue in the figure, tokenised so it holds in both themes */
+  .figbox rect.hl, .figbox line.hl { stroke: var(--accent); }
+  .figbox text.hl { fill: var(--accent); }
+  .figbox .hlfill { fill: var(--accent); }
+  figcaption { color: var(--muted); font-size: 0.92rem; margin-top: 14px; max-width: 68ch; }
+  figcaption b { color: var(--ink); font-weight: 600; }
+
+  /* --- timeline ---------------------------------------------------- */
+  .tl { display: grid; gap: 0; }
+  .tl-row { display: grid; grid-template-columns: 132px 1fr; gap: 30px; padding: 15px 0; border-bottom: 1px dotted var(--rule); align-items: baseline; }
+  .tl-row:last-child { border-bottom: 0; }
+  .tl-row strong { font-weight: 600; }
+  .tl-row .note { color: var(--muted); }
+
+  footer { border-top: 1px solid var(--rule); padding: 40px 0 64px; color: var(--muted); }
+  footer a { color: var(--accent); }
+
+  @media (max-width: 700px) {
+    body { font-size: 17px; }
+    .entry, .tl-row { grid-template-columns: 1fr; gap: 10px; }
+    .entry .meta { display: flex; flex-wrap: wrap; gap: 14px; padding-top: 0; }
+    .entry .meta div + div { margin-top: 0; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .trace polyline { stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: draw 2.4s ease-out forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <span class="mono">Ankush Jain — Backend Engineer</span>
+    <nav class="mono">
+      <a href="#work">Work</a>
+      <a href="#figure">Systems</a>
+      <a href="#path">Path</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>I build backends for systems where being wrong is expensive.</h1>
+    <p class="lede measure">
+      Five years on clinical trial platforms, surgical imaging and medical data
+      infrastructure — the kind of software that carries patient records, runs beside an
+      operating table, or has to prove who was allowed to see what. <em>Currently at Apra Labs.</em>
+    </p>
+
+    <svg class="trace" viewBox="0 0 1000 90" role="img" aria-label="A pulse waveform, drawn from the retinal video signal-extraction work">
+      <polyline fill="none" stroke="currentColor" stroke-width="1.4"
+        stroke-linejoin="round" stroke-linecap="round"
+        points="0,62 40,61 62,60 74,26 84,72 96,55 118,61 150,62 190,61 212,60 224,26 234,72 246,55 268,61 300,62 340,61 362,60 374,26 384,72 396,55 418,61 450,62 490,61 512,60 524,26 534,72 546,55 568,61 600,62 640,61 662,60 674,26 684,72 696,55 718,61 750,62 790,61 812,60 824,26 834,72 846,55 868,61 900,62 940,61 1000,62" />
+    </svg>
+  </div>
+
+  <section id="work">
+    <div class="sec-head">
+      <h2>Selected work</h2><span class="fill"></span>
+      <span class="mono">Apra Labs · 2023—</span>
+    </div>
+
+    <div class="entry">
+      <div class="meta mono">
+        <div>2024 — present</div>
+        <div>Clinical research</div>
+        <div>2,300 hrs</div>
+      </div>
+      <div>
+        <h3>Clinical Trial Management Platform</h3>
+        <p class="domain">Connecting trial study teams and participants to hospital record systems.</p>
+        <p class="measure">
+          Trial data lives inside hospital EHR systems that each expose different APIs,
+          standards and quirks, so every new data source risked becoming a bespoke
+          integration. I built the integration hub's base adapter modules so that each new
+          EHR connection follows one predictable shape, then wrote the first adapter as the
+          reference the others were built from.
+        </p>
+        <p class="measure">
+          The platform also handled patient data without a real access-control story. I
+          designed and shipped role-based access across both applications — admin-only
+          endpoint restriction, per-role response filtering, and pre-authorization checks
+          for resources a user cannot reach.
+        </p>
+        <p class="result">
+          Deploy pipeline <b>26m 33s → 18m 07s</b>. Service image <b>450 MB → 290 MB</b>.
+          Idle cloud spend caught and stopped, <b>$200+</b> saved.
+        </p>
+        <div class="stack">
+          <span>Java</span><span>Spring Boot</span><span>Kotlin</span><span>Go</span>
+          <span>GCP Pub/Sub</span><span>Cloud Run</span><span>Terraform</span><span>FHIR</span><span>RBAC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="meta mono">
+        <div>2023 — 2024</div>
+        <div>Medical devices</div>
+        <div>1,240 hrs</div>
+      </div>
+      <div>
+        <h3>AR Surgical Navigation</h3>
+        <p class="domain">Reconstructing 3D anatomy from intra-operative video.</p>
+        <p class="measure">
+          The reconstruction pipeline wrote intermediate results to disk between every
+          stage, which made it slow and brittle. Worse, a signed distance field computation
+          ran per frame and dominated the budget — no amount of tuning elsewhere mattered
+          while it sat there.
+        </p>
+        <p class="measure">
+          I migrated the pipeline to in-memory, which meant understanding every module's
+          inputs and outputs and refactoring the seams between them. Then I worked out that
+          the distance field did not need recomputing per frame at all, and devised a way to
+          compute it once and reuse it.
+        </p>
+        <p class="result">Removed the dominant per-frame cost — <b>over 80%</b> of the time it consumed.</p>
+        <div class="stack">
+          <span>C++</span><span>VTK</span><span>Python</span><span>Signed distance fields</span><span>Point clouds</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="meta mono">
+        <div>2025</div>
+        <div>Applied AI</div>
+        <div>410 hrs</div>
+      </div>
+      <div>
+        <h3>Document AI Pipeline</h3>
+        <p class="domain">Turning scanned handwritten records into structured data.</p>
+        <p class="measure">
+          The recognition model arrived as a large third-party artifact under a
+          time-limited licence. Wrapping it naively would have produced an enormous
+          deployment and made licence renewal a redeployment emergency. I designed the
+          codebase so the model packages alongside it with the licence swappable on expiry,
+          and owned the high- and low-level design end to end.
+        </p>
+        <p class="result">Deployable image <b>19 GB → 5.28 GB</b>, a <b>72%</b> reduction.</p>
+        <div class="stack">
+          <span>Python</span><span>Docker</span><span>RabbitMQ</span><span>HTR / OCR</span><span>System design</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="figure">
+    <div class="sec-head">
+      <h2>How the trial platform moves data</h2><span class="fill"></span>
+      <span class="mono">Fig. 1</span>
+    </div>
+    <figure>
+      <div class="figbox">
+        <svg viewBox="0 0 920 250" role="img"
+             aria-label="Hospital EHR systems are read by per-source adapters built from a shared base module, which publish to a Pub/Sub topic; backend services subscribe asynchronously with dead-letter handling, and a role-based access layer filters responses before they reach the study team and participant apps.">
+          <defs>
+            <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+            </marker>
+            <marker id="arhl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="hlfill" d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+          </defs>
+          <g font-family="'Cascadia Mono', ui-monospace, Consolas, monospace" font-size="12" fill="currentColor">
+
+            <rect x="8"   y="86" width="118" height="58" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="67"  y="110" text-anchor="middle">Hospital</text>
+            <text x="67"  y="127" text-anchor="middle">EHR</text>
+
+            <rect x="186" y="86" width="118" height="58" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="245" y="110" text-anchor="middle">Adapter</text>
+            <text x="245" y="127" text-anchor="middle" opacity="0.62">shared base</text>
+
+            <rect x="364" y="86" width="118" height="58" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="423" y="110" text-anchor="middle">Pub/Sub</text>
+            <text x="423" y="127" text-anchor="middle" opacity="0.62">topic</text>
+
+            <rect x="542" y="86" width="118" height="58" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="601" y="110" text-anchor="middle">Backend</text>
+            <text x="601" y="127" text-anchor="middle" opacity="0.62">services</text>
+
+            <rect class="hl" x="716" y="76" width="58" height="78" fill="none" stroke-width="1.6" />
+            <text class="hl" x="745" y="107" text-anchor="middle">RBAC</text>
+            <text class="hl" x="745" y="124" text-anchor="middle" opacity="0.75">gate</text>
+
+            <rect x="812" y="50" width="100" height="46" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="862" y="70"  text-anchor="middle">Study team</text>
+            <text x="862" y="86"  text-anchor="middle">app</text>
+
+            <rect x="812" y="146" width="100" height="46" fill="none" stroke="currentColor" stroke-width="1.2" />
+            <text x="862" y="166" text-anchor="middle">Participant</text>
+            <text x="862" y="182" text-anchor="middle">app</text>
+
+            <line x1="126" y1="115" x2="180" y2="115" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)" />
+            <text x="153" y="104" text-anchor="middle" font-size="10.5" opacity="0.72">FHIR</text>
+
+            <line x1="304" y1="115" x2="358" y2="115" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)" />
+            <text x="331" y="104" text-anchor="middle" font-size="10.5" opacity="0.72">publishes</text>
+
+            <line x1="482" y1="115" x2="536" y2="115" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)" />
+            <text x="509" y="104" text-anchor="middle" font-size="10.5" opacity="0.72">subscribes</text>
+            <text x="509" y="137" text-anchor="middle" font-size="10.5" opacity="0.55">async + DLQ</text>
+
+            <line x1="660" y1="115" x2="710" y2="115" stroke="currentColor" stroke-width="1.2" marker-end="url(#ar)" />
+
+            <line class="hl" x1="774" y1="103" x2="806" y2="78"  stroke-width="1.4" marker-end="url(#arhl)" />
+            <line class="hl" x1="774" y1="127" x2="806" y2="164" stroke-width="1.4" marker-end="url(#arhl)" />
+            <text class="hl" x="798" y="122" text-anchor="middle" font-size="10.5" opacity="0.85">filtered by role</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>
+        <b>Fig. 1 — Every hospital connection follows one shape.</b>
+        Adapters are generated from a shared base module rather than written from scratch,
+        so a new EHR source is a configuration problem rather than a new integration.
+        Access control sits at the last hop, which is why the same backend can serve both
+        the clinical staff view and the participant view without leaking between them.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section id="path">
+    <div class="sec-head">
+      <h2>Path</h2><span class="fill"></span><span class="mono">2021 — present</span>
+    </div>
+    <div class="tl measure">
+      <div class="tl-row"><span class="mono">2026 —</span><div><strong>Regenerative medicine data platform</strong><div class="note">FHIR-native protocol and survey modelling on OMOP/LOINC terminology. Architecture and client requirements alongside implementation.</div></div></div>
+      <div class="tl-row"><span class="mono">2025</span><div><strong>Document AI, access control</strong><div class="note">Owned the design of an OCR system end to end; shipped RBAC across two applications.</div></div></div>
+      <div class="tl-row"><span class="mono">2024</span><div><strong>Video infrastructure, hyperspectral imaging</strong><div class="note">Stabilised an edge video recorder; stood up hyperspectral capture and analysis from nothing.</div></div></div>
+      <div class="tl-row"><span class="mono">2023</span><div><strong>Joined Apra Labs</strong><div class="note">Surgical AR reconstruction, retinal signal research, access-control platform work.</div></div></div>
+      <div class="tl-row"><span class="mono">2021 — 2023</span><div><strong>Two engineering roles</strong><div class="note">Placeholder — to be completed from CV.</div></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="mono">Direction A — “Registration” · sample layout, real content</p>
+    <p class="measure" style="margin:10px 0 0">
+      Typography: Sitka / Iowan Old Style with Cascadia Mono. Oxblood is spent only on
+      measured results and the access-control boundary — everywhere else the page is ink on
+      paper. <a href="#work">Back to work</a>.
+    </p>
+  </footer>
+
+</div>

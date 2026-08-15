@@ -1,0 +1,170 @@
+---
+import Base from "../../layouts/Base.astro";
+import career from "../../data/career.json";
+import TrialPlatform from "../../components/diagrams/TrialPlatform.astro";
+import DocumentAiPackaging from "../../components/diagrams/DocumentAiPackaging.astro";
+import RecorderState from "../../components/diagrams/RecorderState.astro";
+
+export function getStaticPaths() {
+  return career.companies[0].projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+
+/** Projects whose mechanism is worth drawing get a figure; the rest do not. */
+const diagrams: Record<string, any> = {
+  "clinical-trial-platform": TrialPlatform,
+  "document-ai-pipeline": DocumentAiPackaging,
+  "headless-nvr": RecorderState,
+};
+const Diagram = diagrams[project.slug];
+
+const period = `${project.period.start} — ${project.period.end ?? "present"}`;
+const metrics = project.highlights.filter((h) => h.metric);
+const rest = project.highlights.filter((h) => !h.metric);
+---
+
+<Base
+  title={project.title}
+  description={project.summary}
+  path={`/work/${project.slug}`}
+>
+  <article>
+    <header class="case-head">
+      <p class="mono breadcrumb"><a href="/work">Work</a> / {project.domain}</p>
+      <h1>{project.title}</h1>
+      <p class="lede measure">{project.summary}</p>
+      <dl class="facts">
+        <div><dt class="mono">Period</dt><dd>{period}</dd></div>
+        <div><dt class="mono">Domain</dt><dd>{project.domain}</dd></div>
+        <div><dt class="mono">Role</dt><dd>{project.role}</dd></div>
+      </dl>
+    </header>
+
+    <section class="section">
+      <div class="sec-head"><h2>The problem</h2><span class="fill"></span></div>
+      <p class="measure">{project.problem}</p>
+    </section>
+
+    <section class="section">
+      <div class="sec-head"><h2>What I did</h2><span class="fill"></span></div>
+      <p class="measure">{project.approach}</p>
+      {Diagram && <div class="figwrap"><Diagram /></div>}
+    </section>
+
+    <section class="section">
+      <div class="sec-head"><h2>Outcome</h2><span class="fill"></span></div>
+      <p class="measure">{project.impact}</p>
+      {
+        metrics.length > 0 && (
+          <ul class="metrics">
+            {metrics.map((m) => (
+              <li class="result">
+                <b>{m.text}</b>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+
+    <section class="section">
+      <div class="sec-head"><h2>Detail</h2><span class="fill"></span></div>
+      <ul class="bullets measure">
+        {rest.map((h) => <li>{h.text}</li>)}
+      </ul>
+
+      <ul class="stack">
+        {project.tech.map((t) => <li>{t}</li>)}
+      </ul>
+
+      {
+        project.links && (
+          <p class="links mono">
+            {project.links.map((l) => (
+              <a href={l.url} rel="noopener">
+                {l.label} →
+              </a>
+            ))}
+          </p>
+        )
+      }
+    </section>
+  </article>
+</Base>
+
+<style>
+  .case-head {
+    padding: clamp(40px, 7vw, 72px) 0 8px;
+  }
+  .breadcrumb {
+    margin: 0 0 18px;
+  }
+  .breadcrumb a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    color: var(--accent);
+  }
+  .case-head h1 {
+    font-size: clamp(2.1rem, 5.2vw, 3.2rem);
+    line-height: 1.08;
+    font-weight: 600;
+    margin: 0 0 18px;
+  }
+  .lede {
+    font-size: clamp(1.06rem, 2vw, 1.24rem);
+    color: var(--muted);
+    margin: 0 0 30px;
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 44px;
+    margin: 0 0 8px;
+    padding: 18px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .facts dt {
+    margin-bottom: 4px;
+  }
+  .facts dd {
+    margin: 0;
+    font-size: 0.98rem;
+  }
+
+  .figwrap {
+    margin-top: 34px;
+  }
+
+  .metrics {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .metrics li {
+    margin: 0;
+  }
+
+  .links {
+    margin-top: 24px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .links a {
+    text-decoration: none;
+  }
+  .links a:hover {
+    text-decoration: underline;
+  }
+</style>

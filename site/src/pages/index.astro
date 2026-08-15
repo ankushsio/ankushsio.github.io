@@ -1,0 +1,197 @@
+---
+import Base from "../layouts/Base.astro";
+import career from "../data/career.json";
+
+const company = career.companies[0];
+const featured = company.projects.filter((p) => p.featured).slice(0, 3);
+
+const fmt = (p: { start: string; end: string | null }) =>
+  `${p.start.slice(0, 4)} — ${p.end ? p.end.slice(0, 4) : "present"}`;
+---
+
+<Base
+  title="Backend Engineer"
+  description="Backend engineer with five years on clinical trial platforms, surgical imaging and medical data infrastructure. Currently at Apra Labs."
+  path="/"
+>
+  <div class="hero">
+    <h1>I build backends for systems where being wrong is expensive.</h1>
+    <p class="lede measure">
+      Five years on clinical trial platforms, surgical imaging and medical data
+      infrastructure — the kind of software that carries patient records, runs beside an
+      operating table, or has to prove who was allowed to see what.
+      <em>Currently at {company.name}.</em>
+    </p>
+
+    <svg
+      class="trace"
+      viewBox="0 0 1000 90"
+      role="img"
+      aria-label="A pulse waveform, drawn from the retinal video signal-extraction work"
+    >
+      <polyline
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.4"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        points="0,62 40,61 62,60 74,26 84,72 96,55 118,61 150,62 190,61 212,60 224,26 234,72 246,55 268,61 300,62 340,61 362,60 374,26 384,72 396,55 418,61 450,62 490,61 512,60 524,26 534,72 546,55 568,61 600,62 640,61 662,60 674,26 684,72 696,55 718,61 750,62 790,61 812,60 824,26 834,72 846,55 868,61 900,62 940,61 1000,62"
+      ></polyline>
+    </svg>
+  </div>
+
+  <section class="section">
+    <div class="sec-head">
+      <h2>Selected work</h2>
+      <span class="fill"></span>
+      <span class="mono">{company.name} · 2023—</span>
+    </div>
+
+    {
+      featured.map((p) => (
+        <article class="entry">
+          <div class="meta mono">
+            <div>{fmt(p.period)}</div>
+            <div>{p.domain}</div>
+          </div>
+          <div>
+            <h3>
+              <a href={`/work/${p.slug}`}>{p.title}</a>
+            </h3>
+            <p class="domain">{p.summary}</p>
+            <p class="measure">{p.problem}</p>
+            <ul class="stack">
+              {p.tech.slice(0, 7).map((t) => (
+                <li>{t}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))
+    }
+
+    <p class="more mono">
+      <a href="/work">All work →</a>
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="sec-head">
+      <h2>What I keep coming back to</h2>
+      <span class="fill"></span>
+    </div>
+    <ul class="bullets measure themes">
+      {career.positioning.themes.map((t) => <li>{t}</li>)}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: clamp(56px, 9vw, 104px) 0 44px;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6.2vw, 4.2rem);
+    line-height: 1.04;
+    font-weight: 600;
+    margin: 0 0 0.5em;
+    letter-spacing: -0.018em;
+  }
+  .lede {
+    font-size: clamp(1.1rem, 2.1vw, 1.32rem);
+    color: var(--muted);
+    margin: 0;
+  }
+  .lede em {
+    color: var(--ink);
+    font-style: normal;
+  }
+  .trace {
+    margin-top: 40px;
+    display: block;
+    width: 100%;
+    height: auto;
+    color: var(--accent);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .trace polyline {
+      stroke-dasharray: 2400;
+      stroke-dashoffset: 2400;
+      animation: draw 2.4s ease-out forwards;
+    }
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 152px 1fr;
+    gap: 30px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .entry:last-of-type {
+    border-bottom: 0;
+  }
+  .entry h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+  .entry h3 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .entry h3 a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .entry .domain {
+    color: var(--muted);
+    font-style: italic;
+    margin: 0 0 12px;
+  }
+  .entry p {
+    margin: 0;
+  }
+  .entry .meta {
+    padding-top: 7px;
+  }
+  .entry .meta div + div {
+    margin-top: 6px;
+  }
+
+  .more {
+    margin: 26px 0 0;
+  }
+  .more a {
+    text-decoration: none;
+  }
+  .more a:hover {
+    text-decoration: underline;
+  }
+
+  .themes li {
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 700px) {
+    .entry {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .entry .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-top: 0;
+    }
+    .entry .meta div + div {
+      margin-top: 0;
+    }
+  }
+</style>

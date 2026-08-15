@@ -1,0 +1,119 @@
+---
+import career from "../data/career.json";
+
+/**
+ * Span timeline of every project, computed from career.json rather than hand-drawn,
+ * so it can never drift from the record. Encodes WHEN and HOW LONG only -- deliberately
+ * not hours, which stay out of the public site.
+ */
+
+const company = career.companies[0];
+
+/** "2024-11" -> months elapsed since the first month on the chart */
+const BASE = "2023-06";
+const END = "2026-08";
+const toIndex = (ym: string) => {
+  const [y, m] = ym.split("-").map(Number);
+  const [by, bm] = BASE.split("-").map(Number);
+  return (y - by) * 12 + (m - bm);
+};
+
+const span = toIndex(END);
+const LABEL_W = 190;
+const CHART_X = 200;
+const CHART_W = 780;
+const perMonth = CHART_W / span;
+const x = (ym: string) => CHART_X + toIndex(ym) * perMonth;
+
+const ROW_H = 24;
+const BAR_H = 12;
+const TOP = 30;
+
+const rows = [...company.projects]
+  .sort((a, b) => a.period.start.localeCompare(b.period.start))
+  .map((p, i) => {
+    const start = x(p.period.start);
+    const end = x(p.period.end ?? END);
+    return {
+      slug: p.slug,
+      label: p.title,
+      major: p.featured,
+      current: !p.period.end,
+      barX: start,
+      barW: Math.max(end - start, 14),
+      y: TOP + i * ROW_H,
+    };
+  });
+
+const height = TOP + rows.length * ROW_H + 46;
+const years = ["2024-01", "2025-01", "2026-01"];
+
+/** Shorter labels than the full project titles, which are too long for the axis. */
+const short: Record<string, string> = {
+  "clinical-trial-platform": "Trial platform",
+  "ar-surgical-navigation": "AR surgery",
+  "headless-nvr": "Video recorder",
+  "document-ai-pipeline": "Document AI",
+  "regenerative-medicine-platform": "Regen. medicine",
+  "retinal-video-biomarkers": "Retinal research",
+  "hyperspectral-imaging": "Hyperspectral",
+  "access-control-platform": "Access control",
+};
+---
+
+<figure>
+  <div class="figbox">
+    <svg
+      viewBox={`0 0 1000 ${height}`}
+      role="img"
+      style="min-width:660px"
+      aria-label={`Timeline of ${rows.length} projects between June 2023 and August 2026. The clinical trial platform runs continuously from November 2024 to the present, with shorter imaging and AI projects before and alongside it.`}
+    >
+      <g font-size="11.5">
+        {
+          years.map((y) => (
+            <line class="grid-line" x1={x(y)} y1="18" x2={x(y)} y2={height - 36} />
+          ))
+        }
+        <line class="grid-line" x1={CHART_X} y1="18" x2={CHART_X} y2={height - 36} />
+
+        <text class="axis-text" x={CHART_X} y={height - 16}>2023</text>
+        {
+          years.map((y) => (
+            <text class="axis-text" x={x(y)} y={height - 16}>
+              {y.slice(0, 4)}
+            </text>
+          ))
+        }
+
+        {
+          rows.map((r) => (
+            <>
+              <text
+                x={LABEL_W}
+                y={r.y + 10}
+                text-anchor="end"
+                fill="currentColor"
+              >
+                {short[r.slug] ?? r.label}
+              </text>
+              <rect
+                class={r.major ? "bar-major" : "bar-minor"}
+                x={r.barX}
+                y={r.y}
+                width={r.barW}
+                height={BAR_H}
+                rx="3"
+              />
+            </>
+          ))
+        }
+      </g>
+    </svg>
+  </div>
+  <figcaption>
+    <b>Three years, {rows.length} projects, two that ran long.</b>
+    The overlaps are the honest part — imaging research and platform work ran in parallel
+    more often than not, and the trial platform has been continuous since late 2024.
+  </figcaption>
+</figure>
