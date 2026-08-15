@@ -40,3 +40,6 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# Resume render output (the shipped PDF is copied into site/public/)
+resume/build/

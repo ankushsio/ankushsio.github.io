@@ -243,11 +243,11 @@
   },
 
   "skills": {
-    "languages": ["Python", "C++", "Java", "Kotlin", "Go", "JavaScript/Node.js", "C#", "TypeScript"],
-    "backend": ["Spring Boot", "Ktor", "REST APIs", "Server-Sent Events", "RabbitMQ", "Google Cloud Pub/Sub", "Redis", "Message brokers", "Event-driven architecture"],
-    "cloud_devops": ["Google Cloud Platform", "Cloud Run", "Terraform", "Docker", "Docker Compose", "CI/CD pipelines", "Infrastructure as code", "AWS (exposure)"],
-    "domain": ["FHIR / HAPI", "OMOP", "LOINC", "SMART on FHIR", "EHR integration", "Clinical trial systems", "HIPAA-adjacent data handling"],
-    "security": ["Role-based access control", "OAuth / token-based auth", "Microsoft Graph API", "Static analysis remediation", "Security hardening"],
+    "languages": ["Python", "C++", "Java", "Kotlin", "Go", "JavaScript/Node.js", "TypeScript"],
+    "backend": ["Spring Boot", "Ktor", "REST APIs", "Server-Sent Events (SSE)", "RabbitMQ", "Google Cloud Pub/Sub", "Redis", "Message brokers", "Event-driven architecture", "Microservices"],
+    "cloud_devops": ["Google Cloud Platform (GCP)", "Cloud Run", "Terraform", "Docker", "Docker Compose", "CI/CD pipelines", "Infrastructure as code (IaC)", "AWS (exposure)"],
+    "domain": ["HL7 FHIR", "HAPI FHIR", "OMOP", "LOINC", "SMART on FHIR", "EHR integration", "Clinical trial systems", "HIPAA-adjacent data handling"],
+    "security": ["Role-based access control (RBAC)", "Authentication & authorization", "OAuth / token-based auth", "Microsoft Graph API", "Static analysis remediation", "Security hardening"],
     "ml_imaging": ["Computer vision", "Image registration", "Signal processing (FFT/DFT)", "Hyperspectral imaging", "OCR / handwriting recognition", "3D meshes & point clouds", "VTK"],
     "practices": ["High- and low-level design", "Code review", "Mentoring", "Technical interviewing", "AI-assisted development", "Requirements gathering"]
   },

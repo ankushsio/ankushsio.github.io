@@ -1,0 +1,11 @@
+Retinal Video Biomarker Research
+
+Applied-research work extracting a physiological signal from retinal video - establishing whether a usable signal was present at all before anyone built a product on the assumption.
+
+What I did:
+Read the underlying papers and open-source implementations, then experimented across different frame regions, pixel-value conditions, histograms and illumination to find where correlation actually held. Built an image-registration pipeline producing stable, registered video, and worked in the frequency domain using FFT/DFT to extract beats-per-minute values from the registered signal.
+
+Outcome:
+Established the presence of a valid physiological signal and produced a working registration pipeline. The image-registration code was durable enough to be revived and reused on a new image set nearly two years later.
+
+Tech: Python, Computer vision, Image registration, FFT/DFT, Signal processing, Research literature

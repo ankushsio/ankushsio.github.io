@@ -1,0 +1,11 @@
+Access Control & Security Platform
+
+My first project. Migrating a command protocol off protobuf and hardening how the service handled malformed input.
+
+What I did:
+Migrated commands and tests from protobuf to gzip and removed the leftover artifacts, verifying the service stayed stable without them. Made command processing resilient so one bad command no longer prevented the rest of the batch from being handled, and worked through schema and command dependency issues alongside the testing team.
+
+Outcome:
+Completed the serialization migration and made batch command processing fault-tolerant rather than all-or-nothing.
+
+Tech: protobuf, gzip, Debian packaging, Schema design, Access control domain

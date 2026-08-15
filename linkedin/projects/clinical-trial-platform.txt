@@ -1,0 +1,11 @@
+Clinical Trial Management Platform
+
+A multi-service platform connecting clinical trial study teams and participants to hospital electronic health record systems. My longest-running project and the one where I moved from writing features to shaping design.
+
+What I did:
+Built the integration hub's base adapter modules so that every new EHR adapter follows one predictable shape, then implemented the first EHR adapter as the reference others were built from. Moved inter-service communication onto managed pub/sub with asynchronous subscriptions, dead-letter handling and retry logic. Wrote infrastructure as code for the cloud APIs, serverless service instances, topics and subscriptions. Designed and implemented role-based access control across both the study-team and participant applications - identifying admin-only endpoints, filtering responses per role, and adding pre-authorization checks for resources a user cannot reach. Added server-sent events for real-time feedback, hardened authentication, remediated static-analysis findings, and rebuilt the CI/CD pipelines.
+
+Outcome:
+Phase 1 delivered on schedule. Deployments got meaningfully faster, container images meaningfully smaller, and the platform gained an access-control story it previously lacked.
+
+Tech: Java, Spring Boot, Kotlin, Ktor, Go, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, GraalVM, Gradle

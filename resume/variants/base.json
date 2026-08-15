@@ -1,0 +1,52 @@
+{
+  "label": "base",
+  "target_role": "Backend Engineer",
+  "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json — the renderer fails on unknown ids, which is what stops invented claims.",
+
+  "summary": "Backend engineer with five years building distributed systems for regulated healthcare and imaging — EHR integration, cloud infrastructure, access control and AI pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.",
+
+  "sections": [
+    {
+      "project": "clinical-trial-platform",
+      "label": "Clinical Trial Management Platform",
+      "bullets": [
+        { "id": "ctp-adapters" },
+        { "id": "ctp-rbac" },
+        { "id": "ctp-pubsub" },
+        { "id": "ctp-deploy" },
+        { "id": "ctp-cost" }
+      ]
+    },
+    {
+      "project": "regenerative-medicine-platform",
+      "label": "Regenerative Medicine Data Platform",
+      "bullets": [{ "id": "rm-fhir" }, { "id": "rm-requirements" }]
+    },
+    {
+      "project": "document-ai-pipeline",
+      "label": "Document AI / Handwriting Recognition Pipeline",
+      "bullets": [{ "id": "p2p-image" }, { "id": "p2p-license" }, { "id": "p2p-design" }]
+    },
+    {
+      "project": "headless-nvr",
+      "label": "Headless Video Recording Platform",
+      "bullets": [{ "id": "nvr-node" }, { "id": "nvr-stability" }]
+    },
+    {
+      "project": "ar-surgical-navigation",
+      "label": "AR Surgical Navigation",
+      "bullets": [{ "id": "ars-sdf" }, { "id": "ars-onboard" }]
+    }
+  ],
+
+  "skills": [
+    "languages",
+    "backend",
+    "cloud_devops",
+    "domain",
+    "security",
+    "ml_imaging"
+  ],
+
+  "max_pages": 1
+}

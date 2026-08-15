@@ -1,0 +1,11 @@
+AR Surgical Navigation
+
+A research system reconstructing 3D anatomy from intra-operative video for augmented-reality surgical guidance. I took it from a file-based research prototype toward something that could run in real conditions.
+
+What I did:
+Read the literature and open-source implementations to understand the geometry properly, then migrated the file-based pipeline to in-memory - which meant understanding every module's inputs and outputs and refactoring the connections between them. For the bottleneck, I worked out that the signed distance field did not need recomputing per frame and devised a technique to compute it once and reuse it. Added multi-inference passes, multi-mesh views, error calculation, and robustness across different input data types.
+
+Outcome:
+Removed the dominant per-frame cost, cutting more than 80% of the time it consumed. Onboarded two junior engineers onto the project and led it through a period when senior engineers were unavailable.
+
+Tech: C++, Python, VTK, 3D meshes & point clouds, Signed distance fields, Neural reconstruction, Computer vision

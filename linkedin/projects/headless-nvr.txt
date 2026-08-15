@@ -1,0 +1,11 @@
+Headless Video Recording Platform
+
+An Apra Labs network video recorder running headless on edge devices. Built on ApraPipes, the company's open-source video and image processing pipeline framework. I joined when it was unstable and worked on getting it to a dependable state.
+
+What I did:
+Refactored the C++ backend and wrote the Node backend from scratch, then made Redis the single source of ground truth connecting them and the frontend. Integrated server-sent events for real-time notifications, which unlocked a set of features that polling could not serve well. Added proper logging across both the C++ and Node sides - which is what finally made the intermittent decoder crashes diagnosable rather than guessable. Debugged segmentation faults in frame decoding and tested aggressively across edge device targets.
+
+Outcome:
+Brought the platform from unstable to a dependable state and integrated the previously disconnected modules into one controllable system with consistent state.
+
+Tech: C++, Node.js, Redis, hiredis, redis-plus-plus, Server-Sent Events, ApraPipes, NVIDIA Jetson (AGX/NX), Video decoding, OpenCV

@@ -1,0 +1,11 @@
+Regenerative Medicine Data Platform
+
+Current project. A FHIR-native platform for clinical protocols and surveys, modelled on healthcare terminology standards, being migrated off a legacy application. My work here is as much architecture and requirements as implementation.
+
+What I did:
+Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Researched SMART on FHIR to decide where the access-control layer belonged, and produced a permission matrix across roles. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and user stories, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.
+
+Outcome:
+Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows with explicit user stories.
+
+Tech: FHIR, OMOP, LOINC, SMART on FHIR, RBAC, Docker Compose, Playwright, AI-assisted development, Requirements & architecture design

@@ -43,8 +43,33 @@ ALLOWED_NOTES = {
 SELF = "scripts/privacy_gate.py"
 
 # Binary-ish extensions we do not grep.
-SKIP_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".pdf", ".woff",
+SKIP_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".woff",
                  ".woff2", ".ttf", ".otf", ".zip", ".xlsx", ".docx"}
+
+
+def read_text_for_scan(path: Path) -> str | None:
+    """Return scannable text for a tracked file, or None if it cannot be read.
+
+    PDFs are handled explicitly rather than skipped: the resume PDF is served publicly
+    from the site, so it is exactly the kind of artifact a leak must not reach.
+    """
+    if path.suffix.lower() == ".pdf":
+        try:
+            from pypdf import PdfReader
+        except ImportError:
+            print(f"WARNING: pypdf not installed — cannot scan {path.name}. "
+                  f"Install it with: python -m pip install pypdf", file=sys.stderr)
+            return None
+        try:
+            reader = PdfReader(str(path))
+            return "\n".join((page.extract_text() or "") for page in reader.pages)
+        except Exception as exc:  # a PDF we cannot read is a PDF we cannot clear
+            print(f"WARNING: could not read {path.name}: {exc}", file=sys.stderr)
+            return None
+    try:
+        return path.read_text(encoding="utf-8", errors="ignore")
+    except (OSError, UnicodeDecodeError):
+        return None
 
 # Lockfiles are machine-generated base64 integrity hashes. Random letter runs inside
 # them trigger false positives ("Mayo" appears inside a sha512 hash) and no human-written
@@ -74,17 +99,17 @@ def main() -> int:
 
     patterns = {term: build_pattern(term) for term in FORBIDDEN}
     findings: list[tuple[str, int, str, str]] = []
+    scanned = 0
 
     for rel in files:
         if rel == SELF or rel in SKIP_FILES:
             continue
         if Path(rel).suffix.lower() in SKIP_SUFFIXES:
             continue
-        path = ROOT / rel
-        try:
-            text = path.read_text(encoding="utf-8", errors="ignore")
-        except (OSError, UnicodeDecodeError):
+        text = read_text_for_scan(ROOT / rel)
+        if text is None:
             continue
+        scanned += 1
         for lineno, line in enumerate(text.splitlines(), 1):
             for term, pattern in patterns.items():
                 if pattern.search(line):
@@ -99,8 +124,8 @@ def main() -> int:
         print("\nRemove these before pushing. The repo is public.")
         return 1
 
-    print(f"privacy gate: OK — {len(files)} tracked files, no client, codename or "
-          f"colleague names found")
+    print(f"privacy gate: OK — {scanned} of {len(files)} tracked files scanned "
+          f"(PDFs included), no client, codename or colleague names found")
     for term, why in ALLOWED_NOTES.items():
         print(f"  (allowed: {term} — {why})")
     return 0

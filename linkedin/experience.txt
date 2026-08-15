@@ -1,0 +1,23 @@
+Engineering services across healthcare, medical devices and imaging. Clients are not named.
+
+CLINICAL TRIAL MANAGEMENT PLATFORM (Nov 2024 - present)
+• Built the integration hub's base adapter modules, turning each new EHR integration from a bespoke build into a repeatable pattern; implemented the reference adapter.
+• Designed and shipped a full role-based access control system across two applications - admin-only endpoint restriction, per-role response filtering, pre-authorization checks.
+• Re-architected inter-service connectivity on GCP Pub/Sub with async subscriptions, dead-letter handling and retries; wrote the Terraform for it.
+• Cut the backend deploy pipeline from 26m33s to 18m07s and a service image from 450 MB to 290 MB.
+
+REGENERATIVE MEDICINE DATA PLATFORM (May 2026 - present)
+• Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC terminology; implemented change logs purely through FHIR provenance.
+• Drove requirements with the client, turning whiteboard sessions into wireframed workflows and user stories.
+
+DOCUMENT AI / HANDWRITING RECOGNITION (May - Nov 2025)
+• Owned high- and low-level design of an end-to-end OCR system around a licensed third-party model.
+• Designed packaging so the model ships with the system and its licence can be swapped on expiry; cut the deployable from 19 GB to 5.28 GB.
+
+HEADLESS VIDEO RECORDING PLATFORM (Apr - Oct 2024)
+• Wrote the Node backend from scratch and made Redis the single ground truth shared with the C++ core; added SSE for real-time updates.
+• Took the recorder from unstable to dependable, debugging intermittent segmentation faults across edge hardware.
+
+AR SURGICAL NAVIGATION (Aug 2023 - Apr 2024)
+• Identified a signed distance field computation as the pipeline bottleneck and devised a compute-once-and-reuse technique, removing over 80% of the time it took per frame.
+• Migrated the reconstruction pipeline from file-based to in-memory; onboarded two junior engineers.

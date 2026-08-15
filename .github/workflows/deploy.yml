@@ -32,7 +32,10 @@ jobs:
       # the build if a client name, internal codename or colleague name ever lands in a
       # tracked file -- on every push, not just the first.
       - name: Privacy gate
-        run: python scripts/privacy_gate.py
+        run: |
+          # pypdf lets the gate read the shipped resume PDF, not just source files
+          python -m pip install --quiet pypdf
+          python scripts/privacy_gate.py
 
       - uses: actions/setup-node@v4
         with:
