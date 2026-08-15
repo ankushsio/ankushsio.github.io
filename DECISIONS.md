@@ -1,0 +1,123 @@
+# Decisions taken while you were asleep
+
+Everything here is reversible. Each entry says what I chose, why, and how to undo it.
+
+---
+
+## 1. Design direction: A ("Registration"), with B's timeline grafted in
+
+**Chose** the editorial/typographic direction as the site's identity, and took the span
+timeline from the warm-minimal direction for the Path page.
+
+**Why.** Your stated bar was "must not look like AI slop". The sans-serif card grid that
+direction B is built on is the single most common shape on the modern web, and it is the one
+a reader is most likely to have seen before. The serif editorial treatment is rarer among
+engineer portfolios and reads as considered rather than assembled. B's timeline was worth
+keeping because it is information, not decoration — it shows overlap and duration honestly.
+
+**To undo.** The whole design is CSS custom properties in `site/src/styles/global.css`.
+Swapping to B's palette and font stack is a token change, not a rewrite.
+
+Both samples are still live if you want to compare:
+- A — https://claude.ai/code/artifact/abcb02da-73d9-45cb-ba75-0d1a82973e25
+- B — https://claude.ai/code/artifact/35c15f7b-453e-49a2-8169-289a9cc59142
+
+## 2. No Tailwind
+
+Plain CSS with custom properties. The design is token-driven anyway, and a portfolio this
+size gets nothing from a utility framework except a build step and a config file.
+
+## 3. Astro, static output, no client-side JS
+
+Ships zero JavaScript. Same static output works on GitHub Pages today and Cloudflare Workers
+later, which is what makes the eventual cutover a DNS change rather than a rebuild.
+
+## 4. Résumé built with Typst, deliberately in a different typeface from the site
+
+The site is serif because it is for reading. The résumé is Calibri/Carlito because it is
+optimised for density and machine parsing. Divergence is intentional, not an oversight.
+
+## 5. Extraction scripts are NOT in the public repo
+
+`extract_timesheets.py`, `extract_evals.py` and `classify_projects.py` encode client names in
+their column mappings — that is unavoidable, since the raw spreadsheets label columns by
+client. They are gitignored and stay on your machine. `privacy_gate.py` and
+`sync-content.mjs` are safe and committed.
+
+## 6. Commit authorship rewritten to a GitHub noreply address
+
+Git was configured with your work email address, which is on a client's domain. On a public
+repo that address is permanently visible in every commit — and it identifies the client. Rewrote both commits to
+`33591091+ankushsio@users.noreply.github.com` and set it as the repo-local default.
+
+This is worth flagging because the privacy gate cannot catch it: the gate greps file
+contents, and this lives in git metadata.
+
+## 7. `gh` was defaulting to your work account
+
+Your work account was the active one; the first push was rejected with a 403. Switched to
+`ankushsio` and set a repo-local credential helper (`!gh auth git-credential`) so this repo
+always authenticates as your personal account regardless of the global default.
+
+## 8. The `entertoescape` source link is not published
+
+That repo is private, so a "Source" link would 404 for every visitor. The personal page shows
+only the play link. Make the repo public and the link appears automatically — the template
+already filters on `repo_is_private` in `content/career.json`.
+
+## 9. Small factual corrections
+
+- **Dropped C# from your skills.** I had inferred it from the Debian-packaging work on the
+  access-control project; there is no evidence for it in the timesheets. Say the word and it
+  goes back.
+- **Added acronym forms** — "RBAC" alongside "role-based access control", "GCP" alongside
+  "Google Cloud Platform", "SSE", "IaC". This was found by the ATS coverage check: a
+  recruiter searching literally for "RBAC" would not have matched your résumé.
+- **Added "HL7 FHIR"** rather than bare "HL7" — you have FHIR/HAPI experience, and FHIR is an
+  HL7 standard, but that is not the same as HL7 v2 messaging. The precise form is defensible;
+  bare "HL7" would have been a stretch.
+- **Reassigned one timesheet entry** (2025-06-03) to the retinal-imaging project — it
+  describes reviving your image-registration code, not work on the sibling system it was
+  filed under. 8 hours; immaterial to totals, but it keeps that story accurate.
+
+## 10. A minor sibling system folded into the Document AI case study
+
+32 hours across four scattered days: codebase familiarisation, AWS metrics, and debugging. It
+was not a project you owned — your own evaluation describes it as the system your RabbitMQ
+broker connected the document pipeline to. A case study would have overstated it.
+
+## 11. One leak happened, and was caught
+
+The first version of this very file named a client and your work email while explaining why
+those must not be published. I chained the privacy gate through `| head` in my shell, which
+swallowed its exit code, so the commit went through. **CI ran the gate and failed the
+deploy** — so nothing broken ever reached the live site. The commit was then rewritten out of
+history with a force push.
+
+Two things worth keeping from that: the gate belongs in CI precisely because a local check
+can be bypassed by accident, and the force push means the leaked blob is unreachable from any
+ref — though if you want to be thorough, GitHub Support can purge the orphaned object.
+
+---
+
+# Open items — these need you
+
+1. **Your current résumé.** Still the one real blocker. Needed for the 2 full-time roles
+   (2021–2023), 3 internships, and education. The site and both résumés have explicit
+   placeholders where these go.
+2. **Contact details** — public email, LinkedIn URL, city. Currently `TODO` in
+   `content/career.json`; the résumé header falls back to placeholder text.
+3. **The Cloudflare DNS record** — the one step I cannot do:
+
+   | Type | Name | Target | Proxy |
+   |---|---|---|---|
+   | CNAME | `me` | `ankushsio.github.io` | **DNS only — grey cloud** |
+
+   Orange/proxied breaks GitHub's certificate issuance. After DNS resolves, enable *Enforce
+   HTTPS* in the repo's Pages settings.
+4. **`portfolio.entertoescape.com` → `me.entertoescape.com/work`** — a Cloudflare Redirect
+   Rule, 301. Dashboard action, or give me a CF API token and I will script it.
+5. **GA4 measurement ID** (`G-XXXXXXXXXX`) to switch analytics on. Also worth checking
+   whether your Search Console entry for `entertoescape.com` is a **Domain** property — if it
+   is, it already covers the subdomain and there is nothing to add.
+6. **Decide on the `entertoescape` repo** — public (source link appears) or stay private.
