@@ -1,12 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
 import career from "../data/career.json";
+import { period as fmt } from "../lib/dates";
 
 const company = career.companies[0];
 const featured = company.projects.filter((p) => p.featured).slice(0, 3);
 
-const fmt = (p: { start: string; end: string | null }) =>
-  `${p.start.slice(0, 4)} — ${p.end ? p.end.slice(0, 4) : "present"}`;
 ---
 
 <Base

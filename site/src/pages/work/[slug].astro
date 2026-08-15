@@ -4,6 +4,7 @@ import career from "../../data/career.json";
 import TrialPlatform from "../../components/diagrams/TrialPlatform.astro";
 import DocumentAiPackaging from "../../components/diagrams/DocumentAiPackaging.astro";
 import RecorderState from "../../components/diagrams/RecorderState.astro";
+import { periodLong } from "../../lib/dates";
 
 export function getStaticPaths() {
   return career.companies[0].projects.map((project) => ({
@@ -22,7 +23,7 @@ const diagrams: Record<string, any> = {
 };
 const Diagram = diagrams[project.slug];
 
-const period = `${project.period.start} — ${project.period.end ?? "present"}`;
+const period = periodLong(project.period);
 const metrics = project.highlights.filter((h) => h.metric);
 const rest = project.highlights.filter((h) => !h.metric);
 ---

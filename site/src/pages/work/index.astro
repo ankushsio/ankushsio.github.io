@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import career from "../../data/career.json";
+import { period as fmt } from "../../lib/dates";
 
 const company = career.companies[0];
 
@@ -9,8 +10,6 @@ const projects = [...company.projects].sort((a, b) =>
   b.period.start.localeCompare(a.period.start)
 );
 
-const fmt = (p: { start: string; end: string | null }) =>
-  `${p.start.slice(0, 4)} — ${p.end ? p.end.slice(0, 4) : "present"}`;
 
 const headline = (p: (typeof projects)[number]) =>
   p.highlights.find((h) => h.metric) ?? p.highlights[0];
