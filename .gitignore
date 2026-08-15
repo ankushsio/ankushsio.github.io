@@ -1,0 +1,35 @@
+# ---------------------------------------------------------------------------
+# CONFIDENTIAL SOURCE DATA — never commit.
+# These contain client names, colleague data, and raw employer records.
+# ---------------------------------------------------------------------------
+timesheets/
+evals/
+data/raw/
+resume-source/
+
+# Build output
+node_modules/
+site/dist/
+site/.astro/
+dist/
+
+# Generated at build time from content/career.json — never edit or commit
+site/src/data/
+
+# Env / secrets
+.env
+.env.*
+.dev.vars
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
