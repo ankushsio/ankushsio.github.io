@@ -1,6 +1,6 @@
 # Ankush Jain
 
-**Backend Engineer**
+**Senior Backend Engineer**
 
 > Master resume — the complete record, no page limit. This is the reference
 > document and is never sent to an employer as-is. One-page tailored versions
@@ -24,7 +24,7 @@ Backend engineer with ~5 years building distributed systems for regulated health
 
 ## Positioning
 
-- **Level:** mid-to-senior backend engineer
+- **Level:** senior backend engineer
 - **Experience:** ~5 years (graduated 2021)
 - **Seeking:** A role with real ownership and systems depth, at a company worth staying at for years.
 
@@ -40,7 +40,7 @@ Backend engineer with ~5 years building distributed systems for regulated health
 
 ## Experience
 
-### Apra Labs — Software Engineer
+### Apra Labs — Senior Software Engineer
 *May 2023 – Present*
 
 Engineering services company. Work is delivered for external clients across healthcare, medical devices and imaging; clients are not named. Also contributed to Apra Labs' own products and open source.
@@ -289,6 +289,9 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 
 - **ByteLearn** — Software Engineer (May 2022 – Apr 2023)
 - **Deloitte USI** — Business Technical Analyst (Software Developer) (Sep 2021 – May 2022)
+- **Utopia Global, Inc.** — Machine Learning Intern (Jan 2021 – Jun 2021)
+- **Innovaccer** — Data Science Intern (May 2020 – Jul 2020)
+- **Directi** — Workshop Trainer Intern (May 2019 – Jun 2019)
 
 ---
 

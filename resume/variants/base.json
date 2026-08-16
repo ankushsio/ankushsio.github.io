@@ -1,8 +1,8 @@
 {
   "label": "base",
-  "target_role": "Backend Engineer",
+  "target_role": "Senior Backend Engineer",
   "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json \u2014 the renderer fails on unknown ids, which is what stops invented claims.",
-  "summary": "Backend engineer, five years on distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control and AI pipelines. Owns systems from design to the CI/CD that ships them.",
+  "summary": "Senior backend engineer, five years on distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control and AI pipelines. Owns systems from design to the CI/CD that ships them.",
   "sections": [
     {
       "project": "clinical-trial-platform",

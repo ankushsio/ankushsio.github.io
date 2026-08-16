@@ -8,7 +8,7 @@
   },
   "person": {
     "name": "Ankush Jain",
-    "title": "Backend Engineer",
+    "title": "Senior Backend Engineer",
     "tagline": "Backend engineer for systems where being wrong is expensive",
     "location": "Bengaluru, India",
     "email": "kushjaing@gmail.com",
@@ -21,7 +21,7 @@
     "_phone_note": "Phone is deliberately NOT in this public file. It lives in resume/private.json (gitignored) and is rendered only with `render_resume.py --phone`."
   },
   "positioning": {
-    "level": "mid-to-senior backend engineer",
+    "level": "senior backend engineer",
     "years_experience": 5,
     "graduated": 2021,
     "themes": [
@@ -38,7 +38,7 @@
       "id": "apra-labs",
       "name": "Apra Labs",
       "nameable": true,
-      "role": "Software Engineer",
+      "role": "Senior Software Engineer",
       "start": "2023-05-24",
       "end": null,
       "current": true,
@@ -666,7 +666,59 @@
         ]
       }
     ],
-    "internships": []
+    "internships": [
+      {
+        "company": "Utopia Global, Inc.",
+        "role": "Machine Learning Intern",
+        "start": "2021-01",
+        "end": "2021-06",
+        "dates": "Jan 2021 – Jun 2021",
+        "months": 6,
+        "highlights": [
+          {
+            "id": "utopia-ml",
+            "text": "Machine learning internship, six months, immediately before joining full time",
+            "metric": false,
+            "source": "linkedin"
+          }
+        ],
+        "_TODO": "What did you actually build here? Six months is long enough to be worth a real bullet."
+      },
+      {
+        "company": "Innovaccer",
+        "role": "Data Science Intern",
+        "start": "2020-05",
+        "end": "2020-07",
+        "dates": "May 2020 – Jul 2020",
+        "months": 3,
+        "highlights": [
+          {
+            "id": "innovaccer-ds",
+            "text": "Data science internship at a healthcare data company",
+            "metric": false,
+            "source": "linkedin"
+          }
+        ],
+        "_TODO": "Worth noting this was healthcare data - it makes the later healthcare specialisation look deliberate rather than accidental. What did you work on?"
+      },
+      {
+        "company": "Directi",
+        "role": "Workshop Trainer Intern",
+        "start": "2019-05",
+        "end": "2019-06",
+        "dates": "May 2019 – Jun 2019",
+        "months": 2,
+        "location": "Raipur, India",
+        "highlights": [
+          {
+            "id": "directi-teach",
+            "text": "Designed session plans and mentored school students at a CodeChef programming workshop, working under a CodeChef manager and supervisor",
+            "metric": false,
+            "source": "linkedin"
+          }
+        ]
+      }
+    ]
   },
   "achievements": [
     {

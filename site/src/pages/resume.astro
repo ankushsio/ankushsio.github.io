@@ -178,14 +178,35 @@ const fmt = periodLong;
     margin: 0;
   }
 
+  /* Same affordance as the work pages: a link has to look like one before hover. */
   .proj h4 a {
     color: var(--ink);
+    text-decoration: underline;
     text-decoration-color: var(--rule);
-    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
   }
-  .proj h4 a:hover {
+  .proj h4 a::after {
+    content: "→";
+    color: var(--accent);
+    font-size: 0.8em;
+    display: inline-block;
+    margin-left: 0.3em;
+    transition: transform 0.18s ease;
+  }
+  .proj h4 a:hover,
+  .proj h4 a:focus-visible {
     color: var(--accent);
     text-decoration-color: currentColor;
+    text-decoration-thickness: 2px;
+  }
+  .proj h4 a:hover::after {
+    transform: translateX(3px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .proj h4 a::after {
+      transition: none;
+    }
   }
 
   .edu {
