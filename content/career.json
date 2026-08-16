@@ -31,7 +31,8 @@
       "Performance and delivery engineering - pipeline and image-size optimization, CI/CD",
       "Applied research to production - imaging, signal processing, AI/OCR"
     ],
-    "seeking": "A role with real ownership and systems depth, at a company worth staying at for years."
+    "seeking": "A role with real ownership and systems depth, at a company worth staying at for years.",
+    "arc": "Two threads run the whole way through: healthcare data, from an analytics internship in 2020 to clinical trial and regenerative medicine platforms today; and OCR, from machinery nameplate recognition in 2021 to a production handwriting-recognition system in 2025."
   },
   "companies": [
     {
@@ -691,12 +692,18 @@
         "highlights": [
           {
             "id": "utopia-ml",
-            "text": "Machine learning internship, six months, immediately before joining full time",
+            "text": "Built machine learning for optical character recognition of machinery nameplates, turning photographs of equipment plates into structured inventory records",
             "metric": false,
-            "source": "linkedin"
+            "source": "clarified"
           }
         ],
-        "_TODO": "What did you actually build here? Six months is long enough to be worth a real bullet."
+        "summary": "Machine learning for industrial inventory management.",
+        "tech": [
+          "Python",
+          "Machine learning",
+          "OCR",
+          "Computer vision"
+        ]
       },
       {
         "company": "Innovaccer",
@@ -708,12 +715,17 @@
         "highlights": [
           {
             "id": "innovaccer-ds",
-            "text": "Data science internship at a healthcare data company",
+            "text": "Data science work on healthcare data analytics - first exposure to the domain I went on to specialise in",
             "metric": false,
-            "source": "linkedin"
+            "source": "clarified"
           }
         ],
-        "_TODO": "Worth noting this was healthcare data - it makes the later healthcare specialisation look deliberate rather than accidental. What did you work on?"
+        "summary": "Healthcare data analytics.",
+        "tech": [
+          "Python",
+          "Data analysis",
+          "Healthcare data"
+        ]
       },
       {
         "company": "Directi",

@@ -50,6 +50,8 @@ const education = career.education;
       <span class="mono">2019 — 2023</span>
     </div>
 
+    <p class="measure arc">{career.positioning.arc}</p>
+
     {
       prior.full_time.map((job) => (
         <article class="past">
@@ -80,6 +82,7 @@ const education = career.education;
                 <dt>
                   {job.role}, {job.company}
                   <span class="mono when">{job.dates}</span>
+                  {job.summary && <span class="mono field">{job.summary}</span>}
                 </dt>
                 {job.highlights.map((h) => (
                   <dd>{h.text}</dd>
@@ -150,6 +153,13 @@ const education = career.education;
     color: var(--muted);
     margin: 0;
   }
+  .arc {
+    margin: 0 0 30px;
+    padding-left: 14px;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+  }
+
   .past {
     padding: 0 0 26px;
   }
@@ -197,6 +207,11 @@ const education = career.education;
   }
   .when {
     font-weight: 400;
+  }
+  .field {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
   }
 
   .achievements {

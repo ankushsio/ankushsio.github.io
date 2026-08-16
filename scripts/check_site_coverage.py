@@ -65,6 +65,8 @@ def required(career: dict) -> list[tuple[str, str]]:
     for job in prior.get("internships", []):
         items.append(("internship", job["company"]))
         items.append(("internship role", job["role"]))
+        if job.get("summary"):
+            items.append((f"internship summary {job['company']}", job["summary"]))
         for h in job.get("highlights", []):
             items.append((f"internship highlight {h['id']}", h["text"][:60]))
 
