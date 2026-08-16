@@ -8,4 +8,4 @@ Built the integration hub's base adapter modules so that every new EHR adapter f
 Outcome:
 Phase 1 delivered on schedule. Deployments got meaningfully faster, container images meaningfully smaller, and the platform gained an access-control story it previously lacked.
 
-Tech: Java, Spring Boot, Kotlin, Ktor, Go, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, GraalVM, Gradle
+Tech: Java, Spring Boot, Kotlin, Ktor, Go, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, GraalVM, Gradle, Microsoft Entra, JWT

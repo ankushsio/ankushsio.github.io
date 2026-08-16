@@ -17,11 +17,14 @@
           "text": "Designed and shipped a full RBAC system across two applications: admin-only endpoint restriction, per-role response filtering and pre-authorization checks"
         },
         {
-          "id": "ctp-pubsub"
+          "id": "ctp-entra"
         },
         {
           "id": "ctp-deploy",
           "text": "Cut the backend deploy pipeline from 26m33s to 18m07s (-32%)"
+        },
+        {
+          "id": "ctp-cost"
         }
       ]
     },
@@ -65,8 +68,10 @@
       "label": "AR Surgical Navigation",
       "bullets": [
         {
-          "id": "ars-sdf",
-          "text": "Found a signed distance field computation dominating the pipeline; compute-once-and-reuse removed over 80% of its per-frame cost"
+          "id": "ars-sdf"
+        },
+        {
+          "id": "ars-onnx"
         }
       ]
     }
@@ -136,16 +141,18 @@
         "OMOP/LOINC",
         "EHR integration",
         "RBAC",
-        "Authentication & authorization"
+        "Microsoft Entra",
+        "JWT"
       ]
     },
     {
       "label": "ML & imaging",
       "items": [
         "Computer vision",
+        "PyTorch",
+        "ONNX/TensorRT",
         "Signal processing (FFT/DFT)",
-        "OCR/HTR",
-        "Hyperspectral imaging"
+        "OCR/HTR"
       ]
     }
   ],

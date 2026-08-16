@@ -77,6 +77,20 @@ def read_text_for_scan(path: Path) -> str | None:
 SKIP_FILES = {"site/package-lock.json", "package-lock.json"}
 
 
+# Personal details that must not reach a public repo even though they are not client
+# names. Phone numbers are the obvious one: they were leaked once by being added to
+# career.json, which the name-based check above could never have caught.
+PII_PATTERNS = [
+    ("phone number",
+     re.compile(r"(?<!\d)(?:\+91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}(?!\d)")),
+    ("phone number",
+     re.compile(r"\+\d{1,3}[\s-]?\d{3,5}[\s-]?\d{5,7}(?!\d)")),
+]
+
+# Files where a match is expected and fine.
+PII_ALLOWED = {"scripts/privacy_gate.py"}
+
+
 def build_pattern(term: str) -> re.Pattern[str]:
     """Word-bounded where the term's edges are word characters, so short names like
     'Mayo' or 'Gates' cannot match inside a longer token."""
@@ -114,6 +128,10 @@ def main() -> int:
             for term, pattern in patterns.items():
                 if pattern.search(line):
                     findings.append((rel, lineno, term, line.strip()[:110]))
+            if rel not in PII_ALLOWED:
+                for label, pattern in PII_PATTERNS:
+                    if pattern.search(line):
+                        findings.append((rel, lineno, label, line.strip()[:110]))
 
     if findings:
         print(f"PRIVACY GATE FAILED — {len(findings)} occurrence(s) in tracked files:\n")

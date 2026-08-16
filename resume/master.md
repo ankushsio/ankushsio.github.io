@@ -70,16 +70,20 @@ A multi-service platform connecting clinical trial study teams and participants 
   <sub>source: eval:2025-05</sub>
 - Reduced a service container image from 450 MB to 290 MB (-36%) by eliminating unneeded dependencies while clearing technical debt `[metric]`  
   <sub>source: timesheet:2025-02</sub>
-- Identified unnoticed idle cloud spend and shut the service down, saving the project $200+ and prompting a billing-review habit `[metric]`  
-  <sub>source: eval:2025-05</sub>
+- Eliminated $200+/month of idle cloud spend (~$2.4k/year) by auditing and decommissioning legacy services, and set up billing review to catch it earlier `[metric]`  
+  <sub>source: eval:2025-05 + eval:2026-04</sub>
 - Remediated security findings from static analysis reports and led a security overhaul separating study-team and participant application concerns  
   <sub>source: eval:2025-11</sub>
 - Introduced server-sent events for real-time product feedback, a pattern later adopted by other teams in the organization  
   <sub>source: eval:2026-04</sub>
 - Delivered phase 1 features end to end: diagnostics smoke tests, participant deletion APIs, retry enhancements, build-info endpoints and integration test updates  
   <sub>source: eval:2026-04</sub>
+- Mapped business entitlements into an enterprise identity flow federated with Microsoft Entra, enforcing endpoint security and data-level response filtering through JWT claims  
+  <sub>source: resume-draft</sub>
+- Migrated the GCP sandbox environment onto the client's internal cloud with no loss of service  
+  <sub>source: resume-draft</sub>
 
-**Tech:** Java, Spring Boot, Kotlin, Ktor, Go, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, GraalVM, Gradle
+**Tech:** Java, Spring Boot, Kotlin, Ktor, Go, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, GraalVM, Gradle, Microsoft Entra, JWT
 
 
 #### AR Surgical Navigation
@@ -95,9 +99,9 @@ A research system reconstructing 3D anatomy from intra-operative video for augme
 
 **Highlights**
 
-- Identified the signed distance field computation as the pipeline's bottleneck and devised a compute-once-and-reuse technique, saving over 80% of the time it took per frame `[metric]`  
-  <sub>source: eval:2024-05</sub>
-- Migrated the reconstruction pipeline from file-based to in-memory, requiring a full refactor of module boundaries and data flow  
+- Cut end-to-end pipeline latency from 22s to 2s by moving the reconstruction pipeline from file-based I/O to in-memory and eliminating a per-frame signed distance field computation that dominated the frame budget `[metric]`  
+  <sub>source: eval:2024-05 + resume-draft</sub>
+- Refactored module boundaries and data flow across the reconstruction pipeline to make the in-memory migration possible  
   <sub>source: eval:2023-11</sub>
 - Shipped pipeline features weekly - multi-inference passes, multi-mesh views, error calculation, and robust handling of varied input data  
   <sub>source: eval:2023-11</sub>
@@ -105,8 +109,12 @@ A research system reconstructing 3D anatomy from intra-operative video for augme
   <sub>source: eval:2024-05</sub>
 - Brought graphics and geometry knowledge into a team new to it, sharing VTK and 3D fundamentals through internal brainstorming sessions  
   <sub>source: eval:2023-11</sub>
+- Optimised inference by converting PyTorch models to ONNX and TensorRT, cutting per-frame model execution time  
+  <sub>source: resume-draft</sub>
+- Solved perspective and alignment problems in the 3D organ model so reconstructed anatomy rendered correctly against the live view  
+  <sub>source: resume-draft</sub>
 
-**Tech:** C++, Python, VTK, 3D meshes & point clouds, Signed distance fields, Neural reconstruction, Computer vision
+**Tech:** C++, Python, VTK, 3D meshes & point clouds, Signed distance fields, Neural reconstruction, Computer vision, PyTorch, ONNX, TensorRT
 
 
 #### Headless Video Recording Platform
@@ -124,7 +132,7 @@ An Apra Labs network video recorder running headless on edge devices. Built on A
 
 - Took the recorder from an unstable state to a dependable one, debugging intermittent segmentation faults in frame decoding across edge hardware  
   <sub>source: eval:2024-05</sub>
-- Wrote the Node backend from scratch and connected it to Redis, the C++ core and the frontend, giving the system one consistent source of truth  
+- Wrote the Node backend from scratch, managing the lifecycle of the C++ binaries and carrying inter-process communication over Redis key-value and Pub/Sub, so the whole system shared one source of truth  
   <sub>source: eval:2025-05</sub>
 - Integrated server-sent events for real-time notifications, enabling functionality that polling could not serve cleanly  
   <sub>source: eval:2025-05</sub>
@@ -287,12 +295,12 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 ## Skills
 
 - **Languages:** Python, C++, Java, Kotlin, Go, JavaScript/Node.js, TypeScript
-- **Backend:** Spring Boot, Ktor, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture
+- **Backend:** Spring Boot, Ktor, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture, Flask
 - **Databases:** PostgreSQL, SQL, Redis, Flyway (migrations)
 - **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, AWS (Lambda, Step Functions), Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), Observability (Sentry, Graylog)
 - **Domain:** HL7 FHIR, OMOP, LOINC, SMART on FHIR, EHR integration, Clinical trial systems
-- **Security:** Role-based access control (RBAC), Authentication & authorization, OAuth / token-based auth, Microsoft Graph API, Static analysis remediation
-- **Ml Imaging:** Computer vision, Image registration, Signal processing (FFT/DFT), Hyperspectral imaging, OCR / handwriting recognition, VTK
+- **Security:** Role-based access control (RBAC), Authentication & authorization, OAuth / token-based auth, Microsoft Graph API, Static analysis remediation, Microsoft Entra, JWT
+- **Ml Imaging:** Computer vision, Image registration, Signal processing (FFT/DFT), Hyperspectral imaging, OCR / handwriting recognition, VTK, PyTorch, ONNX, TensorRT
 - **Practices:** High- and low-level design, Code review, Mentoring, Technical interviewing, AI-assisted development, Requirements gathering
 
 ## Education

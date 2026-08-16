@@ -8,4 +8,4 @@ Read the literature and open-source implementations to understand the geometry p
 Outcome:
 Removed the dominant per-frame cost, cutting more than 80% of the time it consumed. Onboarded two junior engineers onto the project and led it through a period when senior engineers were unavailable.
 
-Tech: C++, Python, VTK, 3D meshes & point clouds, Signed distance fields, Neural reconstruction, Computer vision
+Tech: C++, Python, VTK, 3D meshes & point clouds, Signed distance fields, Neural reconstruction, Computer vision, PyTorch, ONNX, TensorRT

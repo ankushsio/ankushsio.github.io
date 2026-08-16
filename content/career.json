@@ -4,7 +4,7 @@
     "confidentiality": "Apra Labs is the only employer named. No client name, internal codename, or colleague name appears anywhere in this file. Projects are described by work, tech and generic domain only.",
     "sources": "Every highlight carries a `source` pointing at a self-evaluation review period (eval:YYYY-MM) or a timesheet month (timesheet:YYYY-MM). Wording may be tailored per job; facts and metrics may not.",
     "generated_from": "data/raw/ (gitignored) via scripts/extract_timesheets.py, scripts/extract_evals.py, scripts/classify_projects.py",
-    "last_updated": "2026-08-16"
+    "last_updated": "2026-08-17"
   },
   "person": {
     "name": "Ankush Jain",
@@ -17,7 +17,8 @@
       "linkedin": "https://www.linkedin.com/in/ankush-jain-22313a20/",
       "website": "https://me.entertoescape.com"
     },
-    "summary": "Backend engineer with ~5 years building distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control, and AI/ML pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it."
+    "summary": "Backend engineer with ~5 years building distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control, and AI/ML pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.",
+    "_phone_note": "Phone is deliberately NOT in this public file. It lives in resume/private.json (gitignored) and is rendered only with `render_resume.py --phone`."
   },
   "positioning": {
     "level": "mid-to-senior backend engineer",
@@ -76,7 +77,9 @@
             "Microsoft Graph API",
             "Flyway",
             "GraalVM",
-            "Gradle"
+            "Gradle",
+            "Microsoft Entra",
+            "JWT"
           ],
           "highlights": [
             {
@@ -117,9 +120,9 @@
             },
             {
               "id": "ctp-cost",
-              "text": "Identified unnoticed idle cloud spend and shut the service down, saving the project $200+ and prompting a billing-review habit",
+              "text": "Eliminated $200+/month of idle cloud spend (~$2.4k/year) by auditing and decommissioning legacy services, and set up billing review to catch it earlier",
               "metric": true,
-              "source": "eval:2025-05"
+              "source": "eval:2025-05 + eval:2026-04"
             },
             {
               "id": "ctp-security",
@@ -138,6 +141,18 @@
               "text": "Delivered phase 1 features end to end: diagnostics smoke tests, participant deletion APIs, retry enhancements, build-info endpoints and integration test updates",
               "metric": false,
               "source": "eval:2026-04"
+            },
+            {
+              "id": "ctp-entra",
+              "text": "Mapped business entitlements into an enterprise identity flow federated with Microsoft Entra, enforcing endpoint security and data-level response filtering through JWT claims",
+              "metric": false,
+              "source": "resume-draft"
+            },
+            {
+              "id": "ctp-migration",
+              "text": "Migrated the GCP sandbox environment onto the client's internal cloud with no loss of service",
+              "metric": false,
+              "source": "resume-draft"
             }
           ]
         },
@@ -163,18 +178,21 @@
             "3D meshes & point clouds",
             "Signed distance fields",
             "Neural reconstruction",
-            "Computer vision"
+            "Computer vision",
+            "PyTorch",
+            "ONNX",
+            "TensorRT"
           ],
           "highlights": [
             {
               "id": "ars-sdf",
-              "text": "Identified the signed distance field computation as the pipeline's bottleneck and devised a compute-once-and-reuse technique, saving over 80% of the time it took per frame",
+              "text": "Cut end-to-end pipeline latency from 22s to 2s by moving the reconstruction pipeline from file-based I/O to in-memory and eliminating a per-frame signed distance field computation that dominated the frame budget",
               "metric": true,
-              "source": "eval:2024-05"
+              "source": "eval:2024-05 + resume-draft"
             },
             {
               "id": "ars-inmemory",
-              "text": "Migrated the reconstruction pipeline from file-based to in-memory, requiring a full refactor of module boundaries and data flow",
+              "text": "Refactored module boundaries and data flow across the reconstruction pipeline to make the in-memory migration possible",
               "metric": false,
               "source": "eval:2023-11"
             },
@@ -195,6 +213,18 @@
               "text": "Brought graphics and geometry knowledge into a team new to it, sharing VTK and 3D fundamentals through internal brainstorming sessions",
               "metric": false,
               "source": "eval:2023-11"
+            },
+            {
+              "id": "ars-onnx",
+              "text": "Optimised inference by converting PyTorch models to ONNX and TensorRT, cutting per-frame model execution time",
+              "metric": false,
+              "source": "resume-draft"
+            },
+            {
+              "id": "ars-perspective",
+              "text": "Solved perspective and alignment problems in the 3D organ model so reconstructed anatomy rendered correctly against the live view",
+              "metric": false,
+              "source": "resume-draft"
             }
           ]
         },
@@ -242,7 +272,7 @@
             },
             {
               "id": "nvr-node",
-              "text": "Wrote the Node backend from scratch and connected it to Redis, the C++ core and the frontend, giving the system one consistent source of truth",
+              "text": "Wrote the Node backend from scratch, managing the lifecycle of the C++ binaries and carrying inter-process communication over Redis key-value and Pub/Sub, so the whole system shared one source of truth",
               "metric": false,
               "source": "eval:2025-05"
             },
@@ -553,7 +583,8 @@
           "text": "Presented internal tech talks, including one on federated learning",
           "source": "eval:2025-05"
         }
-      ]
+      ],
+      "location": "Bengaluru, India"
     }
   ],
   "prior_experience": {
@@ -688,7 +719,8 @@
       "Server-Sent Events (SSE)",
       "RabbitMQ",
       "Google Cloud Pub/Sub",
-      "Event-driven architecture"
+      "Event-driven architecture",
+      "Flask"
     ],
     "databases": [
       "PostgreSQL",
@@ -719,7 +751,9 @@
       "Authentication & authorization",
       "OAuth / token-based auth",
       "Microsoft Graph API",
-      "Static analysis remediation"
+      "Static analysis remediation",
+      "Microsoft Entra",
+      "JWT"
     ],
     "ml_imaging": [
       "Computer vision",
@@ -727,7 +761,10 @@
       "Signal processing (FFT/DFT)",
       "Hyperspectral imaging",
       "OCR / handwriting recognition",
-      "VTK"
+      "VTK",
+      "PyTorch",
+      "ONNX",
+      "TensorRT"
     ],
     "practices": [
       "High- and low-level design",

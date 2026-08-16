@@ -87,6 +87,12 @@ def build_data(career: dict, variant: dict) -> dict:
     contact: list[dict] = []
     if usable(person.get("email")):
         contact.append({"label": person["email"], "url": f"mailto:{person['email']}"})
+    # Phone is opt-in via --phone and comes from the gitignored resume/private.json.
+    # The PDF published on the site is built WITHOUT it: that file is downloadable by
+    # anyone, so "on the PDF but not the website" only means something if the hosted
+    # copy omits it too. Applications get a --phone build.
+    if person.get("phone"):
+        contact.append({"label": person["phone"], "url": ""})
     if usable(person.get("location")):
         contact.append({"label": person["location"], "url": ""})
     if usable(links.get("linkedin")):
@@ -202,13 +208,24 @@ def build_data(career: dict, variant: dict) -> dict:
 
 
 def main() -> int:
-    name = sys.argv[1] if len(sys.argv) > 1 else "base"
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    with_phone = "--phone" in sys.argv
+
+    name = args[0] if args else "base"
     variant_path = RESUME / "variants" / f"{name}.json"
     if not variant_path.exists():
         sys.exit(f"ERROR: no variant at {variant_path}")
 
     career = json.loads(CAREER.read_text(encoding="utf-8"))
     variant = json.loads(variant_path.read_text(encoding="utf-8"))
+
+    if with_phone:
+        private_path = RESUME / "private.json"
+        if not private_path.exists():
+            sys.exit(f"ERROR: --phone needs {private_path} (gitignored)")
+        private = json.loads(private_path.read_text(encoding="utf-8"))
+        career["person"]["phone"] = private["phone"]
+        print("including phone (do NOT publish this build to the site)")
 
     out_dir = RESUME / "build" / name
     out_dir.mkdir(parents=True, exist_ok=True)
