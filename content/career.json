@@ -650,23 +650,23 @@
         "start": "2021-09",
         "end": "2022-05",
         "dates": "Sep 2021 – May 2022",
-        "summary": "Cloud migration work on an insurance platform.",
+        "summary": "Integration-layer work on an insurance platform migrating from a monolith to AWS serverless.",
         "highlights": [
           {
-            "id": "dl-serverless",
-            "text": "Contributed to migrating a monolithic insurance premium calculation service to an AWS serverless architecture",
-            "metric": false,
-            "source": "resume-draft"
-          },
-          {
             "id": "dl-statemachine",
-            "text": "Maintained the integration layer of an AWS Step Functions state machine, implementing API calls and Lambda functions",
+            "text": "Maintained and extended the integration layer of an AWS Step Functions state machine, implementing the API calls and Lambda functions it depended on",
             "metric": false,
-            "source": "resume-draft"
+            "source": "resume-draft + clarified"
           },
           {
-            "id": "dl-deploy",
-            "text": "Streamlined and automated deployment workflows so configuration stayed consistent across regions and environments",
+            "id": "dl-rollout",
+            "text": "Built the new integrations each additional US state needed to be switched onto the new platform, which is what made those rollouts faster",
+            "metric": false,
+            "source": "clarified"
+          },
+          {
+            "id": "dl-serverless",
+            "text": "Contributed to the wider migration of a monolithic insurance premium calculation service to AWS serverless",
             "metric": false,
             "source": "resume-draft"
           }

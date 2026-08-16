@@ -117,20 +117,70 @@ const fmt = periodLong;
     </div>
 
     {
-      !hasPrior && (
-        <div class="job pending">
+      prior.full_time.map((job) => (
+        <div class="job">
           <div class="job-head">
-            <h3>Earlier roles</h3>
-            <span class="mono">2021 — 2023</span>
+            <h3>{job.company}</h3>
+            <span class="mono">{job.dates}</span>
           </div>
-          <p class="measure job-note">
-            Two engineering roles and three internships between graduating in 2021 and
-            joining {company.name}. Being written up.
-          </p>
+          <ul class="roles">
+            <li>
+              <span class="role-title">{job.role}</span>
+              <span class="mono">{job.location}</span>
+            </li>
+          </ul>
+          {job.summary && <p class="measure job-note">{job.summary}</p>}
+          <ul class="bullets measure">
+            {job.highlights.map((h) => (
+              <li>{h.text}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    {
+      prior.internships.length > 0 && (
+        <div class="job">
+          <div class="job-head">
+            <h3>Internships</h3>
+            <span class="mono">2019 — 2021</span>
+          </div>
+          {prior.internships.map((job) => (
+            <div class="proj">
+              <h4>
+                {job.role}, {job.company}
+                <span class="mono when">{job.dates}</span>
+              </h4>
+              <ul class="bullets measure">
+                {job.highlights.map((h) => (
+                  <li>{h.text}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       )
     }
   </section>
+
+  {
+    career.achievements.length > 0 && (
+      <section class="section">
+        <div class="sec-head">
+          <h2>Achievements</h2>
+          <span class="fill" />
+        </div>
+        <ul class="bullets measure">
+          {career.achievements.map((a) => (
+            <li>
+              {a.text} <span class="mono year">{a.year}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 
   <section class="section">
     <div class="sec-head"><h2>Skills</h2><span class="fill"></span></div>
@@ -222,6 +272,10 @@ const fmt = periodLong;
   .edu {
     border-bottom: 0;
     margin-bottom: 0;
+  }
+
+  .year {
+    margin-left: 6px;
   }
 
   .job {

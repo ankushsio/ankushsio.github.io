@@ -5,7 +5,7 @@ import CareerTimeline from "../components/CareerTimeline.astro";
 
 const company = career.companies[0];
 const prior = career.prior_experience;
-const hasPrior = prior.full_time.length > 0 || prior.internships.length > 0;
+const education = career.education;
 ---
 
 <Base
@@ -43,21 +43,78 @@ const hasPrior = prior.full_time.length > 0 || prior.internships.length > 0;
     </ul>
   </section>
 
-  {
-    !hasPrior && (
-      <section class="section">
-        <div class="sec-head">
-          <h2>Before {company.name}</h2>
-          <span class="fill"></span>
-          <span class="mono">2021 — 2023</span>
+  <section class="section">
+    <div class="sec-head">
+      <h2>Before {company.name}</h2>
+      <span class="fill"></span>
+      <span class="mono">2019 — 2023</span>
+    </div>
+
+    {
+      prior.full_time.map((job) => (
+        <article class="past">
+          <div class="past-head">
+            <h3>{job.company}</h3>
+            <span class="mono">{job.role} · {job.dates} · {job.location}</span>
+          </div>
+          {job.summary && <p class="measure summary">{job.summary}</p>}
+          <ul class="bullets measure">
+            {job.highlights.map((h) => (
+              <li>{h.text}</li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+
+    {
+      prior.internships.length > 0 && (
+        <article class="past">
+          <div class="past-head">
+            <h3>Internships</h3>
+            <span class="mono">2019 — 2021</span>
+          </div>
+          <dl class="interns">
+            {prior.internships.map((job) => (
+              <div>
+                <dt>
+                  {job.role}, {job.company}
+                  <span class="mono when">{job.dates}</span>
+                </dt>
+                {job.highlights.map((h) => (
+                  <dd>{h.text}</dd>
+                ))}
+              </div>
+            ))}
+          </dl>
+        </article>
+      )
+    }
+  </section>
+
+  <section class="section">
+    <div class="sec-head">
+      <h2>Education &amp; achievements</h2>
+      <span class="fill"></span>
+    </div>
+    {
+      education.map((e) => (
+        <div class="past-head">
+          <h3>{e.institution}</h3>
+          <span class="mono">{e.degree} · {e.dates}</span>
         </div>
-        <p class="measure muted-note">
-          Two engineering roles and three internships between graduating in 2021 and
-          joining {company.name} in May 2023. This section is still being written up.
-        </p>
-      </section>
-    )
-  }
+      ))
+    }
+    <ul class="bullets measure achievements">
+      {
+        career.achievements.map((a) => (
+          <li>
+            {a.text} <span class="mono when">{a.year}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
   <section class="section">
     <div class="sec-head">
@@ -93,8 +150,57 @@ const hasPrior = prior.full_time.length > 0 || prior.internships.length > 0;
     color: var(--muted);
     margin: 0;
   }
-  .muted-note {
+  .past {
+    padding: 0 0 26px;
+  }
+  .past + .past {
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 24px;
+  }
+  .past-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .past-head h3 {
+    font-size: 1.28rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .summary {
     color: var(--muted);
+    font-style: italic;
+    margin: 0 0 12px;
+  }
+
+  .interns > div {
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .interns > div:last-child {
+    border-bottom: 0;
+  }
+  .interns dt {
+    font-weight: 600;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .interns dd {
+    margin: 4px 0 0;
+    color: var(--muted);
+    max-width: var(--measure);
+  }
+  .when {
+    font-weight: 400;
+  }
+
+  .achievements {
+    margin-top: 18px;
   }
   .measure p {
     margin: 0 0 18px;

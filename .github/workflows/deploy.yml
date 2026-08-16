@@ -51,6 +51,11 @@ jobs:
         working-directory: site
         run: npm run build
 
+      # Fails if anything in career.json renders nowhere on the site. Added after data
+      # was twice added to the PDF but silently missing from the site.
+      - name: Site coverage
+        run: python scripts/check_site_coverage.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
