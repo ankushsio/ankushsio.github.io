@@ -20,7 +20,7 @@
 
 ## Summary
 
-Backend engineer with ~5 years building distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control, and AI/ML pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.
+Senior backend engineer with five years building distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control, and AI/ML pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.
 
 ## Positioning
 

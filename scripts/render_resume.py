@@ -128,9 +128,16 @@ def build_data(career: dict, variant: dict) -> dict:
             "bullets": bullets,
         })
 
+    # A promotion is shown as two dated rows rather than one current title: internal
+    # promotion is a seniority signal a candidate cannot award themselves.
+    roles = [{"title": r["title"], "dates": r["dates"]}
+             for r in company.get("roles", [])] or [
+        {"title": company["role"], "dates": ""}]
+
     experience = [{
         "company": company["name"],
         "role": company["role"],
+        "roles": roles,
         "dates": f"{fmt_month(company['start'][:7])} – "
                  f"{fmt_month(company.get('end'))}",
         "note": company.get("context_short") or company.get("context", ""),
@@ -155,6 +162,7 @@ def build_data(career: dict, variant: dict) -> dict:
         experience.append({
             "company": job["company"],
             "role": job["role"],
+            "roles": [{"title": job["role"], "dates": ""}],
             "dates": job.get("dates", ""),
             "note": "",
             "groups": [{

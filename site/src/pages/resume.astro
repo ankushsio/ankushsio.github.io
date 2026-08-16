@@ -78,8 +78,18 @@ const fmt = periodLong;
     <div class="job">
       <div class="job-head">
         <h3>{company.name}</h3>
-        <span class="mono">{company.role} · May 2023 — present</span>
+        <span class="mono">May 2023 — present</span>
       </div>
+      <ul class="roles">
+        {
+          (company.roles ?? [{ title: company.role, dates: "" }]).map((r) => (
+            <li>
+              <span class="role-title">{r.title}</span>
+              <span class="mono">{r.dates}</span>
+            </li>
+          ))
+        }
+      </ul>
       <p class="measure job-note">{company.context}</p>
 
       {
@@ -232,6 +242,26 @@ const fmt = periodLong;
     font-weight: 600;
     margin: 0;
   }
+  .roles {
+    list-style: none;
+    margin: 0 0 14px;
+    padding: 0;
+  }
+  .roles li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 3px 0;
+  }
+  .role-title {
+    font-style: italic;
+  }
+  /* The current title reads at full strength; the one before it steps back. */
+  .roles li + li .role-title {
+    color: var(--muted);
+  }
+
   .job-note {
     color: var(--muted);
     margin: 0 0 22px;

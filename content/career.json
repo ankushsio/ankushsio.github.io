@@ -17,7 +17,7 @@
       "linkedin": "https://www.linkedin.com/in/ankush-jain-22313a20/",
       "website": "https://me.entertoescape.com"
     },
-    "summary": "Backend engineer with ~5 years building distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control, and AI/ML pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.",
+    "summary": "Senior backend engineer with five years building distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control, and AI/ML pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.",
     "_phone_note": "Phone is deliberately NOT in this public file. It lives in resume/private.json (gitignored) and is rendered only with `render_resume.py --phone`."
   },
   "positioning": {
@@ -584,7 +584,21 @@
           "source": "eval:2025-05"
         }
       ],
-      "location": "Bengaluru, India"
+      "location": "Bengaluru, India",
+      "roles": [
+        {
+          "title": "Senior Software Engineer",
+          "start": "2026-05",
+          "end": null,
+          "dates": "May 2026 – Present"
+        },
+        {
+          "title": "Software Engineer",
+          "start": "2023-05",
+          "end": "2026-05",
+          "dates": "May 2023 – May 2026"
+        }
+      ]
     }
   ],
   "prior_experience": {
@@ -632,7 +646,7 @@
       {
         "company": "Deloitte USI",
         "role": "Business Technical Analyst (Software Developer)",
-        "location": "Bengaluru, India",
+        "location": "Remote",
         "start": "2021-09",
         "end": "2022-05",
         "dates": "Sep 2021 – May 2022",
@@ -743,15 +757,7 @@
       "degree": "B.Tech, Computer Science and Engineering",
       "dates": "2017 – 2021",
       "start": "2017",
-      "end": "2021",
-      "coursework": [
-        "Data Structures",
-        "Analysis of Algorithms",
-        "DBMS",
-        "Operating Systems",
-        "Distributed Computing",
-        "Deep Learning"
-      ]
+      "end": "2021"
     }
   ],
   "skills": {

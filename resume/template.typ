@@ -76,7 +76,18 @@
       text(size: 9.8pt)[#job.dates],
     )
     #v(-0.30em)
-    #text(size: 10.2pt, style: "italic")[#job.role]
+    // One row per title. Where a promotion happened this shows both, dated, so the
+    // progression is visible rather than just the latest label.
+    #for r in job.roles [
+      #grid(
+        columns: (1fr, auto),
+        align: (left, right),
+        text(size: 10.2pt, style: "italic")[#r.title],
+        text(size: 9.4pt, fill: rgb("#444444"))[#r.dates],
+      )
+      #v(-0.55em)
+    ]
+    #v(0.30em)
     #if job.note != "" [
       #linebreak()
       #text(size: 9.5pt, fill: rgb("#444444"))[#job.note]
