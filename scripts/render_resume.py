@@ -28,6 +28,7 @@ TEMPLATE = RESUME / "template.typ"
 SKILL_LABELS = {
     "languages": "Languages",
     "backend": "Backend & messaging",
+    "databases": "Databases",
     "cloud_devops": "Cloud & DevOps",
     "domain": "Healthcare & standards",
     "security": "Security",
@@ -110,7 +111,7 @@ def build_data(career: dict, variant: dict) -> dict:
         "role": company["role"],
         "dates": f"{fmt_month(company['start'][:7])} – "
                  f"{fmt_month(company.get('end'))}",
-        "note": company.get("context", ""),
+        "note": company.get("context_short") or company.get("context", ""),
         "groups": groups,
     }]
 

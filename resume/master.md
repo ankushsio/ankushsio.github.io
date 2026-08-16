@@ -13,10 +13,10 @@
 ## Contact
 
 - **Github:** https://github.com/ankushsio
-- **Linkedin:** TODO - LinkedIn profile URL
+- **Linkedin:** https://www.linkedin.com/in/ankush-jain-22313a20/
 - **Website:** https://me.entertoescape.com
-- **Email:** TODO - public contact email
-- **Location:** TODO - city, country
+- **Email:** kushjaing@gmail.com
+- **Location:** Bengaluru, India
 
 ## Summary
 
@@ -287,16 +287,17 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 ## Skills
 
 - **Languages:** Python, C++, Java, Kotlin, Go, JavaScript/Node.js, TypeScript
-- **Backend:** Spring Boot, Ktor, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Redis, Message brokers, Event-driven architecture, Microservices
-- **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, Terraform, Docker, Docker Compose, CI/CD pipelines, Infrastructure as code (IaC), AWS (exposure)
-- **Domain:** HL7 FHIR, HAPI FHIR, OMOP, LOINC, SMART on FHIR, EHR integration, Clinical trial systems, HIPAA-adjacent data handling
-- **Security:** Role-based access control (RBAC), Authentication & authorization, OAuth / token-based auth, Microsoft Graph API, Static analysis remediation, Security hardening
-- **Ml Imaging:** Computer vision, Image registration, Signal processing (FFT/DFT), Hyperspectral imaging, OCR / handwriting recognition, 3D meshes & point clouds, VTK
+- **Backend:** Spring Boot, Ktor, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture, Microservices
+- **Databases:** PostgreSQL, SQL, Redis, Flyway (schema migrations), Database design, Cloudflare D1
+- **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), AWS (exposure)
+- **Domain:** HL7 FHIR, OMOP, LOINC, SMART on FHIR, EHR integration, Clinical trial systems
+- **Security:** Role-based access control (RBAC), Authentication & authorization, OAuth / token-based auth, Microsoft Graph API, Static analysis remediation
+- **Ml Imaging:** Computer vision, Image registration, Signal processing (FFT/DFT), Hyperspectral imaging, OCR / handwriting recognition, VTK
 - **Practices:** High- and low-level design, Code review, Mentoring, Technical interviewing, AI-assisted development, Requirements gathering
 
 ## Education
 
-> **TODO — blocked on the current CV.** Degree, institution, graduation year (2021).
+- **Dr. SPM IIIT Naya Raipur** — B.Tech, Computer Science and Engineering (2017 – 2021)
 
 ## Personal projects
 

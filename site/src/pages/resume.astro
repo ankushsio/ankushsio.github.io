@@ -1,33 +1,42 @@
 ---
 import Base from "../layouts/Base.astro";
 import career from "../data/career.json";
+import { periodLong } from "../lib/dates";
 
 const person = career.person;
 const company = career.companies[0];
 const prior = career.prior_experience;
 const hasPrior = prior.full_time.length > 0 || prior.internships.length > 0;
+const education = career.education;
 
-/** Résumé bullets: metric-bearing highlights first, then the rest, capped per project. */
-const bulletsFor = (p: (typeof company.projects)[number], max = 3) => {
-  const metrics = p.highlights.filter((h) => h.metric);
-  const others = p.highlights.filter((h) => !h.metric);
-  return [...metrics, ...others].slice(0, max);
-};
+/**
+ * The web résumé shows EVERY highlight, metric-bearing ones first.
+ *
+ * The one-page PDF is the constrained artifact; this page has unlimited room, so it must
+ * never show less than the PDF does. It previously capped at three bullets per project,
+ * which made the page with more space carry less detail than the page with none.
+ */
+const bulletsFor = (p: (typeof company.projects)[number]) => [
+  ...p.highlights.filter((h) => h.metric),
+  ...p.highlights.filter((h) => !h.metric),
+];
 
-const featured = company.projects.filter((p) => p.featured);
-const others = company.projects.filter((p) => !p.featured);
+const projects = [...company.projects].sort(
+  (a, b) => (b.hours ?? 0) - (a.hours ?? 0)
+);
 
 const skillGroups: [string, string[]][] = [
   ["Languages", career.skills.languages],
   ["Backend & messaging", career.skills.backend],
+  ["Databases", career.skills.databases],
   ["Cloud & DevOps", career.skills.cloud_devops],
   ["Healthcare & standards", career.skills.domain],
   ["Security", career.skills.security],
   ["ML & imaging", career.skills.ml_imaging],
+  ["Practices", career.skills.practices],
 ];
 
-const fmt = (p: { start: string; end: string | null }) =>
-  `${p.start} — ${p.end ?? "present"}`;
+const fmt = periodLong;
 ---
 
 <Base
@@ -44,8 +53,22 @@ const fmt = (p: { start: string; end: string | null }) =>
 
     <p class="lede measure">{person.summary}</p>
 
+    <p class="contact">
+      <a href={`mailto:${person.email}`}>{person.email}</a>
+      <span class="sep">·</span>
+      <a href={person.links.linkedin} rel="noopener">LinkedIn</a>
+      <span class="sep">·</span>
+      <a href={person.links.github} rel="noopener">GitHub</a>
+      <span class="sep">·</span>
+      <span class="where">{person.location}</span>
+    </p>
+
     <p class="dl mono">
-      <a href="/ankush-jain-resume.pdf">Download PDF →</a>
+      <a href="/ankush-jain-resume.pdf">Download the one-page PDF →</a>
+    </p>
+    <p class="note measure">
+      This page is the long version — every project, every highlight. The PDF is cut to one
+      page for applications.
     </p>
   </section>
 
@@ -60,10 +83,11 @@ const fmt = (p: { start: string; end: string | null }) =>
       <p class="measure job-note">{company.context}</p>
 
       {
-        featured.map((p) => (
+        projects.map((p) => (
           <div class="proj">
             <h4>
-              {p.title} <span class="mono when">{fmt(p.period)}</span>
+              <a href={`/work/${p.slug}`}>{p.title}</a>
+              <span class="mono when">{fmt(p.period)} · {p.domain}</span>
             </h4>
             <ul class="bullets measure">
               {bulletsFor(p).map((h) => (
@@ -75,15 +99,9 @@ const fmt = (p: { start: string; end: string | null }) =>
       }
 
       <div class="proj">
-        <h4>Earlier projects</h4>
+        <h4>Across projects</h4>
         <ul class="bullets measure">
-          {
-            others.map((p) => (
-              <li>
-                <strong>{p.title}</strong> ({fmt(p.period)}) — {p.highlights[0].text}
-              </li>
-            ))
-          }
+          {company.cross_project_highlights.map((h) => <li>{h.text}</li>)}
         </ul>
       </div>
     </div>
@@ -117,6 +135,18 @@ const fmt = (p: { start: string; end: string | null }) =>
       }
     </dl>
   </section>
+
+  <section class="section">
+    <div class="sec-head"><h2>Education</h2><span class="fill"></span></div>
+    {
+      education.map((e) => (
+        <div class="job-head edu">
+          <h3>{e.institution}</h3>
+          <span class="mono">{e.degree} · {e.dates}</span>
+        </div>
+      ))
+    }
+  </section>
 </Base>
 
 <style>
@@ -125,14 +155,42 @@ const fmt = (p: { start: string; end: string | null }) =>
     color: var(--muted);
     margin: 0 0 22px;
   }
+  .contact {
+    margin: 0 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    align-items: baseline;
+  }
+  .contact .sep {
+    color: var(--muted);
+  }
+  .contact .where {
+    color: var(--muted);
+  }
+
   .dl {
+    margin: 0 0 8px;
+  }
+  .note {
+    color: var(--muted);
+    font-size: 0.94rem;
     margin: 0;
   }
-  .dl a {
-    text-decoration: none;
+
+  .proj h4 a {
+    color: var(--ink);
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
   }
-  .dl a:hover {
-    text-decoration: underline;
+  .proj h4 a:hover {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+
+  .edu {
+    border-bottom: 0;
+    margin-bottom: 0;
   }
 
   .job {

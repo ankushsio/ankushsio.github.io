@@ -140,14 +140,38 @@ const featured = company.projects.filter((p) => p.featured).slice(0, 3);
     font-weight: 600;
     margin: 0 0 6px;
   }
+  /* A project title is a link and has to look like one before it is hovered:
+     a persistent low-contrast underline plus a trailing arrow. */
   .entry h3 a {
     color: var(--ink);
-    text-decoration: none;
-  }
-  .entry h3 a:hover {
-    color: var(--accent);
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-decoration-color: var(--rule);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+  }
+  .entry h3 a::after {
+    content: "→";
+    color: var(--accent);
+    font-size: 0.78em;
+    display: inline-block;
+    /* margin, not a leading space: HTML collapses the space and the arrow
+       ends up jammed against the last letter */
+    margin-left: 0.3em;
+    transition: transform 0.18s ease;
+  }
+  .entry h3 a:hover,
+  .entry h3 a:focus-visible {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 2px;
+  }
+  .entry h3 a:hover::after {
+    transform: translateX(3px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .entry h3 a::after {
+      transition: none;
+    }
   }
   .entry .domain {
     color: var(--muted);
