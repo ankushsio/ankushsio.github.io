@@ -62,6 +62,21 @@ const jsonLd = {
     <link rel="sitemap" href="/sitemap.xml" />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    {/* Applied before first paint so an explicit choice never flashes the other theme.
+        With nothing stored the attribute stays unset and prefers-color-scheme decides. */}
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.dataset.theme = t;
+          }
+        } catch (e) {
+          /* private mode: fall back to the system preference */
+        }
+      })();
+    </script>
   </head>
 
   <body>
@@ -78,6 +93,34 @@ const jsonLd = {
               </a>
             ))
           }
+          <button
+            type="button"
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Switch between light and dark theme"
+            title="Switch theme"
+          >
+            {/* Which glyph shows is decided in CSS by the same three-state token
+                pattern as the palette, so it is correct before any JS runs. */}
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" width="15" height="15">
+              <path
+                d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" width="15" height="15">
+              <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"></circle>
+              <path
+                d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+              ></path>
+            </svg>
+          </button>
         </nav>
       </header>
 
@@ -94,5 +137,25 @@ const jsonLd = {
         </div>
       </footer>
     </div>
+
+    <script>
+      const root = document.documentElement;
+      const button = document.getElementById("theme-toggle");
+
+      button?.addEventListener("click", () => {
+        // Whatever is on screen right now — an explicit choice if one was made,
+        // otherwise whatever the system preference resolved to.
+        const current =
+          root.dataset.theme ??
+          (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        const next = current === "dark" ? "light" : "dark";
+        root.dataset.theme = next;
+        try {
+          localStorage.setItem("theme", next);
+        } catch (e) {
+          /* preference just will not persist */
+        }
+      });
+    </script>
   </body>
 </html>

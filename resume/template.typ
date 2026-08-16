@@ -19,7 +19,7 @@
 #set page(
   paper: "us-letter",
   // No header/footer: anything there is frequently dropped by resume parsers.
-  margin: (x: 0.55in, top: 0.5in, bottom: 0.5in),
+  margin: (x: 0.5in, top: 0.5in, bottom: 0.5in),   // 0.5in is the floor; never go below
 )
 
 #set text(
@@ -27,7 +27,7 @@
   size: 10.2pt,
   lang: "en",
 )
-#set par(justify: false, leading: 0.56em, spacing: 0.62em)
+#set par(justify: false, leading: 0.54em, spacing: 0.58em)
 #show link: it => it  // keep link text visible and extractable
 
 // Section heading: plain uppercase word plus a rule. No graphics.
@@ -50,8 +50,12 @@
   #v(0.10em)
   #text(size: 10.6pt, fill: rgb("#333333"))[#data.title]
 ]
+// Must stay on ONE line: a method chain broken across newlines ends the code
+// expression, and Typst then prints the remainder as literal text.
+#let contact-line = data.contact.map(c => if c.url == "" { c.label } else { link(c.url, c.label) }).join("  |  ")
+
 #v(0.18em)
-#text(size: 9.6pt)[#data.contact.join("  |  ")]
+#text(size: 9.6pt)[#contact-line]
 #v(0.30em)
 
 // --- summary ----------------------------------------------------------------
@@ -91,11 +95,11 @@
     #list(
       indent: 0.10in,
       body-indent: 0.13in,
-      spacing: 0.42em,
+      spacing: 0.34em,
       marker: [•],
       ..group.bullets,
     )
-    #v(0.30em)
+    #v(0.24em)
   ]
 ]
 

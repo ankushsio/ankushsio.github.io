@@ -279,17 +279,17 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 
 ### Earlier roles
 
-> **TODO — blocked on the current CV.** Two full-time engineering roles
-> (2021–2023) and three internships (pre-2021), plus education.
+- **ByteLearn** — Software Engineer (May 2022 – Apr 2023)
+- **Deloitte USI** — Business Technical Analyst (Software Developer) (Sep 2021 – May 2022)
 
 ---
 
 ## Skills
 
 - **Languages:** Python, C++, Java, Kotlin, Go, JavaScript/Node.js, TypeScript
-- **Backend:** Spring Boot, Ktor, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture, Microservices
-- **Databases:** PostgreSQL, SQL, Redis, Flyway (schema migrations), Database design, Cloudflare D1
-- **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), AWS (exposure)
+- **Backend:** Spring Boot, Ktor, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture
+- **Databases:** PostgreSQL, SQL, Redis, Flyway (migrations)
+- **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, AWS (Lambda, Step Functions), Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), Observability (Sentry, Graylog)
 - **Domain:** HL7 FHIR, OMOP, LOINC, SMART on FHIR, EHR integration, Clinical trial systems
 - **Security:** Role-based access control (RBAC), Authentication & authorization, OAuth / token-based auth, Microsoft Graph API, Static analysis remediation
 - **Ml Imaging:** Computer vision, Image registration, Signal processing (FFT/DFT), Hyperspectral imaging, OCR / handwriting recognition, VTK

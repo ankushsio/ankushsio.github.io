@@ -75,15 +75,31 @@ def build_data(career: dict, variant: dict) -> dict:
     highlights.update({h["id"]: h for h in company["cross_project_highlights"]})
 
     # --- contact line ---------------------------------------------------------
-    contact: list[str] = []
-    for value in (person.get("email"), person.get("location")):
-        if value and not str(value).startswith("TODO"):
-            contact.append(str(value))
-    for _, url in (person.get("links") or {}).items():
-        if url and not str(url).startswith("TODO"):
-            contact.append(str(url).replace("https://", ""))
+    # Each entry is {label, url}. Long profile URLs are rendered as their name
+    # ("LinkedIn") rather than the raw URL -- a LinkedIn slug with its numeric suffix
+    # is unreadable and eats the most valuable line on the page. The portfolio URL is
+    # short and memorable, so it stays written out and gives any parser a real address.
+    links = person.get("links") or {}
+
+    def usable(value) -> bool:
+        return bool(value) and not str(value).startswith("TODO")
+
+    contact: list[dict] = []
+    if usable(person.get("email")):
+        contact.append({"label": person["email"], "url": f"mailto:{person['email']}"})
+    if usable(person.get("location")):
+        contact.append({"label": person["location"], "url": ""})
+    if usable(links.get("linkedin")):
+        contact.append({"label": "LinkedIn", "url": links["linkedin"]})
+    if usable(links.get("github")):
+        contact.append({"label": "GitHub", "url": links["github"]})
+    if usable(links.get("website")):
+        contact.append({
+            "label": str(links["website"]).replace("https://", ""),
+            "url": links["website"],
+        })
     if not contact:
-        contact = ["TODO: email", "TODO: location", "TODO: linkedin"]
+        contact = [{"label": "TODO: contact details", "url": ""}]
 
     # --- experience -----------------------------------------------------------
     groups = []
@@ -115,16 +131,61 @@ def build_data(career: dict, variant: dict) -> dict:
         "groups": groups,
     }]
 
+    # Prior roles are stored richly; the template wants a flat shape. A variant may
+    # name which of their bullets to keep ("prior": {"ByteLearn": ["bl-mathsteps"]}),
+    # which is usually how the one-page limit gets met without cutting recent work.
+    prior_pick = variant.get("prior") or {}
     for job in career.get("prior_experience", {}).get("full_time", []):
-        experience.append(job)
+        wanted = prior_pick.get(job["company"])
+        chosen = [
+            h for h in job.get("highlights", [])
+            if wanted is None or h["id"] in wanted
+        ]
+        if wanted is not None:
+            unknown = set(wanted) - {h["id"] for h in job.get("highlights", [])}
+            if unknown:
+                sys.exit(f"ERROR: variant references unknown highlight id(s) "
+                         f"{sorted(unknown)} for {job['company']}")
+        experience.append({
+            "company": job["company"],
+            "role": job["role"],
+            "dates": job.get("dates", ""),
+            "note": "",
+            "groups": [{
+                "label": "",
+                "dates": "",
+                "bullets": [variant.get("prior_text", {}).get(h["id"], h["text"])
+                        for h in chosen],
+            }],
+        })
 
     # --- skills ---------------------------------------------------------------
-    skills = [
-        {"label": SKILL_LABELS.get(key, key.title()),
-         "items": ", ".join(career["skills"][key])}
-        for key in variant["skills"]
-        if key in career["skills"]
-    ]
+    # The site shows granular groups because it has the room. A variant may merge them
+    # into fewer, denser rows for the page-limited PDF via `skill_rows`, since each
+    # extra label is a line the bullets could have used.
+    if variant.get("skill_rows"):
+        skills = []
+        for row in variant["skill_rows"]:
+            # An explicit `items` list wins: on a one-pager the skills block should be
+            # five or six lines, and pulling whole groups from career.json overruns that.
+            if row.get("items"):
+                skills.append({"label": row["label"], "items": ", ".join(row["items"])})
+                continue
+            items: list[str] = []
+            for key in row["keys"]:
+                if key not in career["skills"]:
+                    sys.exit(f"ERROR: variant skill_rows references unknown group '{key}'")
+                items.extend(career["skills"][key])
+            seen: set[str] = set()
+            deduped = [i for i in items if not (i in seen or seen.add(i))]
+            skills.append({"label": row["label"], "items": ", ".join(deduped)})
+    else:
+        skills = [
+            {"label": SKILL_LABELS.get(key, key.title()),
+             "items": ", ".join(career["skills"][key])}
+            for key in variant["skills"]
+            if key in career["skills"]
+        ]
 
     education = career.get("education", {})
     education_rows = education if isinstance(education, list) else []

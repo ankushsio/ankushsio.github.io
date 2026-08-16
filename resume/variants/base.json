@@ -2,23 +2,26 @@
   "label": "base",
   "target_role": "Backend Engineer",
   "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json \u2014 the renderer fails on unknown ids, which is what stops invented claims.",
-  "summary": "Backend engineer with five years on distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control and AI pipelines. Owns systems end to end: design, implementation, security hardening and the CI/CD that ships them.",
+  "summary": "Backend engineer, five years on distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control and AI pipelines. Owns systems from design to the CI/CD that ships them.",
   "sections": [
     {
       "project": "clinical-trial-platform",
       "label": "Clinical Trial Management Platform",
       "bullets": [
         {
-          "id": "ctp-adapters"
+          "id": "ctp-adapters",
+          "text": "Built the integration hub's base adapter modules, turning each new EHR integration from a bespoke build into a repeatable pattern"
         },
         {
-          "id": "ctp-rbac"
+          "id": "ctp-rbac",
+          "text": "Designed and shipped a full RBAC system across two applications: admin-only endpoint restriction, per-role response filtering and pre-authorization checks"
         },
         {
           "id": "ctp-pubsub"
         },
         {
-          "id": "ctp-deploy"
+          "id": "ctp-deploy",
+          "text": "Cut the backend deploy pipeline from 26m33s to 18m07s (-32%)"
         }
       ]
     },
@@ -27,7 +30,8 @@
       "label": "Regenerative Medicine Data Platform",
       "bullets": [
         {
-          "id": "rm-fhir"
+          "id": "rm-fhir",
+          "text": "Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC terminology; implemented change logs via FHIR provenance"
         },
         {
           "id": "rm-requirements"
@@ -39,13 +43,11 @@
       "label": "Document AI / Handwriting Recognition Pipeline",
       "bullets": [
         {
-          "id": "p2p-image"
+          "id": "p2p-image",
+          "text": "Cut the deployable image from 19 GB to 5.28 GB (-72%) through packaging design"
         },
         {
           "id": "p2p-license"
-        },
-        {
-          "id": "p2p-design"
         }
       ]
     },
@@ -55,9 +57,6 @@
       "bullets": [
         {
           "id": "nvr-node"
-        },
-        {
-          "id": "nvr-stability"
         }
       ]
     },
@@ -66,10 +65,8 @@
       "label": "AR Surgical Navigation",
       "bullets": [
         {
-          "id": "ars-sdf"
-        },
-        {
-          "id": "ars-onboard"
+          "id": "ars-sdf",
+          "text": "Found a signed distance field computation dominating the pipeline; compute-once-and-reuse removed over 80% of its per-frame cost"
         }
       ]
     }
@@ -83,5 +80,78 @@
     "security",
     "ml_imaging"
   ],
-  "max_pages": 1
+  "max_pages": 1,
+  "prior": {
+    "ByteLearn": [
+      "bl-observability",
+      "bl-mathsteps"
+    ],
+    "Deloitte USI": [
+      "dl-serverless",
+      "dl-statemachine"
+    ]
+  },
+  "skill_rows": [
+    {
+      "label": "Languages",
+      "items": [
+        "Python",
+        "Java",
+        "Kotlin",
+        "C++",
+        "Go",
+        "TypeScript/Node.js",
+        "SQL"
+      ]
+    },
+    {
+      "label": "Backend & data",
+      "items": [
+        "Spring Boot",
+        "Ktor",
+        "REST",
+        "Server-Sent Events",
+        "RabbitMQ",
+        "GCP Pub/Sub",
+        "PostgreSQL",
+        "Redis",
+        "Event-driven architecture"
+      ]
+    },
+    {
+      "label": "Cloud & DevOps",
+      "items": [
+        "GCP (Cloud Run)",
+        "AWS (Lambda, Step Functions)",
+        "Terraform",
+        "Docker",
+        "CI/CD",
+        "Observability (Sentry, Graylog)"
+      ]
+    },
+    {
+      "label": "Healthcare & security",
+      "items": [
+        "HL7 FHIR",
+        "OMOP/LOINC",
+        "EHR integration",
+        "RBAC",
+        "Authentication & authorization"
+      ]
+    },
+    {
+      "label": "ML & imaging",
+      "items": [
+        "Computer vision",
+        "Signal processing (FFT/DFT)",
+        "OCR/HTR",
+        "Hyperspectral imaging"
+      ]
+    }
+  ],
+  "prior_text": {
+    "bl-observability": "Built out monitoring and log management: Graylog for structured logging, Sentry APM across the Flask and Node.js services",
+    "bl-mathsteps": "Core maintainer of the open-source mathsteps library; added complex expression support and improved parsing accuracy",
+    "dl-serverless": "Contributed to migrating a monolithic insurance premium service to AWS serverless (Lambda, Step Functions)"
+  }
 }

@@ -42,7 +42,7 @@
       "end": null,
       "current": true,
       "context": "Engineering services company. Work is delivered for external clients across healthcare, medical devices and imaging; clients are not named. Also contributed to Apra Labs' own products and open source.",
-      "context_short": "Engineering services; client work across healthcare, medical devices and imaging. Clients not named.",
+      "context_short": "Engineering services across healthcare, medical devices and imaging; clients not named.",
       "total_logged_hours": 5736,
       "projects": [
         {
@@ -557,17 +557,118 @@
     }
   ],
   "prior_experience": {
-    "_TODO": "BLOCKED on receiving Ankush's current resume. Needs: 2 full-time roles (2021-2023), 3 internships (pre-2021), with company names, titles, dates and achievements.",
-    "full_time": [],
+    "_note": "Consolidated from four of Ankush's own resume drafts. Where drafts disagreed the more conservative claim was kept, and every bracketed placeholder metric in those drafts ([X%], [Number]) was dropped rather than guessed at.",
+    "_TODO": "Three internships (pre-2021) are still missing - none of the four resume drafts mention them.",
+    "full_time": [
+      {
+        "company": "ByteLearn",
+        "role": "Software Engineer",
+        "location": "Remote",
+        "start": "2022-05",
+        "end": "2023-04",
+        "dates": "May 2022 – Apr 2023",
+        "summary": "Backend and reliability work on an AI math tutoring product.",
+        "highlights": [
+          {
+            "id": "bl-observability",
+            "text": "Built out application monitoring and log management - Graylog for structured logging and parsing, Sentry APM across both the Flask and Node.js services - giving the team real visibility into production errors",
+            "metric": false,
+            "source": "resume-draft"
+          },
+          {
+            "id": "bl-mathsteps",
+            "text": "Core maintainer of the open-source mathsteps JavaScript library; added support for complex mathematical expressions and improved parsing accuracy",
+            "metric": false,
+            "source": "resume-draft"
+          },
+          {
+            "id": "bl-tutor",
+            "text": "Engineered backend logic for the AI math tutor - user state, hint routing and step-by-step problem-solving flow - and authored lesson content that shipped to students",
+            "metric": false,
+            "source": "resume-draft"
+          }
+        ],
+        "tech": [
+          "Python",
+          "Flask",
+          "Node.js",
+          "JavaScript",
+          "Graylog",
+          "Sentry",
+          "Open source"
+        ]
+      },
+      {
+        "company": "Deloitte USI",
+        "role": "Business Technical Analyst (Software Developer)",
+        "location": "Bengaluru, India",
+        "start": "2021-09",
+        "end": "2022-05",
+        "dates": "Sep 2021 – May 2022",
+        "summary": "Cloud migration work on an insurance platform.",
+        "highlights": [
+          {
+            "id": "dl-serverless",
+            "text": "Contributed to migrating a monolithic insurance premium calculation service to an AWS serverless architecture",
+            "metric": false,
+            "source": "resume-draft"
+          },
+          {
+            "id": "dl-statemachine",
+            "text": "Maintained the integration layer of an AWS Step Functions state machine, implementing API calls and Lambda functions",
+            "metric": false,
+            "source": "resume-draft"
+          },
+          {
+            "id": "dl-deploy",
+            "text": "Streamlined and automated deployment workflows so configuration stayed consistent across regions and environments",
+            "metric": false,
+            "source": "resume-draft"
+          }
+        ],
+        "tech": [
+          "AWS Lambda",
+          "AWS Step Functions",
+          "Serverless",
+          "API integration",
+          "CI/CD"
+        ]
+      }
+    ],
     "internships": []
   },
+  "achievements": [
+    {
+      "text": "Honourable Mention, ACM ICPC Kharagpur Regional Contest",
+      "year": 2019,
+      "source": "resume-draft"
+    },
+    {
+      "text": "Honourable Mention, ACM ICPC Kolkata-Kanpur Regional Contest",
+      "year": 2018,
+      "source": "resume-draft"
+    },
+    {
+      "text": "3rd place, Codeutsava hackathon, NIT Raipur",
+      "year": 2020,
+      "source": "resume-draft"
+    }
+  ],
   "education": [
     {
       "institution": "Dr. SPM IIIT Naya Raipur",
       "degree": "B.Tech, Computer Science and Engineering",
       "dates": "2017 – 2021",
       "start": "2017",
-      "end": "2021"
+      "end": "2021",
+      "coursework": [
+        "Data Structures",
+        "Analysis of Algorithms",
+        "DBMS",
+        "Operating Systems",
+        "Distributed Computing",
+        "Deep Learning"
+      ]
     }
   ],
   "skills": {
@@ -587,25 +688,23 @@
       "Server-Sent Events (SSE)",
       "RabbitMQ",
       "Google Cloud Pub/Sub",
-      "Event-driven architecture",
-      "Microservices"
+      "Event-driven architecture"
     ],
     "databases": [
       "PostgreSQL",
       "SQL",
       "Redis",
-      "Flyway (schema migrations)",
-      "Database design",
-      "Cloudflare D1"
+      "Flyway (migrations)"
     ],
     "cloud_devops": [
       "Google Cloud Platform (GCP)",
       "Cloud Run",
+      "AWS (Lambda, Step Functions)",
       "Terraform",
       "Docker",
       "CI/CD pipelines",
       "Infrastructure as code (IaC)",
-      "AWS (exposure)"
+      "Observability (Sentry, Graylog)"
     ],
     "domain": [
       "HL7 FHIR",

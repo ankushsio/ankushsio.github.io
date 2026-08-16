@@ -206,6 +206,48 @@ p {
   color: var(--accent);
 }
 
+/* --- theme toggle ------------------------------------------------------ */
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 3px 7px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Which glyph is visible follows the same three-state pattern as the palette, so it
+   is already correct on first paint — no JS needed to avoid showing the wrong icon.
+   Light shows the moon (click to go dark); dark shows the sun. */
+.theme-toggle .icon-sun {
+  display: none;
+}
+.theme-toggle .icon-moon {
+  display: inline;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun {
+    display: inline;
+  }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon {
+    display: none;
+  }
+}
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: inline;
+}
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
 .site-footer {
   border-top: 1px solid var(--rule);
   margin-top: 72px;

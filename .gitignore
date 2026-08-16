@@ -6,6 +6,7 @@ timesheets/
 evals/
 data/raw/
 resume-source/
+old resumes/
 
 # Extraction scripts encode client names and internal codenames in their column
 # mappings, so they stay local. They are documented in README.md and run against the
