@@ -20,21 +20,21 @@
 
 ## Summary
 
-Senior backend engineer with five years building distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control, and AI/ML pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.
+Senior backend engineer with five years on distributed systems where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control, and applied ML in production. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.
 
 ## Positioning
 
 - **Level:** senior backend engineer
 - **Experience:** ~5 years (graduated 2021)
-- **Seeking:** A role with real ownership and systems depth, at a company worth staying at for years.
+- **Seeking:** A role with real ownership and systems depth, at a company worth staying at for years. Domain-agnostic: the systems problems travel.
 
 **Themes:**
 
-- Distributed backends in regulated domains (healthcare, clinical research, medical devices)
-- Systems integration - EHR/FHIR, message brokers, event-driven services
-- Security and access control - RBAC, auth hardening, static-analysis remediation
-- Performance and delivery engineering - pipeline and image-size optimization, CI/CD
-- Applied research to production - imaging, signal processing, AI/OCR
+- Distributed backends and service integration - adapters, message brokers, event-driven services
+- Access control and security - RBAC, authentication and authorization, static-analysis remediation
+- Performance and delivery engineering - latency, image size, CI/CD pipelines
+- Applied research into production - computer vision, signal processing, OCR
+- Design ownership - high- and low-level design, and the client conversations that shape it
 
 ---
 

@@ -1,1 +1,1 @@
-Backend Engineer at Apra Labs | Distributed systems for regulated healthcare | FHIR, GCP, RBAC, Kotlin/Java
+Senior Backend Engineer at Apra Labs | Distributed systems, event-driven architecture, access control | Java/Kotlin, Go, Python, GCP

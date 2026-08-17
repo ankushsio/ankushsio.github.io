@@ -142,8 +142,8 @@ def master_resume(c: dict) -> str:
 # ------------------------------------------------------------------- linkedin
 
 def linkedin_headline(c: dict) -> str:
-    return ("Backend Engineer at Apra Labs | Distributed systems for regulated "
-            "healthcare | FHIR, GCP, RBAC, Kotlin/Java")
+    return ("Senior Backend Engineer at Apra Labs | Distributed systems, event-driven "
+            "architecture, access control | Java/Kotlin, Go, Python, GCP")
 
 
 def linkedin_about(c: dict) -> str:
@@ -151,11 +151,11 @@ def linkedin_about(c: dict) -> str:
     lines = [
         "I build backends for systems where being wrong is expensive.",
         "",
-        "For the last three years at Apra Labs I have worked on clinical trial "
-        "platforms, surgical imaging and medical data infrastructure - software that "
-        "carries patient records, runs beside an operating table, or has to prove who "
-        "was allowed to see what. Before that, two engineering roles and three "
-        "internships after graduating in 2021.",
+        "For the last three years at Apra Labs that has meant service integration, "
+        "event-driven architecture, access control and the delivery pipelines that ship "
+        "them - mostly in settings where a mistake is costly: clinical trials, surgical "
+        "imaging, video infrastructure running on edge hardware. Before that, two "
+        "engineering roles and three internships after graduating in 2021.",
         "",
         "What I tend to do on a project:",
         "",
@@ -171,8 +171,8 @@ def linkedin_about(c: dict) -> str:
         "• Own design end to end - high- and low-level design, then the implementation, "
         "security hardening and CI/CD that ships it.",
         "",
-        "I work mostly in Java/Kotlin, Python, Go and C++, on GCP, with FHIR, Pub/Sub, "
-        "RabbitMQ, Redis, Docker and Terraform. I also spend real time on the things "
+        "I work mostly in Java/Kotlin, Python, Go and C++, on GCP, with Pub/Sub, "
+        "RabbitMQ, Redis, PostgreSQL, Docker and Terraform. I also spend real time on the things "
         "around the code: onboarding people, reviewing designs rather than only diffs, "
         "and making project setup simple enough that a new developer needs the source "
         "and nothing else.",

@@ -1,8 +1,8 @@
 {
   "label": "base",
   "target_role": "Senior Backend Engineer",
-  "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json \u2014 the renderer fails on unknown ids, which is what stops invented claims.",
-  "summary": "Senior backend engineer, five years on distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control and AI pipelines. Owns systems from design to the CI/CD that ships them.",
+  "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json \u2014 the renderer fails on unknown ids, which is what stops invented claims. This base variant is DOMAIN-NEUTRAL: healthcare standards are trimmed to one item. For a healthcare role, copy it and add the 'domain' skills group and the FHIR/OMOP highlights back.",
+  "summary": "Senior backend engineer, five years on distributed systems where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control and applied ML. Owns systems from design to the CI/CD that ships them.",
   "sections": [
     {
       "project": "clinical-trial-platform",
@@ -120,7 +120,8 @@
         "GCP Pub/Sub",
         "PostgreSQL",
         "Redis",
-        "Event-driven architecture"
+        "Event-driven architecture",
+        "HL7 FHIR"
       ]
     },
     {
@@ -135,14 +136,13 @@
       ]
     },
     {
-      "label": "Healthcare & security",
+      "label": "Security & access",
       "items": [
-        "HL7 FHIR",
-        "OMOP/LOINC",
-        "EHR integration",
         "RBAC",
+        "Authentication & authorization",
+        "OAuth / JWT",
         "Microsoft Entra",
-        "JWT"
+        "Static analysis remediation"
       ]
     },
     {

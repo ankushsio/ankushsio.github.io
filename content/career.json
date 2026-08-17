@@ -17,7 +17,7 @@
       "linkedin": "https://www.linkedin.com/in/ankush-jain-22313a20/",
       "website": "https://me.entertoescape.com"
     },
-    "summary": "Senior backend engineer with five years building distributed systems for regulated healthcare and imaging - EHR integration, cloud infrastructure, access control, and AI/ML pipelines. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.",
+    "summary": "Senior backend engineer with five years on distributed systems where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control, and applied ML in production. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.",
     "_phone_note": "Phone is deliberately NOT in this public file. It lives in resume/private.json (gitignored) and is rendered only with `render_resume.py --phone`."
   },
   "positioning": {
@@ -25,14 +25,15 @@
     "years_experience": 5,
     "graduated": 2021,
     "themes": [
-      "Distributed backends in regulated domains (healthcare, clinical research, medical devices)",
-      "Systems integration - EHR/FHIR, message brokers, event-driven services",
-      "Security and access control - RBAC, auth hardening, static-analysis remediation",
-      "Performance and delivery engineering - pipeline and image-size optimization, CI/CD",
-      "Applied research to production - imaging, signal processing, AI/OCR"
+      "Distributed backends and service integration - adapters, message brokers, event-driven services",
+      "Access control and security - RBAC, authentication and authorization, static-analysis remediation",
+      "Performance and delivery engineering - latency, image size, CI/CD pipelines",
+      "Applied research into production - computer vision, signal processing, OCR",
+      "Design ownership - high- and low-level design, and the client conversations that shape it"
     ],
-    "seeking": "A role with real ownership and systems depth, at a company worth staying at for years.",
-    "arc": "Two threads run the whole way through: healthcare data, from an analytics internship in 2020 to clinical trial and regenerative medicine platforms today; and OCR, from machinery nameplate recognition in 2021 to a production handwriting-recognition system in 2025."
+    "seeking": "A role with real ownership and systems depth, at a company worth staying at for years. Domain-agnostic: the systems problems travel.",
+    "arc": "One thread runs the whole way through: taking applied research into production - machinery nameplate OCR in 2021, a handwriting-recognition system in 2025, signal processing and spectral imaging in between. The other is that most of it happened in regulated, high-consequence settings, which is where the habits around access control, auditability and delivery discipline come from.",
+    "domain_note": "Most of this work happened in regulated, high-consequence settings. That is where the habits came from - access control, auditability, delivery discipline - not a specialisation I am looking to continue."
   },
   "companies": [
     {
@@ -715,7 +716,7 @@
         "highlights": [
           {
             "id": "innovaccer-ds",
-            "text": "Data science work on healthcare data analytics - first exposure to the domain I went on to specialise in",
+            "text": "Data science work on healthcare data analytics, building the domain context the later platform work drew on",
             "metric": false,
             "source": "clarified"
           }
