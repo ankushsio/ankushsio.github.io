@@ -25,6 +25,9 @@ dist/
 # Generated at build time from content/career.json — never edit or commit
 site/src/data/
 
+# Wrangler local state
+.wrangler/
+
 # Env / secrets
 .env
 .env.*

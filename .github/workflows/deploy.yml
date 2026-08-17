@@ -1,4 +1,8 @@
-name: Build and deploy
+# me.entertoescape.com is served by Cloudflare Workers (see wrangler.jsonc), which builds
+# from this same repo on its own. This workflow is no longer the primary deploy: it is the
+# CI gate -- privacy gate, build, coverage -- plus the ankushsio.github.io mirror, which
+# stays fresh as a fallback if Cloudflare ever has a bad day.
+name: CI and Pages mirror
 
 on:
   push:

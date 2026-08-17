@@ -1,0 +1,34 @@
+{
+  "$schema": "./site/node_modules/wrangler/config-schema.json",
+  "name": "ankushsio-portfolio",
+
+  // Astro emits a fully static site into site/dist, so nearly every request is
+  // served straight from Cloudflare's asset store with no Worker invocation.
+  // `main` exists only for the resume-download hook below.
+  "main": "src/worker/index.js",
+  "compatibility_date": "2026-08-17",
+
+  "assets": {
+    "directory": "./site/dist",
+    "binding": "ASSETS",
+
+    // Astro builds with `format: "directory"`, so /about is /about/index.html.
+    // auto-trailing-slash matches that and matches the sitemap's canonical URLs.
+    "html_handling": "auto-trailing-slash",
+
+    // src/pages/404.astro compiles to dist/404.html -- serve it instead of a bare 404.
+    "not_found_handling": "404-page",
+
+    // The ONLY path that invokes the Worker. Page views stay at zero invocations;
+    // this exists because "who pulled the resume" is the one signal worth paying for.
+    "run_worker_first": ["/ankush-jain-resume.pdf"]
+  },
+
+  // Turns on Workers Logs so the console.log in the Worker is queryable.
+  "observability": {
+    "enabled": true
+  }
+
+  // No `routes` here on purpose: the custom domain is attached in the Cloudflare
+  // dashboard, same as entertoescape.com.
+}
