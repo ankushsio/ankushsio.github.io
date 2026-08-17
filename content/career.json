@@ -853,7 +853,7 @@
         "end": null
       },
       "repo_is_private": true,
-      "_TODO": "Repo github.com/ankushsio/entertoescape is PRIVATE - the source link will 404 for visitors. Either make it public or ship only the play link.",
+      "_note": "Repo github.com/ankushsio/entertoescape is deliberately private (decided 2026-08-17). The Source link below stays because it genuinely is the source; personal.astro filters it out while repo_is_private is true, so nothing on the live site 404s. Flip that flag if the repo is ever opened and the link renders itself.",
       "summary": "A browser game I built and ship myself, live on my own domain. Written in TypeScript with Phaser, deployed as a Cloudflare Worker serving static assets plus a leaderboard API backed by D1, with CI on every push and preview URLs per branch.",
       "why_it_matters": "The one project I can hand someone the source for. It is also where I own the whole stack - game loop, backend, database, auth, deployment pipeline and DNS.",
       "tech": [

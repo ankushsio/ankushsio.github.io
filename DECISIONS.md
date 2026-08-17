@@ -106,6 +106,33 @@ catch a number, so PII patterns had to be added explicitly; and a force push lea
 unreachable from any ref but not erased — GitHub Support can purge the orphan if it ever
 matters. Ankush decided it did not.
 
+## 12. Hosting moved to Cloudflare Workers, in one step instead of two (2026-08-17)
+
+The original plan was GitHub Pages now, Cloudflare later. That was chosen for a real reason —
+Pages is fully automatable from the CLI with no secrets, whereas Workers Builds needs one
+manual dashboard connection. Doing it in two phases meant paying the DNS-and-certificate cost
+twice, so it collapsed into one move.
+
+**Analytics decided it.** GitHub Pages provides none at all — no logs, no dashboard, no API —
+so the only option there was a client-side beacon that ad blockers strip and crawlers never
+trigger. On Workers the request data is server-side and unblockable.
+
+The migration also deleted a constraint rather than satisfying it. Under Pages, the `me` CNAME
+had to stay **grey-clouded**, because GitHub needed Let's Encrypt to reach *its* servers to
+answer an ACME challenge; proxying broke issuance. A Cloudflare custom domain has no third
+party in that loop, so the whole grey-cloud rule simply stopped existing.
+
+What it looks like now: `wrangler.jsonc` at the repo root, assets from `site/dist`,
+`run_worker_first` narrowed to `/ankush-jain-resume.pdf` so page views cost **zero** Worker
+invocations. `src/worker/index.js` runs on that one path to log downloads with country and
+requesting network. Non-production branches get a preview URL each via `wrangler versions
+upload`, which Pages could never do — it has one environment per repo.
+
+`.github/workflows/deploy.yml` was kept, not deleted: it is still the CI gate (privacy gate →
+build → coverage) and it keeps `ankushsio.github.io` fresh as a fallback. `site/public/CNAME`
+was deleted, because leaving it would have GitHub Pages contend for a domain Cloudflare now
+owns.
+
 ---
 
 # Open items — these need you
@@ -114,17 +141,24 @@ matters. Ankush decided it did not.
    three internships, achievements and education are all in and on the site.
 2. ~~Contact details~~ — **done.** Email, LinkedIn, Bengaluru. Phone lives in the
    gitignored `resume/private.json` and renders only with `render_resume.py --phone`.
-3. **The Cloudflare DNS record** — the one step I cannot do:
+3. ~~The Cloudflare DNS record~~ — **done, and not the way this file used to describe it.**
+   The site no longer runs on GitHub Pages, so the grey-cloud CNAME and the *Enforce HTTPS*
+   step that used to be listed here do not apply and would undo the current setup if followed.
+   `me.entertoescape.com` is a **Cloudflare Workers custom domain**, attached in the Worker's
+   dashboard — Cloudflare creates the DNS record itself, proxied, and issues the certificate.
+   There was never a record to add by hand. See §12.
+4. ~~`portfolio.entertoescape.com` → `me.entertoescape.com/work`~~ — **dropped.** The second
+   hostname was never clearly worth its own redirect rule; one canonical URL is simpler to put
+   on a résumé. Revisit only if something already links to the old subdomain.
+5. ~~GA4 measurement ID~~ — **closed, not skipped.** Moving to Workers made it redundant:
+   traffic data now comes from Cloudflare zone analytics and the `resume_download` lines in
+   Workers Logs, both server-side. GA4 would be a strictly worse duplicate — client-side, so
+   ad blockers strip it, and blind to crawlers. Nothing to add.
+6. ~~Decide on the `entertoescape` repo~~ — **decided: it stays private.** The `Source` link
+   stays in `career.json` because it is genuinely the source; `repo_is_private: true` makes
+   `personal.astro` suppress it, so nothing on the live site 404s. Flip that one flag if the
+   repo is ever opened and the link renders itself.
 
-   | Type | Name | Target | Proxy |
-   |---|---|---|---|
-   | CNAME | `me` | `ankushsio.github.io` | **DNS only — grey cloud** |
-
-   Orange/proxied breaks GitHub's certificate issuance. After DNS resolves, enable *Enforce
-   HTTPS* in the repo's Pages settings.
-4. **`portfolio.entertoescape.com` → `me.entertoescape.com/work`** — a Cloudflare Redirect
-   Rule, 301. Dashboard action, or give me a CF API token and I will script it.
-5. **GA4 measurement ID** (`G-XXXXXXXXXX`) to switch analytics on. Also worth checking
-   whether your Search Console entry for `entertoescape.com` is a **Domain** property — if it
-   is, it already covers the subdomain and there is nothing to add.
-6. **Decide on the `entertoescape` repo** — public (source link appears) or stay private.
+   Still worth a look at some point: `why_it_matters` on that entry says *"the one project I
+   can hand someone the source for"*, which reads oddly next to a suppressed link. Copy, not
+   a defect.
