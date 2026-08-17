@@ -23,6 +23,12 @@
   --accent-wash: #8a2b3b14;
   --focus: #8a2b3b;
 
+  /* Measurable-impact green. Deliberately separate from --accent: every metric on
+     this site is a *reduction* (-32%, -72%, 22s to 2s), and the burgundy accent read
+     as an error state on exactly the numbers meant to be the strongest evidence. */
+  --gain: #1f6b47;
+  --gain-wash: #1f6b4712;
+
   --serif: "Sitka Text", "Iowan Old Style", Charter, "Bitstream Charter",
     Cambria, Georgia, serif;
   --mono: "Cascadia Mono", "SF Mono", ui-monospace, Consolas, "Liberation Mono",
@@ -44,6 +50,8 @@
     --accent: #db8390;
     --accent-wash: #db839018;
     --focus: #db8390;
+    --gain: #6fbf95;
+    --gain-wash: #6fbf9518;
   }
 }
 
@@ -57,6 +65,8 @@
   --accent: #db8390;
   --accent-wash: #db839018;
   --focus: #db8390;
+  --gain: #6fbf95;
+  --gain-wash: #6fbf9518;
 }
 
 *,
@@ -293,13 +303,13 @@ p {
 /* --- results: the one place colour is spent --------------------------- */
 
 .result {
-  border-left: 2px solid var(--accent);
-  background: var(--accent-wash);
+  border-left: 2px solid var(--gain);
+  background: var(--gain-wash);
   padding: 11px 16px;
   margin: 16px 0 0;
 }
 .result b {
-  color: var(--accent);
+  color: var(--gain);
   font-variant-numeric: tabular-nums;
   font-weight: 600;
 }
