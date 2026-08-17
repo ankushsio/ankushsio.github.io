@@ -59,7 +59,8 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="sitemap" href="/sitemap.xml" />
+    <!-- @astrojs/sitemap emits sitemap-index.xml, not sitemap.xml -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 

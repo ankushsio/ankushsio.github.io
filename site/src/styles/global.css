@@ -278,6 +278,7 @@ p {
   gap: 16px;
   margin-bottom: 30px;
 }
+.sec-head h1,
 .sec-head h2 {
   font-size: 1.05rem;
   font-weight: 600;

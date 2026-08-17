@@ -6,7 +6,6 @@ import { periodLong } from "../lib/dates";
 const person = career.person;
 const company = career.companies[0];
 const prior = career.prior_experience;
-const hasPrior = prior.full_time.length > 0 || prior.internships.length > 0;
 const education = career.education;
 
 /**
@@ -46,7 +45,7 @@ const fmt = periodLong;
 >
   <section class="section">
     <div class="sec-head">
-      <h2>Résumé</h2>
+      <h1>Résumé</h1>
       <span class="fill"></span>
       <span class="mono">Updated {career.meta.last_updated}</span>
     </div>

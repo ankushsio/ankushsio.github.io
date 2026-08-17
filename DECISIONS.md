@@ -86,7 +86,7 @@ already filters on `repo_is_private` in `content/career.json`.
 was not a project you owned — your own evaluation describes it as the system your RabbitMQ
 broker connected the document pipeline to. A case study would have overstated it.
 
-## 11. One leak happened, and was caught
+## 11. Two leaks happened, both caught
 
 The first version of this very file named a client and your work email while explaining why
 those must not be published. I chained the privacy gate through `| head` in my shell, which
@@ -94,19 +94,26 @@ swallowed its exit code, so the commit went through. **CI ran the gate and faile
 deploy** — so nothing broken ever reached the live site. The commit was then rewritten out of
 history with a force push.
 
-Two things worth keeping from that: the gate belongs in CI precisely because a local check
-can be bypassed by accident, and the force push means the leaked blob is unreachable from any
-ref — though if you want to be thorough, GitHub Support can purge the orphaned object.
+**The second** was a phone number: approving "phone on the PDF, not the website" was
+implemented by putting it in `content/career.json`, which is public — and the PDF is served
+*from* the website anyway, so the distinction was meaningless as built. Phone now lives in the
+gitignored `resume/private.json`, renders only via `render_resume.py --phone`, and the build
+published to the site omits it. The gate now detects phone numbers too.
+
+Three things worth keeping: the gate belongs in CI because a local check can be bypassed by
+accident (a shell pipe swallowed its exit code the first time); a name-based check cannot
+catch a number, so PII patterns had to be added explicitly; and a force push leaves the blob
+unreachable from any ref but not erased — GitHub Support can purge the orphan if it ever
+matters. Ankush decided it did not.
 
 ---
 
 # Open items — these need you
 
-1. **Your current résumé.** Still the one real blocker. Needed for the 2 full-time roles
-   (2021–2023), 3 internships, and education. The site and both résumés have explicit
-   placeholders where these go.
-2. **Contact details** — public email, LinkedIn URL, city. Currently `TODO` in
-   `content/career.json`; the résumé header falls back to placeholder text.
+1. ~~Your current résumé~~ — **done.** Four drafts supplied; ByteLearn, Deloitte USI, the
+   three internships, achievements and education are all in and on the site.
+2. ~~Contact details~~ — **done.** Email, LinkedIn, Bengaluru. Phone lives in the
+   gitignored `resume/private.json` and renders only with `render_resume.py --phone`.
 3. **The Cloudflare DNS record** — the one step I cannot do:
 
    | Type | Name | Target | Proxy |

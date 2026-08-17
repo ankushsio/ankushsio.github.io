@@ -106,10 +106,11 @@ an annualised total — projected annual figures are the first thing an intervie
 
 ---
 
-## D. Still missing
+## D. Still missing — RESOLVED
 
-**The three internships.** None of the four drafts mention them. If you want them on the
-résumé and the Path page I need company, role, dates and roughly what you did.
+**The three internships** were supplied separately (Utopia Global, Innovaccer, Directi) and
+are on the Path and Résumé pages. They are not on the one-page PDF, where they would
+displace stronger material.
 
 **Student projects** (Quiz Platform, Accident Detection with HRRN, Math Assistant backend) exist
 in one draft and as GitHub repos. You previously said personal work should be EnterToEscape only,

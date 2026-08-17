@@ -9,7 +9,6 @@
   "person": {
     "name": "Ankush Jain",
     "title": "Senior Backend Engineer",
-    "tagline": "Backend engineer for systems where being wrong is expensive",
     "location": "Bengaluru, India",
     "email": "kushjaing@gmail.com",
     "links": {
@@ -33,7 +32,7 @@
     ],
     "seeking": "A role with real ownership and systems depth, at a company worth staying at for years. Domain-agnostic: the systems problems travel.",
     "arc": "One thread runs the whole way through: taking applied research into production - machinery nameplate OCR in 2021, a handwriting-recognition system in 2025, signal processing and spectral imaging in between. The other is that most of it happened in regulated, high-consequence settings, which is where the habits around access control, auditability and delivery discipline come from.",
-    "domain_note": "Most of this work happened in regulated, high-consequence settings. That is where the habits came from - access control, auditability, delivery discipline - not a specialisation I am looking to continue."
+    "_domain_note": "Most of this work happened in regulated, high-consequence settings. That is where the habits came from - access control, auditability, delivery discipline - not a specialisation I am looking to continue."
   },
   "companies": [
     {
@@ -604,8 +603,7 @@
     }
   ],
   "prior_experience": {
-    "_note": "Consolidated from four of Ankush's own resume drafts. Where drafts disagreed the more conservative claim was kept, and every bracketed placeholder metric in those drafts ([X%], [Number]) was dropped rather than guessed at.",
-    "_TODO": "Three internships (pre-2021) are still missing - none of the four resume drafts mention them.",
+    "_note": "Consolidated from four of Ankush's own resume drafts, then corrected by him. Bracketed placeholder metrics from those drafts ([X%], [Number]) were dropped rather than guessed at; the Deloitte ownership wording and both internship descriptions came from him directly.",
     "full_time": [
       {
         "company": "ByteLearn",

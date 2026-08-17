@@ -15,7 +15,7 @@ const education = career.education;
 >
   <section class="section">
     <div class="sec-head">
-      <h2>Path</h2>
+      <h1>Path</h1>
       <span class="fill"></span>
       <span class="mono">2021 — present</span>
     </div>
@@ -143,6 +143,7 @@ const education = career.education;
         projects, reviewing designs rather than only diffs, and making setup simple enough
         that a new developer needs the source and nothing else.
       </p>
+      <p class="seeking">{career.positioning.seeking}</p>
     </div>
   </section>
 </Base>
@@ -216,6 +217,12 @@ const education = career.education;
 
   .achievements {
     margin-top: 18px;
+  }
+  .seeking {
+    margin-top: 26px;
+    padding-left: 14px;
+    border-left: 2px solid var(--accent);
+    color: var(--ink);
   }
   .measure p {
     margin: 0 0 18px;

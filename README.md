@@ -18,8 +18,17 @@ content/career.json      single source of truth (public, anonymised)
 site/                    Astro app
   src/components/diagrams/   hand-authored inline-SVG architecture figures
   src/pages/work/[slug]      one case study per project
+resume/
+  template.typ           one-page ATS-first Typst template
+  variants/base.json     which highlights appear, and their JD-tuned wording
+  private.json           GITIGNORED - phone, rendered only with --phone
+linkedin/                copy-paste blocks, within LinkedIn's character limits
 scripts/
-  privacy_gate.py        fails the build if a client name reaches a tracked file
+  render_resume.py       variant -> PDF, asserts the page count
+  ats_check.py           parse-back + JD keyword coverage on the rendered PDF
+  build_docs.py          master.md + LinkedIn copy from career.json
+  privacy_gate.py        fails the build on client names, codenames or phone numbers
+  check_site_coverage.py fails the build if career.json data renders on no page
   sync-content.mjs       copies career.json into the Astro app before dev/build
 design/                  the two design directions the site was chosen from
 ```
@@ -34,8 +43,12 @@ internal codenames and colleague names, and exits non-zero on a hit. It runs in 
 push, and should be run locally before pushing:
 
 ```bash
-python scripts/privacy_gate.py
+python scripts/privacy_gate.py        # client names, codenames, colleague names, phone numbers
+python scripts/check_site_coverage.py # every career.json entry reaches a page
 ```
+
+Both run in CI on every push. The coverage check exists because data was twice added to
+`career.json`, rendered in the PDF, and silently missing from the site.
 
 The source data this was built from — timesheets, self-evaluations, and the scripts that
 parse them — is gitignored and never leaves the machine. Those extraction scripts

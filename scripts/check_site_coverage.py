@@ -43,6 +43,16 @@ def required(career: dict) -> list[tuple[str, str]]:
     items.append(("person name", person["name"]))
     items.append(("email", person["email"]))
     items.append(("location", person["location"]))
+    items.append(("summary", person["summary"][:60]))
+
+    # Positioning copy is display text unless the key starts with "_", which marks it as
+    # internal guidance (e.g. _domain_note, which deliberately never ships).
+    for key, value in career.get("positioning", {}).items():
+        if key.startswith("_") or not isinstance(value, str) or len(value) < 40:
+            continue
+        items.append((f"positioning.{key}", value[:60]))
+    for theme in career.get("positioning", {}).get("themes", []):
+        items.append(("theme", theme[:60]))
 
     for company in career["companies"]:
         items.append(("company", company["name"]))
