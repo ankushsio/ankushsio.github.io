@@ -78,13 +78,20 @@ export default {
     // latency and lets us see the status before deciding to record.
     const response = await env.ASSETS.fetch(request);
 
-    // Skip redirects. html_handling sends /resume to /resume/ with a 307, and logging
-    // both hops double-counts every navigation that omits the trailing slash, which
-    // silently inflates session depth -- the metric most worth trusting. The query
-    // string survives the redirect, so the ?r= marker is still captured on the 200.
-    const isRedirect = response.status >= 300 && response.status < 400;
+    // Record successful responses only, which excludes two kinds of noise.
+    //
+    // 3xx: html_handling sends /resume to /resume/ with a 307. Logging both hops
+    // double-counts every navigation that omits a trailing slash and silently
+    // inflates session depth. The query string survives the redirect, so the ?r=
+    // marker is still captured on the 200 that follows.
+    //
+    // 4xx: every public domain is scanned constantly for /xmlrpc.php,
+    // /wp-includes/... and friends. Those 404s are not page views, and left in they
+    // quickly outnumber real traffic and ruin the "read the last 30 rows" view.
+    // Genuinely broken internal links are already caught by the CI coverage check.
+    const isSuccess = response.status >= 200 && response.status < 300;
 
-    if (!isRedirect) {
+    if (isSuccess) {
       // The write happens in waitUntil so a slow or broken D1 can never delay -- or
       // break -- the page a recruiter is waiting on.
       ctx.waitUntil(
