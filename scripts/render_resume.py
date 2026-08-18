@@ -63,7 +63,7 @@ def fmt_range(period: dict) -> str:
     return f"{fmt_month(period['start'])} – {fmt_month(period.get('end'))}"
 
 
-def build_data(career: dict, variant: dict) -> dict:
+def build_data(career: dict, variant: dict, tag: str = "cv") -> dict:
     person = career["person"]
     company = career["companies"][0]
     projects = {p["slug"]: p for p in company["projects"]}
@@ -100,9 +100,15 @@ def build_data(career: dict, variant: dict) -> dict:
     if usable(links.get("github")):
         contact.append({"label": "GitHub", "url": links["github"]})
     if usable(links.get("website")):
+        site = str(links["website"]).rstrip("/")
         contact.append({
-            "label": str(links["website"]).replace("https://", ""),
-            "url": links["website"],
+            # The label stays clean -- that is what a human reads and what an ATS
+            # pulls out of the text layer. The marker rides in the href only.
+            # An arrival tagged ?r=<tag> is provably someone holding this PDF, which
+            # is otherwise invisible: nobody re-downloads a resume they were sent, so
+            # they click through to the site and never touch the PDF again.
+            "label": site.replace("https://", ""),
+            "url": f"{site}/?r={tag}" if tag else site,
         })
     if not contact:
         contact = [{"label": "TODO: contact details", "url": ""}]
@@ -219,6 +225,15 @@ def main() -> int:
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     with_phone = "--phone" in sys.argv
 
+    # --tag=acme writes ?r=cv-acme into the PDF's portfolio link, so a click from THIS
+    # application is distinguishable from every other copy of the resume. Plain `cv`
+    # is the default and is enough to separate resume traffic from LinkedIn traffic.
+    tag = "cv"
+    for a in sys.argv[1:]:
+        if a.startswith("--tag="):
+            suffix = a.split("=", 1)[1].strip()
+            tag = f"cv-{suffix}" if suffix else "cv"
+
     name = args[0] if args else "base"
     variant_path = RESUME / "variants" / f"{name}.json"
     if not variant_path.exists():
@@ -238,7 +253,7 @@ def main() -> int:
     out_dir = RESUME / "build" / name
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "data.json").write_text(
-        json.dumps(build_data(career, variant), indent=2), encoding="utf-8")
+        json.dumps(build_data(career, variant, tag), indent=2), encoding="utf-8")
     shutil.copyfile(TEMPLATE, out_dir / "template.typ")
 
     pdf = out_dir / "resume.pdf"

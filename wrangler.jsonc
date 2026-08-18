@@ -2,9 +2,9 @@
   "$schema": "./site/node_modules/wrangler/config-schema.json",
   "name": "ankushsio-portfolio",
 
-  // Astro emits a fully static site into site/dist, so nearly every request is
-  // served straight from Cloudflare's asset store with no Worker invocation.
-  // `main` exists only for the resume-download hook below.
+  // Astro emits a fully static site into site/dist. The Worker exists to record
+  // arrivals -- see src/worker/index.js for why that is server-side rather than a
+  // client beacon.
   "main": "src/worker/index.js",
   "compatibility_date": "2026-08-17",
 
@@ -19,12 +19,24 @@
     // src/pages/404.astro compiles to dist/404.html -- serve it instead of a bare 404.
     "not_found_handling": "404-page",
 
-    // The ONLY path that invokes the Worker. Page views stay at zero invocations;
-    // this exists because "who pulled the resume" is the one signal worth paying for.
-    "run_worker_first": ["/ankush-jain-resume.pdf"]
+    // Pages now invoke the Worker so visits are recorded; hashed build assets do not,
+    // since a CSS fetch says nothing a page view has not already said. At this site's
+    // volume the invocation count is a rounding error against the 100k/day free tier.
+    "run_worker_first": ["/*", "!/_astro/*"]
   },
 
-  // Turns on Workers Logs so the console.log in the Worker is queryable.
+  // Visit log. D1 rather than Workers Logs because logs expire in 3 days (free) or 7
+  // (paid), and a job search outlives both. Create with:
+  //   wrangler d1 create portfolio-visits
+  // then paste the returned id below and apply analytics/schema.sql.
+  "d1_databases": [
+    {
+      "binding": "VISITS",
+      "database_name": "portfolio-visits",
+      "database_id": "PASTE_DATABASE_ID_FROM_wrangler_d1_create"
+    }
+  ],
+
   "observability": {
     "enabled": true
   }
