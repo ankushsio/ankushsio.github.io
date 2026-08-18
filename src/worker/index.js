@@ -74,17 +74,27 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // Serve first, measure after. The write happens in waitUntil so a slow or broken
-    // D1 can never delay -- or break -- the page a recruiter is waiting on.
-    const response = env.ASSETS.fetch(request);
+    // Awaiting resolves headers only -- the body still streams -- so this costs no
+    // latency and lets us see the status before deciding to record.
+    const response = await env.ASSETS.fetch(request);
 
-    ctx.waitUntil(
-      record(request, url, env).catch((err) => {
-        console.log(
-          JSON.stringify({ event: "visit_record_failed", message: String(err) }),
-        );
-      }),
-    );
+    // Skip redirects. html_handling sends /resume to /resume/ with a 307, and logging
+    // both hops double-counts every navigation that omits the trailing slash, which
+    // silently inflates session depth -- the metric most worth trusting. The query
+    // string survives the redirect, so the ?r= marker is still captured on the 200.
+    const isRedirect = response.status >= 300 && response.status < 400;
+
+    if (!isRedirect) {
+      // The write happens in waitUntil so a slow or broken D1 can never delay -- or
+      // break -- the page a recruiter is waiting on.
+      ctx.waitUntil(
+        record(request, url, env).catch((err) => {
+          console.log(
+            JSON.stringify({ event: "visit_record_failed", message: String(err) }),
+          );
+        }),
+      );
+    }
 
     return response;
   },
