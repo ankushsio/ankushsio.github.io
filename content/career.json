@@ -377,13 +377,12 @@
           "role": "Engineer - architecture, FHIR modelling, AI-assisted delivery",
           "summary": "Current project. A FHIR-native platform for clinical protocols and surveys, modelled on healthcare terminology standards, being migrated off a legacy application. My work here is as much architecture and requirements as implementation.",
           "problem": "A legacy application needed replacing with something modelled properly on healthcare standards rather than ad-hoc structures, with requirements arriving as slide decks, whiteboard sessions and client calls rather than as a spec.",
-          "approach": "Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Researched SMART on FHIR to decide where the access-control layer belonged, and produced a permission matrix across roles. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and E2E implementation, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.",
+          "approach": "Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Produced a permission matrix across roles to settle where the access-control layer belonged. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and E2E implementation, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.",
           "impact": "Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows and E2E implementation.",
           "tech": [
             "FHIR",
             "OMOP",
             "LOINC",
-            "SMART on FHIR",
             "RBAC",
             "Docker Compose",
             "Playwright",
@@ -405,7 +404,7 @@
             },
             {
               "id": "rm-rbac",
-              "text": "Produced a permission matrix across roles and researched SMART on FHIR to determine the correct layer for access control",
+              "text": "Produced a permission matrix across roles to determine the correct layer for access control",
               "metric": false,
               "source": "timesheet:2026-07"
             },
@@ -814,7 +813,6 @@
       "HL7 FHIR",
       "OMOP",
       "LOINC",
-      "SMART on FHIR",
       "Service integration (EHR, surveys, scheduling)",
       "Clinical trial systems"
     ],

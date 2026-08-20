@@ -7,7 +7,8 @@ Writes:
     resume/master.md          everything, no page limit -- the reference document
     linkedin/headline.txt     220 char limit
     linkedin/about.txt        2,600 char limit
-    linkedin/experience.txt   2,000 char limit (the Experience entry description)
+    linkedin/experience-senior.txt    2,000 char limit (Senior SWE, May 2026 - present)
+    linkedin/experience-engineer.txt  2,000 char limit (SWE, May 2023 - May 2026)
     linkedin/projects/*.txt   per-project blurbs for the Projects section
 
 LinkedIn strips markdown, so those files are plain text with bullet characters and real
@@ -185,9 +186,38 @@ def linkedin_about(c: dict) -> str:
     return "\n".join(lines)
 
 
-def linkedin_experience(c: dict) -> str:
-    company = c["companies"][0]
-    lines = [
+def linkedin_experience_senior(c: dict) -> str:
+    """Senior Software Engineer, May 2026 - present.
+
+    LinkedIn gives every position under the same employer its own description box, so
+    the promotion buys a second ~2,000 character budget instead of five projects
+    competing for one. The single entry was sitting at 1,935 of 2,000.
+
+    The split is also the accurate one rather than merely convenient: every
+    clinical-trial highlight carries a `source` evaluation dated before May 2026, so
+    that work belongs to the earlier role even though the project is still running.
+    """
+    return "\n".join([
+        "Engineering services across healthcare, medical devices and imaging. "
+        "Clients are not named.",
+        "",
+        "MEDICINE DATA PLATFORM (May 2026 - present)",
+        "• Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC "
+        "terminology; implemented change logs purely through FHIR provenance.",
+        "• Produced a permission matrix across roles to settle where the access-control "
+        "layer belonged.",
+        "• Built a question bank explorable against the standard terminology.",
+        "• Drove requirements with the client, turning whiteboard sessions into "
+        "wireframed workflows and E2E implementation.",
+        "• Used AI-assisted and agent-orchestrated development for legacy-to-new UI "
+        "migration and phased delivery, supervising and correcting the output rather "
+        "than accepting it.",
+    ])
+
+
+def linkedin_experience_engineer(c: dict) -> str:
+    """Software Engineer, May 2023 - May 2026. Everything up to the promotion."""
+    return "\n".join([
         "Engineering services across healthcare, medical devices and imaging. "
         "Clients are not named.",
         "",
@@ -202,12 +232,8 @@ def linkedin_experience(c: dict) -> str:
         "subscriptions, dead-letter handling and retries; wrote the Terraform for it.",
         "• Cut the backend deploy pipeline from 26m33s to 18m07s and a service image "
         "from 450 MB to 290 MB.",
-        "",
-        "MEDICINE DATA PLATFORM (May 2026 - present)",
-        "• Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC "
-        "terminology; implemented change logs purely through FHIR provenance.",
-        "• Drove requirements with the client, turning whiteboard sessions into "
-        "wireframed workflows and E2E implementation.",
+        "• Eliminated $200+/month of idle cloud spend by auditing and decommissioning "
+        "legacy services, and set up billing review to catch the next one.",
         "",
         "DOCUMENT AI / HANDWRITING RECOGNITION (May - Nov 2025)",
         "• Owned high- and low-level design of an end-to-end OCR system around a "
@@ -227,8 +253,7 @@ def linkedin_experience(c: dict) -> str:
         "it took per frame.",
         "• Migrated the reconstruction pipeline from file-based to in-memory; onboarded "
         "two junior engineers.",
-    ]
-    return "\n".join(lines)
+    ])
 
 
 def linkedin_project(p: dict) -> str:
@@ -259,7 +284,10 @@ def main() -> int:
     pieces = [
         ("headline.txt", linkedin_headline(career), LIMITS["headline"]),
         ("about.txt", linkedin_about(career), LIMITS["about"]),
-        ("experience.txt", linkedin_experience(career), LIMITS["experience"]),
+        # One box per position. The May 2026 promotion means LinkedIn shows two entries
+        # under Apra Labs, each with its own limit.
+        ("experience-senior.txt", linkedin_experience_senior(career), LIMITS["experience"]),
+        ("experience-engineer.txt", linkedin_experience_engineer(career), LIMITS["experience"]),
     ]
     for filename, text, limit in pieces:
         (ln / filename).write_text(text, encoding="utf-8")

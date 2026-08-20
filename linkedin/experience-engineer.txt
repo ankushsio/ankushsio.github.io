@@ -5,10 +5,7 @@ CLINICAL TRIAL MANAGEMENT PLATFORM (Nov 2024 - present)
 • Designed and shipped a full role-based access control system - admin-only endpoint restriction, per-role response filtering, pre-authorization checks.
 • Re-architected inter-service connectivity on GCP Pub/Sub with async subscriptions, dead-letter handling and retries; wrote the Terraform for it.
 • Cut the backend deploy pipeline from 26m33s to 18m07s and a service image from 450 MB to 290 MB.
-
-MEDICINE DATA PLATFORM (May 2026 - present)
-• Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC terminology; implemented change logs purely through FHIR provenance.
-• Drove requirements with the client, turning whiteboard sessions into wireframed workflows and E2E implementation.
+• Eliminated $200+/month of idle cloud spend by auditing and decommissioning legacy services, and set up billing review to catch the next one.
 
 DOCUMENT AI / HANDWRITING RECOGNITION (May - Nov 2025)
 • Owned high- and low-level design of an end-to-end OCR system around a licensed third-party model.

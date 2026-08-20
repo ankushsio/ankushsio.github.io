@@ -181,7 +181,7 @@ Current project. A FHIR-native platform for clinical protocols and surveys, mode
 
 **Problem.** A legacy application needed replacing with something modelled properly on healthcare standards rather than ad-hoc structures, with requirements arriving as slide decks, whiteboard sessions and client calls rather than as a spec.
 
-**Approach.** Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Researched SMART on FHIR to decide where the access-control layer belonged, and produced a permission matrix across roles. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and E2E implementation, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.
+**Approach.** Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Produced a permission matrix across roles to settle where the access-control layer belonged. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and E2E implementation, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.
 
 **Outcome.** Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows and E2E implementation.
 
@@ -191,7 +191,7 @@ Current project. A FHIR-native platform for clinical protocols and surveys, mode
   <sub>source: timesheet:2026-06</sub>
 - Built a question bank letting users explore questions against standard clinical terminology instead of free-text entry  
   <sub>source: timesheet:2026-06</sub>
-- Produced a permission matrix across roles and researched SMART on FHIR to determine the correct layer for access control  
+- Produced a permission matrix across roles to determine the correct layer for access control  
   <sub>source: timesheet:2026-07</sub>
 - Drove requirements with the client directly - converting whiteboard sessions and slide feedback into wireframed workflows and E2E implementation  
   <sub>source: timesheet:2026-07</sub>
@@ -200,7 +200,7 @@ Current project. A FHIR-native platform for clinical protocols and surveys, mode
 - Simplified environment setup so a new developer needs only the source and terminology files, with everything else provisioned automatically  
   <sub>source: timesheet:2026-06</sub>
 
-**Tech:** FHIR, OMOP, LOINC, SMART on FHIR, RBAC, Docker Compose, Playwright, AI-assisted development, Requirements & architecture design
+**Tech:** FHIR, OMOP, LOINC, RBAC, Docker Compose, Playwright, AI-assisted development, Requirements & architecture design
 
 
 #### Retinal Video Biomarker Research
@@ -301,7 +301,7 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 - **Backend:** Spring Boot, Ktor, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture, Flask
 - **Databases:** PostgreSQL, SQL, Redis, Flyway (migrations)
 - **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, AWS (Lambda, Step Functions), Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), Observability (Sentry, Graylog)
-- **Domain:** HL7 FHIR, OMOP, LOINC, SMART on FHIR, Service integration (EHR, surveys, scheduling), Clinical trial systems
+- **Domain:** HL7 FHIR, OMOP, LOINC, Service integration (EHR, surveys, scheduling), Clinical trial systems
 - **Security:** Role-based access control (RBAC), Authentication & authorization, OAuth / token-based auth, Microsoft Graph API, Static analysis remediation, Microsoft Entra, JWT
 - **Ml Imaging:** Computer vision, Image registration, Signal processing (FFT/DFT), Hyperspectral imaging, OCR / handwriting recognition, VTK, PyTorch, ONNX, TensorRT
 - **Practices:** High- and low-level design, Code review, Mentoring, Technical interviewing, AI-assisted development, Requirements gathering

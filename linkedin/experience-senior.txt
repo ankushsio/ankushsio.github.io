@@ -1,0 +1,8 @@
+Engineering services across healthcare, medical devices and imaging. Clients are not named.
+
+MEDICINE DATA PLATFORM (May 2026 - present)
+• Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC terminology; implemented change logs purely through FHIR provenance.
+• Produced a permission matrix across roles to settle where the access-control layer belonged.
+• Built a question bank explorable against the standard terminology.
+• Drove requirements with the client, turning whiteboard sessions into wireframed workflows and E2E implementation.
+• Used AI-assisted and agent-orchestrated development for legacy-to-new UI migration and phased delivery, supervising and correcting the output rather than accepting it.
