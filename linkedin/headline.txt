@@ -1,1 +1,1 @@
-Senior Backend Engineer at Apra Labs | Distributed systems, event-driven architecture, access control | Java/Kotlin, Go, Python, GCP
+Senior Software Engineer at Apra Labs | Distributed systems, event-driven architecture, access control | Java/Kotlin, Python, GCP
