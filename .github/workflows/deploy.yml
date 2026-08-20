@@ -60,6 +60,13 @@ jobs:
       - name: Site coverage
         run: python scripts/check_site_coverage.py
 
+      # The LinkedIn counterpart. Fails if a quantified achievement never reaches the
+      # LinkedIn copy -- added after the $200+/month saving sat on the resume for weeks
+      # while being absent from LinkedIn, because that copy is hand-written prose that
+      # does not read career.json.
+      - name: Metric coverage
+        run: python scripts/check_metric_coverage.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
