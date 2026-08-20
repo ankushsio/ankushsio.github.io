@@ -67,6 +67,13 @@ jobs:
       - name: Metric coverage
         run: python scripts/check_metric_coverage.py
 
+      # resume/variants/*.json is a second source of truth and only it reaches the PDF.
+      # It has silently disagreed with career.json twice -- once holding Go after it was
+      # dropped, once holding the old job title -- both caught by a human reading the
+      # PDF, which is the wrong last line of defence for a document sent to recruiters.
+      - name: Resume consistency
+        run: python scripts/check_resume_consistency.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
