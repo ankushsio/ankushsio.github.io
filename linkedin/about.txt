@@ -6,7 +6,7 @@ What I tend to do on a project:
 
 • Turn one-off integrations into a repeatable pattern - I built the base adapter modules for an integration hub so each new service connection follows one shape instead of becoming a bespoke build.
 • Design and ship access control properly - a full RBAC system, covering admin-only endpoints, per-role response filtering and pre-authorization checks.
-• Find the cost nobody has looked at - a per-frame computation that dominated a 3D reconstruction pipeline (over 80% of its time removed), a 19 GB deployable cut to 5.28 GB, a deploy pipeline taken from 26m33s to 18m07s.
+• Find the cost nobody has looked at - a per-frame computation that dominated a 3D reconstruction pipeline (over 80% of its time removed), a 19 GB deployable cut to 5.28 GB, a deploy pipeline taken from 26m33s to 18m07s, $200+/month of idle cloud spend found and decommissioned.
 • Own design end to end - high- and low-level design, then the implementation, security hardening and CI/CD that ships it.
 
 I work mostly in Java/Kotlin, Python, Node and C++, on GCP, with Pub/Sub, RabbitMQ, Redis, PostgreSQL, Docker and Terraform. I also spend real time on the things around the code: onboarding people, reviewing designs rather than only diffs, and making project setup simple enough that a new developer needs the source and nothing else.

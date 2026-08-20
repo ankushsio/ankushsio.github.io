@@ -142,8 +142,8 @@ def master_resume(c: dict) -> str:
 # ------------------------------------------------------------------- linkedin
 
 def linkedin_headline(c: dict) -> str:
-    return ("Senior Backend Engineer at Apra Labs | Distributed systems, event-driven "
-            "architecture, access control | Java/Kotlin, Go, Python, GCP")
+    return ("Senior Software Engineer at Apra Labs | Distributed systems, event-driven "
+            "architecture, access control | Java/Kotlin, Python, GCP")
 
 
 def linkedin_about(c: dict) -> str:
@@ -160,18 +160,19 @@ def linkedin_about(c: dict) -> str:
         "What I tend to do on a project:",
         "",
         "• Turn one-off integrations into a repeatable pattern - I built the base "
-        "adapter modules for an EHR integration hub so each new hospital connection "
+        "adapter modules for an integration hub so each new service connection "
         "follows one shape instead of becoming a bespoke build.",
-        "• Design and ship access control properly - a full RBAC system across two "
-        "applications, covering admin-only endpoints, per-role response filtering and "
+        "• Design and ship access control properly - a full RBAC system, covering "
+        "admin-only endpoints, per-role response filtering and "
         "pre-authorization checks.",
         "• Find the cost nobody has looked at - a per-frame computation that dominated "
         "a 3D reconstruction pipeline (over 80% of its time removed), a 19 GB "
-        "deployable cut to 5.28 GB, a deploy pipeline taken from 26m33s to 18m07s.",
+        "deployable cut to 5.28 GB, a deploy pipeline taken from 26m33s to 18m07s, "
+        "$200+/month of idle cloud spend found and decommissioned.",
         "• Own design end to end - high- and low-level design, then the implementation, "
         "security hardening and CI/CD that ships it.",
         "",
-        "I work mostly in Java/Kotlin, Python, Go and C++, on GCP, with Pub/Sub, "
+        "I work mostly in Java/Kotlin, Python, Node and C++, on GCP, with Pub/Sub, "
         "RabbitMQ, Redis, PostgreSQL, Docker and Terraform. I also spend real time on the things "
         "around the code: onboarding people, reviewing designs rather than only diffs, "
         "and making project setup simple enough that a new developer needs the source "
@@ -191,22 +192,22 @@ def linkedin_experience(c: dict) -> str:
         "Clients are not named.",
         "",
         "CLINICAL TRIAL MANAGEMENT PLATFORM (Nov 2024 - present)",
-        "• Built the integration hub's base adapter modules, turning each new EHR "
+        "• Built the integration hub's base adapter modules, turning each new "
         "integration from a bespoke build into a repeatable pattern; implemented the "
         "reference adapter.",
-        "• Designed and shipped a full role-based access control system across two "
-        "applications - admin-only endpoint restriction, per-role response filtering, "
+        "• Designed and shipped a full role-based access control system - "
+        "admin-only endpoint restriction, per-role response filtering, "
         "pre-authorization checks.",
         "• Re-architected inter-service connectivity on GCP Pub/Sub with async "
         "subscriptions, dead-letter handling and retries; wrote the Terraform for it.",
         "• Cut the backend deploy pipeline from 26m33s to 18m07s and a service image "
         "from 450 MB to 290 MB.",
         "",
-        "REGENERATIVE MEDICINE DATA PLATFORM (May 2026 - present)",
+        "MEDICINE DATA PLATFORM (May 2026 - present)",
         "• Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC "
         "terminology; implemented change logs purely through FHIR provenance.",
         "• Drove requirements with the client, turning whiteboard sessions into "
-        "wireframed workflows and user stories.",
+        "wireframed workflows and E2E implementation.",
         "",
         "DOCUMENT AI / HANDWRITING RECOGNITION (May - Nov 2025)",
         "• Owned high- and low-level design of an end-to-end OCR system around a "

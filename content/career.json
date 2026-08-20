@@ -8,7 +8,7 @@
   },
   "person": {
     "name": "Ankush Jain",
-    "title": "Senior Backend Engineer",
+    "title": "Senior Software Engineer",
     "location": "Bengaluru, India",
     "email": "kushjaing@gmail.com",
     "links": {
@@ -16,11 +16,11 @@
       "linkedin": "https://www.linkedin.com/in/ankush-jain-22313a20/",
       "website": "https://me.entertoescape.com"
     },
-    "summary": "Senior backend engineer with five years on distributed systems where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control, and applied ML in production. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.",
+    "summary": "Senior software engineer with five years on distributed backends where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control, and applied ML in production. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.",
     "_phone_note": "Phone is deliberately NOT in this public file. It lives in resume/private.json (gitignored) and is rendered only with `render_resume.py --phone`."
   },
   "positioning": {
-    "level": "senior backend engineer",
+    "level": "senior software engineer",
     "years_experience": 5,
     "graduated": 2021,
     "themes": [
@@ -58,16 +58,15 @@
           "hours": 2305,
           "featured": true,
           "role": "Backend engineer - integration, cloud infrastructure, access control",
-          "summary": "A multi-service platform connecting clinical trial study teams and participants to hospital electronic health record systems. My longest-running project and the one where I moved from writing features to shaping design.",
-          "problem": "Trial data lives inside hospital EHR systems that each expose different APIs, standards and quirks. Every new data source risked becoming a bespoke integration, and a platform handling patient data needed access control and auditability that could survive scrutiny - neither of which existed when I joined.",
-          "approach": "Built the integration hub's base adapter modules so that every new EHR adapter follows one predictable shape, then implemented the first EHR adapter as the reference others were built from. Moved inter-service communication onto managed pub/sub with asynchronous subscriptions, dead-letter handling and retry logic. Wrote infrastructure as code for the cloud APIs, serverless service instances, topics and subscriptions. Designed and implemented role-based access control across both the study-team and participant applications - identifying admin-only endpoints, filtering responses per role, and adding pre-authorization checks for resources a user cannot reach. Added server-sent events for real-time feedback, hardened authentication, remediated static-analysis findings, and rebuilt the CI/CD pipelines.",
+          "summary": "A multi-service platform connecting clinical trial study teams and participants to the external systems a trial depends on. My longest-running project and the one where I moved from writing features to shaping design.",
+          "problem": "Trial data lives in systems the platform does not control - survey tools, appointment scheduling services, electronic health records - each exposing different APIs, standards and quirks. Every new data source risked becoming a bespoke integration, and a platform handling patient data needed access control and auditability that could survive scrutiny - neither of which existed when I joined.",
+          "approach": "Built the integration hub's base adapter modules so that every new adapter - whichever service it targets - follows one predictable shape, then implemented the first adapter as the reference others were built from. Moved inter-service communication onto managed pub/sub with asynchronous subscriptions, dead-letter handling and retry logic. Wrote infrastructure as code for the cloud APIs, serverless service instances, topics and subscriptions. Designed and implemented role-based access control - identifying admin-only endpoints, filtering responses per role, and adding pre-authorization checks for resources a user cannot reach. Added server-sent events for real-time feedback, hardened authentication, remediated static-analysis findings, and rebuilt the CI/CD pipelines.",
           "impact": "Phase 1 delivered on schedule. Deployments got meaningfully faster, container images meaningfully smaller, and the platform gained an access-control story it previously lacked.",
           "tech": [
             "Java",
             "Spring Boot",
             "Kotlin",
             "Ktor",
-            "Go",
             "Google Cloud Pub/Sub",
             "Cloud Run",
             "Terraform",
@@ -87,17 +86,18 @@
               "id": "ctp-deploy",
               "text": "Cut the backend deployment pipeline from 26 min 33 s to 18 min 07 s (-32%), shortening every developer's feedback loop",
               "metric": true,
-              "source": "eval:2026-04"
+              "source": "eval:2026-04",
+              "linkedin_figure": "26m33s to 18m07s"
             },
             {
               "id": "ctp-rbac",
-              "text": "Designed and shipped a full role-based access control system across two applications, covering admin and basic access - admin-only endpoint restriction, per-role response filtering, and pre-authorization checks",
+              "text": "Designed and shipped a full role-based access control system, covering admin and basic access - admin-only endpoint restriction, per-role response filtering, and pre-authorization checks",
               "metric": false,
               "source": "eval:2025-11"
             },
             {
               "id": "ctp-adapters",
-              "text": "Built the integration hub's base adapter modules, turning each new EHR integration from a bespoke build into a repeatable pattern; implemented the first adapter as the reference implementation",
+              "text": "Built the integration hub's base adapter modules, turning each new integration from a bespoke build into a repeatable pattern; implemented the first adapter as the reference implementation",
               "metric": false,
               "source": "eval:2025-05"
             },
@@ -117,13 +117,15 @@
               "id": "ctp-image",
               "text": "Reduced a service container image from 450 MB to 290 MB (-36%) by eliminating unneeded dependencies while clearing technical debt",
               "metric": true,
-              "source": "timesheet:2025-02"
+              "source": "timesheet:2025-02",
+              "linkedin_figure": "450 MB to 290 MB"
             },
             {
               "id": "ctp-cost",
               "text": "Eliminated $200+/month of idle cloud spend (~$2.4k/year) by auditing and decommissioning legacy services, and set up billing review to catch it earlier",
               "metric": true,
-              "source": "eval:2025-05 + eval:2026-04"
+              "source": "eval:2025-05 + eval:2026-04",
+              "linkedin_figure": "$200+/month"
             },
             {
               "id": "ctp-security",
@@ -189,7 +191,8 @@
               "id": "ars-sdf",
               "text": "Cut end-to-end pipeline latency from 22s to 2s by moving the reconstruction pipeline from file-based I/O to in-memory and eliminating a per-frame signed distance field computation that dominated the frame budget",
               "metric": true,
-              "source": "eval:2024-05 + resume-draft"
+              "source": "eval:2024-05 + resume-draft",
+              "linkedin_figure": "over 80%"
             },
             {
               "id": "ars-inmemory",
@@ -325,7 +328,8 @@
               "id": "p2p-image",
               "text": "Reduced the deployable image from 19 GB to 5.28 GB (-72%) through deliberate packaging design",
               "metric": true,
-              "source": "eval:2025-11"
+              "source": "eval:2025-11",
+              "linkedin_figure": "5.28 GB"
             },
             {
               "id": "p2p-license",
@@ -360,8 +364,8 @@
           ]
         },
         {
-          "slug": "regenerative-medicine-platform",
-          "title": "Regenerative Medicine Data Platform",
+          "slug": "medicine-data-platform",
+          "title": "Medicine Data Platform",
           "domain": "Healthcare data / clinical standards",
           "period": {
             "start": "2026-05",
@@ -373,8 +377,8 @@
           "role": "Engineer - architecture, FHIR modelling, AI-assisted delivery",
           "summary": "Current project. A FHIR-native platform for clinical protocols and surveys, modelled on healthcare terminology standards, being migrated off a legacy application. My work here is as much architecture and requirements as implementation.",
           "problem": "A legacy application needed replacing with something modelled properly on healthcare standards rather than ad-hoc structures, with requirements arriving as slide decks, whiteboard sessions and client calls rather than as a spec.",
-          "approach": "Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Researched SMART on FHIR to decide where the access-control layer belonged, and produced a permission matrix across roles. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and user stories, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.",
-          "impact": "Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows with explicit user stories.",
+          "approach": "Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Researched SMART on FHIR to decide where the access-control layer belonged, and produced a permission matrix across roles. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and E2E implementation, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.",
+          "impact": "Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows and E2E implementation.",
           "tech": [
             "FHIR",
             "OMOP",
@@ -407,7 +411,7 @@
             },
             {
               "id": "rm-requirements",
-              "text": "Drove requirements with the client directly - converting whiteboard sessions and slide feedback into wireframed workflows and user stories",
+              "text": "Drove requirements with the client directly - converting whiteboard sessions and slide feedback into wireframed workflows and E2E implementation",
               "metric": false,
               "source": "timesheet:2026-07"
             },
@@ -777,7 +781,6 @@
       "C++",
       "Java",
       "Kotlin",
-      "Go",
       "JavaScript/Node.js",
       "TypeScript"
     ],
@@ -812,7 +815,7 @@
       "OMOP",
       "LOINC",
       "SMART on FHIR",
-      "EHR integration",
+      "Service integration (EHR, surveys, scheduling)",
       "Clinical trial systems"
     ],
     "security": [

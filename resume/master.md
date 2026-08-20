@@ -1,6 +1,6 @@
 # Ankush Jain
 
-**Senior Backend Engineer**
+**Senior Software Engineer**
 
 > Master resume — the complete record, no page limit. This is the reference
 > document and is never sent to an employer as-is. One-page tailored versions
@@ -20,11 +20,11 @@
 
 ## Summary
 
-Senior backend engineer with five years on distributed systems where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control, and applied ML in production. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.
+Senior software engineer with five years on distributed backends where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control, and applied ML in production. Comfortable owning a system end to end: high- and low-level design, implementation, security hardening, and the CI/CD that ships it.
 
 ## Positioning
 
-- **Level:** senior backend engineer
+- **Level:** senior software engineer
 - **Experience:** ~5 years (graduated 2021)
 - **Seeking:** A role with real ownership and systems depth, at a company worth staying at for years. Domain-agnostic: the systems problems travel.
 
@@ -48,11 +48,11 @@ Engineering services company. Work is delivered for external clients across heal
 #### Clinical Trial Management Platform
 *Nov 2024 – Present · Clinical research / healthcare · Backend engineer - integration, cloud infrastructure, access control*
 
-A multi-service platform connecting clinical trial study teams and participants to hospital electronic health record systems. My longest-running project and the one where I moved from writing features to shaping design.
+A multi-service platform connecting clinical trial study teams and participants to the external systems a trial depends on. My longest-running project and the one where I moved from writing features to shaping design.
 
-**Problem.** Trial data lives inside hospital EHR systems that each expose different APIs, standards and quirks. Every new data source risked becoming a bespoke integration, and a platform handling patient data needed access control and auditability that could survive scrutiny - neither of which existed when I joined.
+**Problem.** Trial data lives in systems the platform does not control - survey tools, appointment scheduling services, electronic health records - each exposing different APIs, standards and quirks. Every new data source risked becoming a bespoke integration, and a platform handling patient data needed access control and auditability that could survive scrutiny - neither of which existed when I joined.
 
-**Approach.** Built the integration hub's base adapter modules so that every new EHR adapter follows one predictable shape, then implemented the first EHR adapter as the reference others were built from. Moved inter-service communication onto managed pub/sub with asynchronous subscriptions, dead-letter handling and retry logic. Wrote infrastructure as code for the cloud APIs, serverless service instances, topics and subscriptions. Designed and implemented role-based access control across both the study-team and participant applications - identifying admin-only endpoints, filtering responses per role, and adding pre-authorization checks for resources a user cannot reach. Added server-sent events for real-time feedback, hardened authentication, remediated static-analysis findings, and rebuilt the CI/CD pipelines.
+**Approach.** Built the integration hub's base adapter modules so that every new adapter - whichever service it targets - follows one predictable shape, then implemented the first adapter as the reference others were built from. Moved inter-service communication onto managed pub/sub with asynchronous subscriptions, dead-letter handling and retry logic. Wrote infrastructure as code for the cloud APIs, serverless service instances, topics and subscriptions. Designed and implemented role-based access control - identifying admin-only endpoints, filtering responses per role, and adding pre-authorization checks for resources a user cannot reach. Added server-sent events for real-time feedback, hardened authentication, remediated static-analysis findings, and rebuilt the CI/CD pipelines.
 
 **Outcome.** Phase 1 delivered on schedule. Deployments got meaningfully faster, container images meaningfully smaller, and the platform gained an access-control story it previously lacked.
 
@@ -60,9 +60,9 @@ A multi-service platform connecting clinical trial study teams and participants 
 
 - Cut the backend deployment pipeline from 26 min 33 s to 18 min 07 s (-32%), shortening every developer's feedback loop `[metric]`  
   <sub>source: eval:2026-04</sub>
-- Designed and shipped a full role-based access control system across two applications, covering admin and basic access - admin-only endpoint restriction, per-role response filtering, and pre-authorization checks  
+- Designed and shipped a full role-based access control system, covering admin and basic access - admin-only endpoint restriction, per-role response filtering, and pre-authorization checks  
   <sub>source: eval:2025-11</sub>
-- Built the integration hub's base adapter modules, turning each new EHR integration from a bespoke build into a repeatable pattern; implemented the first adapter as the reference implementation  
+- Built the integration hub's base adapter modules, turning each new integration from a bespoke build into a repeatable pattern; implemented the first adapter as the reference implementation  
   <sub>source: eval:2025-05</sub>
 - Re-architected inter-service connectivity on managed pub/sub with async subscriptions, dead-letter handling and retry enhancement  
   <sub>source: eval:2026-04</sub>
@@ -83,7 +83,7 @@ A multi-service platform connecting clinical trial study teams and participants 
 - Migrated the GCP sandbox environment onto the client's internal cloud with no loss of service  
   <sub>source: resume-draft</sub>
 
-**Tech:** Java, Spring Boot, Kotlin, Ktor, Go, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, GraalVM, Gradle, Microsoft Entra, JWT
+**Tech:** Java, Spring Boot, Kotlin, Ktor, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, GraalVM, Gradle, Microsoft Entra, JWT
 
 
 #### AR Surgical Navigation
@@ -174,16 +174,16 @@ An end-to-end system turning scanned handwritten documents into structured data,
 **Tech:** Python, Docker, RabbitMQ, Handwriting recognition (HTR/OCR), System design (HLD/LLD), Message brokers
 
 
-#### Regenerative Medicine Data Platform
+#### Medicine Data Platform
 *May 2026 – Present · Healthcare data / clinical standards · Engineer - architecture, FHIR modelling, AI-assisted delivery*
 
 Current project. A FHIR-native platform for clinical protocols and surveys, modelled on healthcare terminology standards, being migrated off a legacy application. My work here is as much architecture and requirements as implementation.
 
 **Problem.** A legacy application needed replacing with something modelled properly on healthcare standards rather than ad-hoc structures, with requirements arriving as slide decks, whiteboard sessions and client calls rather than as a spec.
 
-**Approach.** Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Researched SMART on FHIR to decide where the access-control layer belonged, and produced a permission matrix across roles. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and user stories, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.
+**Approach.** Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Researched SMART on FHIR to decide where the access-control layer belonged, and produced a permission matrix across roles. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and E2E implementation, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.
 
-**Outcome.** Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows with explicit user stories.
+**Outcome.** Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows and E2E implementation.
 
 **Highlights**
 
@@ -193,7 +193,7 @@ Current project. A FHIR-native platform for clinical protocols and surveys, mode
   <sub>source: timesheet:2026-06</sub>
 - Produced a permission matrix across roles and researched SMART on FHIR to determine the correct layer for access control  
   <sub>source: timesheet:2026-07</sub>
-- Drove requirements with the client directly - converting whiteboard sessions and slide feedback into wireframed workflows and user stories  
+- Drove requirements with the client directly - converting whiteboard sessions and slide feedback into wireframed workflows and E2E implementation  
   <sub>source: timesheet:2026-07</sub>
 - Used AI-assisted and agent-orchestrated development for legacy-to-new migration and phased delivery, supervising and correcting output rather than accepting it  
   <sub>source: timesheet:2026-05</sub>
@@ -297,11 +297,11 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 
 ## Skills
 
-- **Languages:** Python, C++, Java, Kotlin, Go, JavaScript/Node.js, TypeScript
+- **Languages:** Python, C++, Java, Kotlin, JavaScript/Node.js, TypeScript
 - **Backend:** Spring Boot, Ktor, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture, Flask
 - **Databases:** PostgreSQL, SQL, Redis, Flyway (migrations)
 - **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, AWS (Lambda, Step Functions), Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), Observability (Sentry, Graylog)
-- **Domain:** HL7 FHIR, OMOP, LOINC, SMART on FHIR, EHR integration, Clinical trial systems
+- **Domain:** HL7 FHIR, OMOP, LOINC, SMART on FHIR, Service integration (EHR, surveys, scheduling), Clinical trial systems
 - **Security:** Role-based access control (RBAC), Authentication & authorization, OAuth / token-based auth, Microsoft Graph API, Static analysis remediation, Microsoft Entra, JWT
 - **Ml Imaging:** Computer vision, Image registration, Signal processing (FFT/DFT), Hyperspectral imaging, OCR / handwriting recognition, VTK, PyTorch, ONNX, TensorRT
 - **Practices:** High- and low-level design, Code review, Mentoring, Technical interviewing, AI-assisted development, Requirements gathering
@@ -317,7 +317,7 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 
 A browser game I built and ship myself, live on my own domain. Written in TypeScript with Phaser, deployed as a Cloudflare Worker serving static assets plus a leaderboard API backed by D1, with CI on every push and preview URLs per branch.
 
-*The one project I can hand someone the source for. It is also where I own the whole stack - game loop, backend, database, auth, deployment pipeline and DNS.*
+*The one project where every layer is mine - game loop, backend, database, auth, deployment pipeline and DNS. It is also the easiest thing I have to show rather than describe: the game is live, so anyone can just play it.*
 
 **Tech:** TypeScript, Phaser, Vite, Cloudflare Workers, Cloudflare D1, Google OAuth, CI/CD
 
