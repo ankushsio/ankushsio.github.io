@@ -10,11 +10,11 @@
       "bullets": [
         {
           "id": "ctp-adapters",
-          "text": "Built the integration hub's base adapter modules, turning each new EHR integration from a bespoke build into a repeatable pattern"
+          "text": "Built the integration hub's base adapter modules, turning each new integration from a bespoke build into a repeatable pattern"
         },
         {
           "id": "ctp-rbac",
-          "text": "Designed and shipped a full RBAC system across two applications: admin-only endpoint restriction, per-role response filtering and pre-authorization checks"
+          "text": "Designed and shipped a full RBAC system: admin-only endpoint restriction, per-role response filtering and pre-authorization checks"
         },
         {
           "id": "ctp-entra"
@@ -92,7 +92,6 @@
       "bl-mathsteps"
     ],
     "Deloitte USI": [
-      "dl-serverless",
       "dl-statemachine"
     ]
   },
@@ -103,7 +102,6 @@
         "Python",
         "Java",
         "Kotlin",
-        "C++",
         "TypeScript/Node.js",
         "SQL"
       ]
@@ -112,7 +110,6 @@
       "label": "Backend & data",
       "items": [
         "Spring Boot",
-        "Ktor",
         "REST",
         "Server-Sent Events",
         "RabbitMQ",
@@ -157,7 +154,6 @@
   ],
   "prior_text": {
     "bl-observability": "Built out monitoring and log management: Graylog for structured logging, Sentry APM across the Flask and Node.js services",
-    "bl-mathsteps": "Core maintainer of the open-source mathsteps library; added complex expression support and improved parsing accuracy",
-    "dl-serverless": "Contributed to migrating a monolithic insurance premium service to AWS serverless (Lambda, Step Functions)"
+    "bl-mathsteps": "Core maintainer of the open-source mathsteps library; added complex expression support and improved parsing accuracy"
   }
 }

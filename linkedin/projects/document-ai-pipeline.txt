@@ -1,6 +1,6 @@
 Document AI / Handwriting Recognition Pipeline
 
-An end-to-end system turning scanned handwritten documents into structured data, built around a licensed third-party handwriting-recognition model. The first project where I owned both the high- and low-level design.
+An end-to-end system turning scanned handwritten documents into structured data, built around a licensed third-party handwriting-recognition model.
 
 What I did:
 Took the vendor's model and code, worked out how it actually functioned, and adapted it to our use case until there was a working end-to-end system. Then designed the codebase so it packages and deploys alongside the model with the licence swappable on expiry rather than baked in. Set up a RabbitMQ message broker connecting the document pipeline to the partner backend, adding the features and usability the integration needed. Produced the high- and low-level design independently with minimal supervision.

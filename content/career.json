@@ -58,15 +58,14 @@
           "hours": 2305,
           "featured": true,
           "role": "Backend engineer - integration, cloud infrastructure, access control",
-          "summary": "A multi-service platform connecting clinical trial study teams and participants to the external systems a trial depends on. My longest-running project and the one where I moved from writing features to shaping design.",
-          "problem": "Trial data lives in systems the platform does not control - survey tools, appointment scheduling services, electronic health records - each exposing different APIs, standards and quirks. Every new data source risked becoming a bespoke integration, and a platform handling patient data needed access control and auditability that could survive scrutiny - neither of which existed when I joined.",
+          "summary": "The platform where clinical trial study teams design and run trials and participants take part in them. Integrations feed it what a trial needs from the outside - survey responses, phlebotomy appointments, records from health systems - and the platform is where that information is surfaced and acted on. My longest-running project and the one where I moved from writing features to shaping design.",
+          "problem": "The trials, and the participants taking part in them, live in the platform - but much of what a trial depends on does not. Survey tools, appointment scheduling services and electronic health records each expose different APIs, standards and quirks, so every new source of information risked becoming a bespoke integration. On top of that, a platform holding patient data needed access control and auditability that could survive scrutiny, and neither existed when I joined.",
           "approach": "Built the integration hub's base adapter modules so that every new adapter - whichever service it targets - follows one predictable shape, then implemented the first adapter as the reference others were built from. Moved inter-service communication onto managed pub/sub with asynchronous subscriptions, dead-letter handling and retry logic. Wrote infrastructure as code for the cloud APIs, serverless service instances, topics and subscriptions. Designed and implemented role-based access control - identifying admin-only endpoints, filtering responses per role, and adding pre-authorization checks for resources a user cannot reach. Added server-sent events for real-time feedback, hardened authentication, remediated static-analysis findings, and rebuilt the CI/CD pipelines.",
           "impact": "Phase 1 delivered on schedule. Deployments got meaningfully faster, container images meaningfully smaller, and the platform gained an access-control story it previously lacked.",
           "tech": [
             "Java",
             "Spring Boot",
             "Kotlin",
-            "Ktor",
             "Google Cloud Pub/Sub",
             "Cloud Run",
             "Terraform",
@@ -76,7 +75,6 @@
             "RBAC",
             "Microsoft Graph API",
             "Flyway",
-            "GraalVM",
             "Gradle",
             "Microsoft Entra",
             "JWT"
@@ -172,10 +170,9 @@
           "role": "Engineer - 3D pipeline, performance, team lead in practice",
           "summary": "A research system reconstructing 3D anatomy from intra-operative video for augmented-reality surgical guidance. I took it from a file-based research prototype toward something that could run in real conditions.",
           "problem": "The reconstruction pipeline wrote intermediate results to disk between every stage, which made it slow and fragile. Worse, a signed distance field computation ran per frame and bottlenecked the entire operation - no amount of tuning elsewhere mattered while it dominated the frame budget.",
-          "approach": "Read the literature and open-source implementations to understand the geometry properly, then migrated the file-based pipeline to in-memory - which meant understanding every module's inputs and outputs and refactoring the connections between them. For the bottleneck, I worked out that the signed distance field did not need recomputing per frame and devised a technique to compute it once and reuse it. Added multi-inference passes, multi-mesh views, error calculation, and robustness across different input data types.",
+          "approach": "Read the literature and open-source implementations to understand the geometry properly, then migrated the file-based pipeline to in-memory - which meant understanding every module's inputs and outputs and refactoring the connections between them. The bottleneck fell to an idea from physics rather than graphics. A signed distance field only has to be rebuilt every frame if you hold the viewer still and let the scene move around it; borrowing the notion of a frame of reference, shifting the perspective so the field is what stays fixed turns it into something computed once and reused for every frame after. Added multi-inference passes, multi-mesh views, error calculation, and robustness across different input data types.",
           "impact": "Removed the dominant per-frame cost, cutting more than 80% of the time it consumed. Onboarded two junior engineers onto the project and led it through a period when senior engineers were unavailable.",
           "tech": [
-            "C++",
             "Python",
             "VTK",
             "3D meshes & point clouds",
@@ -193,6 +190,12 @@
               "metric": true,
               "source": "eval:2024-05 + resume-draft",
               "linkedin_figure": "over 80%"
+            },
+            {
+              "id": "ars-reference-frame",
+              "text": "Traced the dominant per-frame cost to the choice of reference frame rather than to the computation itself - borrowing the idea from physics, a shift in perspective turned the signed distance field from a per-frame recomputation into a compute-once quantity",
+              "metric": false,
+              "source": "clarified"
             },
             {
               "id": "ars-inmemory",
@@ -245,7 +248,7 @@
           "nameable_product": true,
           "role": "Backend engineer - C++ and Node services, state, real-time",
           "summary": "An Apra Labs network video recorder running headless on edge devices. Built on ApraPipes, the company's open-source video and image processing pipeline framework. I joined when it was unstable and worked on getting it to a dependable state.",
-          "problem": "The recorder was in an unstable state - segmentation faults in the decoder, unreliable behaviour across edge hardware, and no coherent story for how the C++ core, the web layer and the UI shared state.",
+          "problem": "The recorder was in an unstable state - segmentation faults in the decoder, unreliable behaviour across cameras, and no coherent story for how the C++ core, the web layer and the UI shared state.",
           "approach": "Refactored the C++ backend and wrote the Node backend from scratch, then made Redis the single source of ground truth connecting them and the frontend. Integrated server-sent events for real-time notifications, which unlocked a set of features that polling could not serve well. Added proper logging across both the C++ and Node sides - which is what finally made the intermittent decoder crashes diagnosable rather than guessable. Debugged segmentation faults in frame decoding and tested aggressively across edge device targets.",
           "impact": "Brought the platform from unstable to a dependable state and integrated the previously disconnected modules into one controllable system with consistent state.",
           "tech": [
@@ -256,7 +259,6 @@
             "redis-plus-plus",
             "Server-Sent Events",
             "ApraPipes",
-            "NVIDIA Jetson (AGX/NX)",
             "Video decoding",
             "OpenCV"
           ],
@@ -311,7 +313,7 @@
           "hours": 414,
           "featured": true,
           "role": "Engineer and designer - end-to-end system, owned HLD and LLD",
-          "summary": "An end-to-end system turning scanned handwritten documents into structured data, built around a licensed third-party handwriting-recognition model. The first project where I owned both the high- and low-level design.",
+          "summary": "An end-to-end system turning scanned handwritten documents into structured data, built around a licensed third-party handwriting-recognition model.",
           "problem": "The recognition model came as a large third-party artifact with a time-limited licence. Wrapping it naively would have produced an enormous deployment, coupled our code to someone else's release cycle, and made licence renewal a redeployment emergency.",
           "approach": "Took the vendor's model and code, worked out how it actually functioned, and adapted it to our use case until there was a working end-to-end system. Then designed the codebase so it packages and deploys alongside the model with the licence swappable on expiry rather than baked in. Set up a RabbitMQ message broker connecting the document pipeline to the partner backend, adding the features and usability the integration needed. Produced the high- and low-level design independently with minimal supervision.",
           "impact": "Cut the deployable image from 19 GB to 5.28 GB - a 72% reduction - and delivered the system within its timeline. My design reviews and guidance then enabled the team to build the LLM-based successor.",
@@ -378,7 +380,7 @@
           "summary": "Current project. A FHIR-native platform for clinical protocols and surveys, modelled on healthcare terminology standards, being migrated off a legacy application. My work here is as much architecture and requirements as implementation.",
           "problem": "A legacy application needed replacing with something modelled properly on healthcare standards rather than ad-hoc structures, with requirements arriving as slide decks, whiteboard sessions and client calls rather than as a spec.",
           "approach": "Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Produced a permission matrix across roles to settle where the access-control layer belonged. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and E2E implementation, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.",
-          "impact": "Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows and E2E implementation.",
+          "impact": "Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from discussions to wireframed workflows and E2E implementation.",
           "tech": [
             "FHIR",
             "OMOP",
@@ -485,7 +487,7 @@
           "role": "Research engineer - camera, tooling, pipeline",
           "summary": "Establishing hyperspectral imaging capability from scratch: standing up the camera, learning the domain, and leaving behind a library and pipeline the team could actually use.",
           "problem": "Nobody on the team had used a hyperspectral camera. Captured images came out faint under our lighting, and it was unclear whether that was the room, the calibration procedure, or a misunderstanding of what the data meant.",
-          "approach": "Read the research on hyperspectral imaging for early disease indicators, set up the camera physically with measured positioning, and worked through lighting conditions until images were usable - the breakthrough being that calibration captures had been misread as needing extra brightness. Wrote a helper library on top of the camera SDK providing region-of-interest selection, cleaning and preprocessing for downstream analysis, plus a data-generation pipeline covering feature extraction, brightness extraction, and normalization against a dark reference.",
+          "approach": "Read the research on hyperspectral imaging for early disease indicators, set up the camera physically with measured positioning, and worked through lighting conditions until images were usable - the breakthrough being that calibration captures had been misread as needing extra brightness. Wrote a helper library on top of the camera SDK providing region-of-interest selection, cleaning and preprocessing for downstream analysis, plus a data-generation pipeline covering feature extraction, brightness extraction, and normalization against a white reference.",
           "impact": "Turned an unfamiliar instrument into a documented, repeatable capability - camera setup, helper library, data pipeline and written documentation for teams in other locations.",
           "tech": [
             "Python",
@@ -511,7 +513,7 @@
             },
             {
               "id": "hsi-pipeline",
-              "text": "Built a data-generation pipeline covering feature extraction, brightness extraction and dark-reference normalization",
+              "text": "Built a data-generation pipeline covering feature extraction, brightness extraction and white-reference normalization",
               "metric": false,
               "source": "timesheet:2024-09"
             },
@@ -666,12 +668,6 @@
             "text": "Built the new integrations each additional US state needed to be switched onto the new platform, which is what made those rollouts faster",
             "metric": false,
             "source": "clarified"
-          },
-          {
-            "id": "dl-serverless",
-            "text": "Contributed to the wider migration of a monolithic insurance premium calculation service to AWS serverless",
-            "metric": false,
-            "source": "resume-draft"
           }
         ],
         "tech": [
@@ -777,7 +773,6 @@
   "skills": {
     "languages": [
       "Python",
-      "C++",
       "Java",
       "Kotlin",
       "JavaScript/Node.js",
@@ -785,7 +780,6 @@
     ],
     "backend": [
       "Spring Boot",
-      "Ktor",
       "REST APIs",
       "Server-Sent Events (SSE)",
       "RabbitMQ",

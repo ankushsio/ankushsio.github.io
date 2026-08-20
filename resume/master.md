@@ -48,9 +48,9 @@ Engineering services company. Work is delivered for external clients across heal
 #### Clinical Trial Management Platform
 *Nov 2024 – Present · Clinical research / healthcare · Backend engineer - integration, cloud infrastructure, access control*
 
-A multi-service platform connecting clinical trial study teams and participants to the external systems a trial depends on. My longest-running project and the one where I moved from writing features to shaping design.
+The platform where clinical trial study teams design and run trials and participants take part in them. Integrations feed it what a trial needs from the outside - survey responses, phlebotomy appointments, records from health systems - and the platform is where that information is surfaced and acted on. My longest-running project and the one where I moved from writing features to shaping design.
 
-**Problem.** Trial data lives in systems the platform does not control - survey tools, appointment scheduling services, electronic health records - each exposing different APIs, standards and quirks. Every new data source risked becoming a bespoke integration, and a platform handling patient data needed access control and auditability that could survive scrutiny - neither of which existed when I joined.
+**Problem.** The trials, and the participants taking part in them, live in the platform - but much of what a trial depends on does not. Survey tools, appointment scheduling services and electronic health records each expose different APIs, standards and quirks, so every new source of information risked becoming a bespoke integration. On top of that, a platform holding patient data needed access control and auditability that could survive scrutiny, and neither existed when I joined.
 
 **Approach.** Built the integration hub's base adapter modules so that every new adapter - whichever service it targets - follows one predictable shape, then implemented the first adapter as the reference others were built from. Moved inter-service communication onto managed pub/sub with asynchronous subscriptions, dead-letter handling and retry logic. Wrote infrastructure as code for the cloud APIs, serverless service instances, topics and subscriptions. Designed and implemented role-based access control - identifying admin-only endpoints, filtering responses per role, and adding pre-authorization checks for resources a user cannot reach. Added server-sent events for real-time feedback, hardened authentication, remediated static-analysis findings, and rebuilt the CI/CD pipelines.
 
@@ -83,7 +83,7 @@ A multi-service platform connecting clinical trial study teams and participants 
 - Migrated the GCP sandbox environment onto the client's internal cloud with no loss of service  
   <sub>source: resume-draft</sub>
 
-**Tech:** Java, Spring Boot, Kotlin, Ktor, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, GraalVM, Gradle, Microsoft Entra, JWT
+**Tech:** Java, Spring Boot, Kotlin, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, Gradle, Microsoft Entra, JWT
 
 
 #### AR Surgical Navigation
@@ -93,7 +93,7 @@ A research system reconstructing 3D anatomy from intra-operative video for augme
 
 **Problem.** The reconstruction pipeline wrote intermediate results to disk between every stage, which made it slow and fragile. Worse, a signed distance field computation ran per frame and bottlenecked the entire operation - no amount of tuning elsewhere mattered while it dominated the frame budget.
 
-**Approach.** Read the literature and open-source implementations to understand the geometry properly, then migrated the file-based pipeline to in-memory - which meant understanding every module's inputs and outputs and refactoring the connections between them. For the bottleneck, I worked out that the signed distance field did not need recomputing per frame and devised a technique to compute it once and reuse it. Added multi-inference passes, multi-mesh views, error calculation, and robustness across different input data types.
+**Approach.** Read the literature and open-source implementations to understand the geometry properly, then migrated the file-based pipeline to in-memory - which meant understanding every module's inputs and outputs and refactoring the connections between them. The bottleneck fell to an idea from physics rather than graphics. A signed distance field only has to be rebuilt every frame if you hold the viewer still and let the scene move around it; borrowing the notion of a frame of reference, shifting the perspective so the field is what stays fixed turns it into something computed once and reused for every frame after. Added multi-inference passes, multi-mesh views, error calculation, and robustness across different input data types.
 
 **Outcome.** Removed the dominant per-frame cost, cutting more than 80% of the time it consumed. Onboarded two junior engineers onto the project and led it through a period when senior engineers were unavailable.
 
@@ -101,6 +101,8 @@ A research system reconstructing 3D anatomy from intra-operative video for augme
 
 - Cut end-to-end pipeline latency from 22s to 2s by moving the reconstruction pipeline from file-based I/O to in-memory and eliminating a per-frame signed distance field computation that dominated the frame budget `[metric]`  
   <sub>source: eval:2024-05 + resume-draft</sub>
+- Traced the dominant per-frame cost to the choice of reference frame rather than to the computation itself - borrowing the idea from physics, a shift in perspective turned the signed distance field from a per-frame recomputation into a compute-once quantity  
+  <sub>source: clarified</sub>
 - Refactored module boundaries and data flow across the reconstruction pipeline to make the in-memory migration possible  
   <sub>source: eval:2023-11</sub>
 - Shipped pipeline features weekly - multi-inference passes, multi-mesh views, error calculation, and robust handling of varied input data  
@@ -114,7 +116,7 @@ A research system reconstructing 3D anatomy from intra-operative video for augme
 - Solved perspective and alignment problems in the 3D organ model so reconstructed anatomy rendered correctly against the live view  
   <sub>source: resume-draft</sub>
 
-**Tech:** C++, Python, VTK, 3D meshes & point clouds, Signed distance fields, Neural reconstruction, Computer vision, PyTorch, ONNX, TensorRT
+**Tech:** Python, VTK, 3D meshes & point clouds, Signed distance fields, Neural reconstruction, Computer vision, PyTorch, ONNX, TensorRT
 
 
 #### Headless Video Recording Platform
@@ -122,7 +124,7 @@ A research system reconstructing 3D anatomy from intra-operative video for augme
 
 An Apra Labs network video recorder running headless on edge devices. Built on ApraPipes, the company's open-source video and image processing pipeline framework. I joined when it was unstable and worked on getting it to a dependable state.
 
-**Problem.** The recorder was in an unstable state - segmentation faults in the decoder, unreliable behaviour across edge hardware, and no coherent story for how the C++ core, the web layer and the UI shared state.
+**Problem.** The recorder was in an unstable state - segmentation faults in the decoder, unreliable behaviour across cameras, and no coherent story for how the C++ core, the web layer and the UI shared state.
 
 **Approach.** Refactored the C++ backend and wrote the Node backend from scratch, then made Redis the single source of ground truth connecting them and the frontend. Integrated server-sent events for real-time notifications, which unlocked a set of features that polling could not serve well. Added proper logging across both the C++ and Node sides - which is what finally made the intermittent decoder crashes diagnosable rather than guessable. Debugged segmentation faults in frame decoding and tested aggressively across edge device targets.
 
@@ -141,14 +143,14 @@ An Apra Labs network video recorder running headless on edge devices. Built on A
 - Integrated the previously separate modules with fine-grained control and correct handling of edge cases, with ground truth maintained in Redis  
   <sub>source: eval:2025-05</sub>
 
-**Tech:** C++, Node.js, Redis, hiredis, redis-plus-plus, Server-Sent Events, ApraPipes, NVIDIA Jetson (AGX/NX), Video decoding, OpenCV
+**Tech:** C++, Node.js, Redis, hiredis, redis-plus-plus, Server-Sent Events, ApraPipes, Video decoding, OpenCV
 
 - [ApraPipes (Apra Labs open source, C++)](https://github.com/Apra-Labs/ApraPipes)
 
 #### Document AI / Handwriting Recognition Pipeline
 *May 2025 – Nov 2025 · Applied AI / document processing · Engineer and designer - end-to-end system, owned HLD and LLD*
 
-An end-to-end system turning scanned handwritten documents into structured data, built around a licensed third-party handwriting-recognition model. The first project where I owned both the high- and low-level design.
+An end-to-end system turning scanned handwritten documents into structured data, built around a licensed third-party handwriting-recognition model.
 
 **Problem.** The recognition model came as a large third-party artifact with a time-limited licence. Wrapping it naively would have produced an enormous deployment, coupled our code to someone else's release cycle, and made licence renewal a redeployment emergency.
 
@@ -183,7 +185,7 @@ Current project. A FHIR-native platform for clinical protocols and surveys, mode
 
 **Approach.** Modelled protocols, surveys and their relationships on FHIR resources, using OMOP and LOINC terminology so questions map to recognized clinical codes rather than free text. Implemented change logs purely through FHIR provenance. Built a question bank explorable against the standard terminology. Produced a permission matrix across roles to settle where the access-control layer belonged. Drove requirements directly with the client - turning whiteboard discussions into wireframed workflows and E2E implementation, then iterating on their feedback. Used AI-assisted and agent-orchestrated development throughout for legacy-to-new UI migration and phased implementation, supervising and correcting the output rather than accepting it.
 
-**Outcome.** Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from ambiguous discussions to wireframed workflows and E2E implementation.
+**Outcome.** Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from discussions to wireframed workflows and E2E implementation.
 
 **Highlights**
 
@@ -233,7 +235,7 @@ Establishing hyperspectral imaging capability from scratch: standing up the came
 
 **Problem.** Nobody on the team had used a hyperspectral camera. Captured images came out faint under our lighting, and it was unclear whether that was the room, the calibration procedure, or a misunderstanding of what the data meant.
 
-**Approach.** Read the research on hyperspectral imaging for early disease indicators, set up the camera physically with measured positioning, and worked through lighting conditions until images were usable - the breakthrough being that calibration captures had been misread as needing extra brightness. Wrote a helper library on top of the camera SDK providing region-of-interest selection, cleaning and preprocessing for downstream analysis, plus a data-generation pipeline covering feature extraction, brightness extraction, and normalization against a dark reference.
+**Approach.** Read the research on hyperspectral imaging for early disease indicators, set up the camera physically with measured positioning, and worked through lighting conditions until images were usable - the breakthrough being that calibration captures had been misread as needing extra brightness. Wrote a helper library on top of the camera SDK providing region-of-interest selection, cleaning and preprocessing for downstream analysis, plus a data-generation pipeline covering feature extraction, brightness extraction, and normalization against a white reference.
 
 **Outcome.** Turned an unfamiliar instrument into a documented, repeatable capability - camera setup, helper library, data pipeline and written documentation for teams in other locations.
 
@@ -243,7 +245,7 @@ Establishing hyperspectral imaging capability from scratch: standing up the came
   <sub>source: eval:2025-05</sub>
 - Set up the hyperspectral camera and worked out the lighting and calibration conditions that produced usable captures, then shared the know-how with the team  
   <sub>source: eval:2025-05</sub>
-- Built a data-generation pipeline covering feature extraction, brightness extraction and dark-reference normalization  
+- Built a data-generation pipeline covering feature extraction, brightness extraction and white-reference normalization  
   <sub>source: timesheet:2024-09</sub>
 - Documented the setup and workflow for a team in another location to reproduce  
   <sub>source: timesheet:2024-09</sub>
@@ -297,8 +299,8 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 
 ## Skills
 
-- **Languages:** Python, C++, Java, Kotlin, JavaScript/Node.js, TypeScript
-- **Backend:** Spring Boot, Ktor, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture, Flask
+- **Languages:** Python, Java, Kotlin, JavaScript/Node.js, TypeScript
+- **Backend:** Spring Boot, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture, Flask
 - **Databases:** PostgreSQL, SQL, Redis, Flyway (migrations)
 - **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, AWS (Lambda, Step Functions), Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), Observability (Sentry, Graylog)
 - **Domain:** HL7 FHIR, OMOP, LOINC, Service integration (EHR, surveys, scheduling), Clinical trial systems

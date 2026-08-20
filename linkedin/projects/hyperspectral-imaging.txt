@@ -3,7 +3,7 @@ Hyperspectral Imaging Analysis
 Establishing hyperspectral imaging capability from scratch: standing up the camera, learning the domain, and leaving behind a library and pipeline the team could actually use.
 
 What I did:
-Read the research on hyperspectral imaging for early disease indicators, set up the camera physically with measured positioning, and worked through lighting conditions until images were usable - the breakthrough being that calibration captures had been misread as needing extra brightness. Wrote a helper library on top of the camera SDK providing region-of-interest selection, cleaning and preprocessing for downstream analysis, plus a data-generation pipeline covering feature extraction, brightness extraction, and normalization against a dark reference.
+Read the research on hyperspectral imaging for early disease indicators, set up the camera physically with measured positioning, and worked through lighting conditions until images were usable - the breakthrough being that calibration captures had been misread as needing extra brightness. Wrote a helper library on top of the camera SDK providing region-of-interest selection, cleaning and preprocessing for downstream analysis, plus a data-generation pipeline covering feature extraction, brightness extraction, and normalization against a white reference.
 
 Outcome:
 Turned an unfamiliar instrument into a documented, repeatable capability - camera setup, helper library, data pipeline and written documentation for teams in other locations.

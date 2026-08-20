@@ -8,4 +8,4 @@ Refactored the C++ backend and wrote the Node backend from scratch, then made Re
 Outcome:
 Brought the platform from unstable to a dependable state and integrated the previously disconnected modules into one controllable system with consistent state.
 
-Tech: C++, Node.js, Redis, hiredis, redis-plus-plus, Server-Sent Events, ApraPipes, NVIDIA Jetson (AGX/NX), Video decoding, OpenCV
+Tech: C++, Node.js, Redis, hiredis, redis-plus-plus, Server-Sent Events, ApraPipes, Video decoding, OpenCV
