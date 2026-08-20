@@ -29,8 +29,9 @@ size gets nothing from a utility framework except a build step and a config file
 
 ## 3. Astro, static output, no client-side JS
 
-Ships zero JavaScript. Same static output works on GitHub Pages today and Cloudflare Workers
-later, which is what makes the eventual cutover a DNS change rather than a rebuild.
+Ships zero JavaScript. The same static output runs unchanged on both GitHub Pages and
+Cloudflare Workers, which is what let the move to Workers in §12 be a deploy-target change
+rather than a rebuild — and is why the Pages mirror still works as a fallback.
 
 ## 4. Résumé built with Typst, deliberately in a different typeface from the site
 

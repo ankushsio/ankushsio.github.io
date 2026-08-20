@@ -1,10 +1,10 @@
 # me.entertoescape.com
 
 Personal portfolio and résumé source for Ankush Jain. Built with Astro, deployed to
-GitHub Pages by GitHub Actions on every push to `main`.
+Cloudflare Workers by Workers Builds on every push to `main`.
 
 - **Live:** https://me.entertoescape.com
-- **Mirror:** https://ankushsio.github.io
+- **Mirror:** https://ankushsio.github.io — GitHub Pages, kept fresh as a fallback
 
 ## How this is put together
 
@@ -70,15 +70,22 @@ npm run preview
 
 ## Deployment
 
-Push to `main`. The workflow in `.github/workflows/deploy.yml` runs the privacy gate,
-builds, and deploys to GitHub Pages using OIDC — there are no secrets to manage.
+Push to `main`. Two things happen, both automatic:
 
-The custom domain requires one manual DNS record in Cloudflare:
+- **Cloudflare Workers Builds** runs the privacy gate, builds the site, runs the coverage
+  checks and deploys — this is what serves `me.entertoescape.com`. Config lives in
+  [`wrangler.jsonc`](wrangler.jsonc). Push any other branch and you get a preview URL for
+  that branch instead of a production deploy.
+- **GitHub Actions** (`.github/workflows/deploy.yml`) runs the same checks and refreshes
+  the `ankushsio.github.io` mirror. It is no longer the primary deploy.
 
-| Type | Name | Target | Proxy |
-|---|---|---|---|
-| CNAME | `me` | `ankushsio.github.io` | **DNS only (grey cloud)** |
+Neither needs a secret: Workers Builds uses a dashboard-connected OAuth link, Actions uses
+OIDC and the built-in token.
 
-Proxying breaks GitHub's certificate issuance. It goes back to proxied only if the site
-later moves to Cloudflare Workers, at which point the build output is unchanged and the
-cutover is a DNS change.
+There is **no manual DNS record to add**. `me.entertoescape.com` is attached as a Workers
+custom domain in the Cloudflare dashboard, which creates the proxied record and issues the
+certificate itself. An earlier version of this file told you to add a grey-clouded CNAME to
+`ankushsio.github.io` — that applied only while GitHub Pages served the site and needed
+Let's Encrypt to reach its own servers. Following it now would break the setup.
+
+Visit logging is described in [`analytics/queries.md`](analytics/queries.md).
