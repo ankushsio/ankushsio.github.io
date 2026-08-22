@@ -9,20 +9,28 @@ const prior = career.prior_experience;
 const education = career.education;
 
 /**
- * The web résumé shows EVERY highlight, metric-bearing ones first.
+ * The web résumé shows EVERY highlight — metric-bearing ones lifted into a results
+ * callout, the rest as plain bullets underneath.
  *
  * The one-page PDF is the constrained artifact; this page has unlimited room, so it must
  * never show less than the PDF does. It previously capped at three bullets per project,
- * which made the page with more space carry less detail than the page with none.
+ * which made the page with more space carry less detail than the page with none. The
+ * split below reorders and re-styles; it never drops anything.
  */
-const bulletsFor = (p: (typeof company.projects)[number]) => [
-  ...p.highlights.filter((h) => h.metric),
-  ...p.highlights.filter((h) => !h.metric),
-];
+const metricsFor = (p: (typeof company.projects)[number]) =>
+  p.highlights.filter((h) => h.metric);
+const restFor = (p: (typeof company.projects)[number]) =>
+  p.highlights.filter((h) => !h.metric);
 
 const projects = [...company.projects].sort(
   (a, b) => (b.hours ?? 0) - (a.hours ?? 0)
 );
+
+/**
+ * Every project, prior role and internship carries a `tech` list except the Directi
+ * internship, which has none in the record. Render nothing there rather than invent one.
+ */
+const techOf = (entry: { tech?: string[] }) => (entry.tech ?? []).slice(0, 9);
 
 const skillGroups: [string, string[]][] = [
   ["Languages", career.skills.languages],
@@ -93,25 +101,51 @@ const fmt = periodLong;
 
       {
         projects.map((p) => (
-          <div class="proj">
-            <h4>
-              <a href={`/work/${p.slug}`}>{p.title}</a>
-              <span class="mono when">{fmt(p.period)} · {p.domain}</span>
-            </h4>
-            <ul class="bullets measure">
-              {bulletsFor(p).map((h) => (
-                <li>{h.text}</li>
-              ))}
-            </ul>
+          <div class="proj row">
+            {/* Period, domain and stack all live in the rail so every project block
+                aligns on the same spine, the way the /work index does — and so the
+                column beside a long bullet list is not simply empty. Hours order the
+                list but are deliberately never shown — see CareerTimeline.astro. */}
+            <div class="rail">
+              <div class="mono">{fmt(p.period)}</div>
+              <div class="mono">{p.domain}</div>
+              <ul class="stack">
+                {techOf(p).map((t) => (
+                  <li>{t}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="pbody">
+              <h4>
+                <a href={`/work/${p.slug}`}>{p.title}</a>
+              </h4>
+              {metricsFor(p).length > 0 && (
+                <ul class="results">
+                  {metricsFor(p).map((h) => (
+                    <li>{h.text}</li>
+                  ))}
+                </ul>
+              )}
+              {restFor(p).length > 0 && (
+                <ul class="bullets measure">
+                  {restFor(p).map((h) => (
+                    <li>{h.text}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         ))
       }
 
-      <div class="proj">
-        <h4>Across projects</h4>
-        <ul class="bullets measure">
-          {company.cross_project_highlights.map((h) => <li>{h.text}</li>)}
-        </ul>
+      <div class="proj row">
+        <div class="rail"></div>
+        <div class="pbody">
+          <h4>Across projects</h4>
+          <ul class="bullets measure">
+            {company.cross_project_highlights.map((h) => <li>{h.text}</li>)}
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -129,63 +163,71 @@ const fmt = periodLong;
             </li>
           </ul>
           {job.summary && <p class="measure job-note">{job.summary}</p>}
-          <ul class="bullets measure">
-            {job.highlights.map((h) => (
-              <li>{h.text}</li>
-            ))}
-          </ul>
+          {/* The dates and location already sit in the head above, so the rail carries
+              just the stack — on the same spine as every project. */}
+          <div class="row">
+            <div class="rail">
+              {techOf(job).length > 0 && (
+                <ul class="stack">
+                  {techOf(job).map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div class="pbody">
+              <ul class="bullets measure">
+                {job.highlights.map((h) => (
+                  <li>{h.text}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       ))
     }
 
     {
       prior.internships.length > 0 && (
-        <div class="job">
+        <div class="job interns">
           <div class="job-head">
             <h3>Internships</h3>
             <span class="mono">2019 — 2021</span>
           </div>
           {prior.internships.map((job) => (
-            <div class="proj">
-              <h4>
-                {job.role}, {job.company}
-                <span class="mono when">{job.dates}</span>
-              </h4>
-              {/* The summary describes the problem space; highlights claim work done in
-                  it. An internship can legitimately have the first without the second,
-                  so render the summary rather than leaving an empty bullet list. */}
-              {job.summary && <p class="measure intern-summary">{job.summary}</p>}
-              {job.highlights.length > 0 && (
-                <ul class="bullets measure">
-                  {job.highlights.map((h) => (
-                    <li>{h.text}</li>
-                  ))}
-                </ul>
-              )}
+            <div class="proj row">
+              <div class="rail">
+                <div class="mono">{job.dates}</div>
+                {techOf(job).length > 0 && (
+                  <ul class="stack">
+                    {techOf(job).map((t) => (
+                      <li>{t}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div class="pbody">
+                <h4>
+                  {job.role}, {job.company}
+                </h4>
+                {/* The summary describes the problem space; highlights claim work done in
+                    it. An internship can legitimately have the first without the second,
+                    so render the summary rather than leaving an empty bullet list. */}
+                {job.summary && <p class="measure intern-summary">{job.summary}</p>}
+                {job.highlights.length > 0 && (
+                  <ul class="bullets measure">
+                    {job.highlights.map((h) => (
+                      <li>{h.text}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           ))}
         </div>
       )
     }
   </section>
-
-  {
-    career.achievements.length > 0 && (
-      <section class="section">
-        <div class="sec-head">
-          <h2>Achievements</h2>
-          <span class="fill" />
-        </div>
-        <ul class="bullets measure">
-          {career.achievements.map((a) => (
-            <li>
-              {a.text} <span class="mono year">{a.year}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )
-  }
 
   <section class="section">
     <div class="sec-head"><h2>Skills</h2><span class="fill"></span></div>
@@ -201,16 +243,37 @@ const fmt = periodLong;
     </dl>
   </section>
 
-  <section class="section">
-    <div class="sec-head"><h2>Education</h2><span class="fill"></span></div>
+  {/* Two short sections side by side rather than two more full-width bands — it closes
+      the page on a different layout instead of a ninth stack of bullets. */}
+  <section class="section two-up">
     {
-      education.map((e) => (
-        <div class="job-head edu">
-          <h3>{e.institution}</h3>
-          <span class="mono">{e.degree} · {e.dates}</span>
+      career.achievements.length > 0 && (
+        <div>
+          <div class="sec-head">
+            <h2>Achievements</h2>
+            <span class="fill" />
+          </div>
+          <ul class="bullets">
+            {career.achievements.map((a) => (
+              <li>
+                {a.text} <span class="mono year">{a.year}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-      ))
+      )
     }
+    <div>
+      <div class="sec-head"><h2>Education</h2><span class="fill"></span></div>
+      {
+        education.map((e) => (
+          <div class="job-head edu">
+            <h3>{e.institution}</h3>
+            <span class="mono">{e.degree} · {e.dates}</span>
+          </div>
+        ))
+      }
+    </div>
   </section>
 </Base>
 
@@ -241,6 +304,57 @@ const fmt = periodLong;
     color: var(--muted);
     font-size: 0.94rem;
     margin: 0;
+  }
+
+  /* --- the spine ------------------------------------------------------ */
+
+  /* Same two-column measure as the /work index, so a reader moving between the two
+     pages sees one layout rather than two — a little wider here, because this rail
+     carries the stack as well as the dates. */
+  .row {
+    display: grid;
+    grid-template-columns: 176px 1fr;
+    gap: 30px;
+  }
+  .rail {
+    padding-top: 7px;
+  }
+  .rail div + div {
+    margin-top: 6px;
+  }
+  /* Stacked rather than a band under the bullets: it fills a column that would
+     otherwise sit empty beside eleven bullets, and costs the page no height. */
+  .rail .stack {
+    margin-top: 14px;
+    gap: 5px;
+  }
+  .rail .stack li {
+    max-width: 100%;
+  }
+  /* A rail carrying only a stack has no dates above it to clear. */
+  .rail .stack:first-child {
+    margin-top: 0;
+  }
+
+  /* --- measured results ------------------------------------------------ */
+
+  /* The .result treatment from global.css, widened to hold a project's several
+     metrics in one callout instead of several stacked boxes. */
+  .results {
+    list-style: none;
+    margin: 0 0 15px;
+    padding: 11px 16px;
+    border-left: 2px solid var(--gain);
+    background: var(--gain-wash);
+    max-width: var(--measure);
+  }
+  .results li {
+    color: var(--gain);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .results li + li {
+    margin-top: 9px;
   }
 
   /* Same affordance as the work pages: a link has to look like one before hover. */
@@ -278,13 +392,17 @@ const fmt = periodLong;
     border-bottom: 0;
     margin-bottom: 0;
   }
+  /* The company scale is too wide for a half-width column. */
+  .edu h3 {
+    font-size: 1.24rem;
+  }
 
   .year {
     margin-left: 6px;
   }
 
   .job {
-    margin-bottom: 34px;
+    margin-bottom: 40px;
   }
   .job-head {
     display: flex;
@@ -297,13 +415,13 @@ const fmt = periodLong;
     margin-bottom: 14px;
   }
   .job-head h3 {
-    font-size: 1.32rem;
+    font-size: 1.7rem;
     font-weight: 600;
     margin: 0;
   }
   .roles {
     list-style: none;
-    margin: 0 0 14px;
+    margin: 0 0 10px;
     padding: 0;
   }
   .roles li {
@@ -323,26 +441,59 @@ const fmt = periodLong;
 
   .job-note {
     color: var(--muted);
-    margin: 0 0 22px;
+    margin: 0 0 16px;
   }
   .pending .job-note {
     font-style: italic;
   }
 
+  /* More air between projects than within one, so each block reads as a block. */
   .proj {
-    margin-bottom: 22px;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 20px;
+    margin-bottom: 32px;
+  }
+  /* Bullets sit closer together than blocks do, so proximity does the grouping. */
+  .bullets li {
+    margin-bottom: 7px;
+  }
+  .proj:last-child {
+    margin-bottom: 0;
   }
   .proj h4 {
-    font-size: 1.06rem;
+    font-size: 1.28rem;
     font-weight: 600;
-    margin: 0 0 8px;
-    display: flex;
-    gap: 12px;
-    align-items: baseline;
-    flex-wrap: wrap;
+    margin: 0 0 12px;
   }
-  .when {
-    font-weight: 400;
+
+  /* Three entries of one line each, from six and seven years ago. They get the same
+     structure as a project at a smaller scale, so they read as the tail of the record
+     rather than a fourth job competing with it. */
+  .interns {
+    margin-bottom: 0;
+  }
+  .interns .proj {
+    padding-top: 13px;
+    margin-bottom: 14px;
+  }
+  .interns .proj h4 {
+    font-size: 1.06rem;
+    margin-bottom: 4px;
+  }
+  .interns .intern-summary {
+    margin: 0;
+  }
+  .interns .bullets {
+    margin-top: 5px;
+  }
+  .interns .bullets li {
+    margin-bottom: 4px;
+  }
+  .interns .rail {
+    padding-top: 4px;
+  }
+  .interns .rail .stack {
+    margin-top: 8px;
   }
 
   .skills > div {
@@ -362,10 +513,50 @@ const fmt = periodLong;
     margin: 0;
   }
 
+  /* Page-local: five sections at the global 58px rhythm is a lot of air on the one
+     page that is already the longest on the site. */
+  .section {
+    padding: 46px 0;
+  }
+
+  .two-up {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
   @media (max-width: 700px) {
     .skills > div {
       grid-template-columns: 1fr;
       gap: 4px;
+    }
+    /* Collapsed, the rail's contents have to split around the body: the dates read as
+       a kicker above the title, but a stack of nine chips before the reader knows which
+       project they belong to does not. Dissolving the rail promotes its children to
+       flex items so they can be ordered independently — and an empty rail then
+       contributes nothing, instead of an extra gap. */
+    .row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .rail {
+      display: contents;
+    }
+    .rail > .mono {
+      order: 1;
+      margin-top: 0;
+    }
+    .pbody {
+      order: 2;
+    }
+    .rail > .stack {
+      order: 3;
+      margin-top: 0;
+    }
+    .two-up {
+      grid-template-columns: 1fr;
+      gap: 40px;
     }
   }
 

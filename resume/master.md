@@ -141,7 +141,7 @@ An Apra Labs network video recorder running headless on edge devices. Built on A
 - Integrated the previously separate modules with fine-grained control and correct handling of edge cases, with ground truth maintained in Redis  
   <sub>source: eval:2025-05</sub>
 
-**Tech:** C++, Node.js, Redis, hiredis, redis-plus-plus, Server-Sent Events, ApraPipes, Video decoding, OpenCV
+**Tech:** C++, Node.js, Redis, redis-plus-plus, Server-Sent Events, ApraPipes, Video decoding, OpenCV
 
 - [ApraPipes (Apra Labs open source, C++)](https://github.com/Apra-Labs/ApraPipes)
 

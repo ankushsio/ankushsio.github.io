@@ -250,7 +250,6 @@
             "C++",
             "Node.js",
             "Redis",
-            "hiredis",
             "redis-plus-plus",
             "Server-Sent Events",
             "ApraPipes",
@@ -724,6 +723,9 @@
             "metric": false,
             "source": "linkedin"
           }
+        ],
+        "tech": [
+          "Pedagogy"
         ]
       }
     ]
