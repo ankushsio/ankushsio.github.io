@@ -855,19 +855,5 @@
         }
       ]
     }
-  ],
-  "personal_sketches": [
-    {
-      "slug": "gift-wrapping",
-      "title": "Gift wrapping",
-      "editor_id": "dD7ueHr9U",
-      "blurb": "Jarvis march finding the convex hull of 40 random points. It tests one candidate per frame, so you watch the pivot swing around the boundary rather than see the answer appear."
-    },
-    {
-      "slug": "prim-mst",
-      "title": "Prim's minimum spanning tree",
-      "editor_id": "HMaIFKp3s",
-      "blurb": "Grows a tree from a single vertex, each step taking the shortest edge to a vertex it has not reached yet. Click anywhere to add a point and it rebuilds around it."
-    }
   ]
 }
