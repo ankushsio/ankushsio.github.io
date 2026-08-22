@@ -30,7 +30,7 @@
       "Applied research into production - computer vision, signal processing, OCR",
       "Design ownership - high- and low-level design, and the client conversations that shape it"
     ],
-    "seeking": "A role with real ownership and systems depth, at a company worth staying at for years. Domain-agnostic: the systems problems travel.",
+    "seeking": "A role with real ownership and systems depth. Domain-agnostic: the systems problems travel.",
     "arc": "One thread runs the whole way through: taking applied research into production - machinery nameplate OCR in 2021, a handwriting-recognition system in 2025, signal processing and spectral imaging in between. The other is that most of it happened in regulated, high-consequence settings, which is where the habits around access control, auditability and delivery discipline come from.",
     "_domain_note": "Most of this work happened in regulated, high-consequence settings. That is where the habits came from - access control, auditability, delivery discipline - not a specialisation I am looking to continue."
   },
@@ -583,11 +583,6 @@
           "id": "x-reviews",
           "text": "Regular code, design and pair-review contributor across teams, including for projects outside my own",
           "source": "eval:2026-04"
-        },
-        {
-          "id": "x-techmeet",
-          "text": "Presented internal tech talks, including one on federated learning",
-          "source": "eval:2025-05"
         }
       ],
       "location": "Bengaluru, India",
@@ -713,7 +708,7 @@
         "highlights": [
           {
             "id": "innovaccer-ds",
-            "text": "Data science work on healthcare data analytics, building the domain context the later platform work drew on",
+            "text": "Data science work on healthcare data analytics",
             "metric": false,
             "source": "clarified"
           }

@@ -26,7 +26,7 @@ Senior software engineer with five years on distributed backends where correctne
 
 - **Level:** senior software engineer
 - **Experience:** ~5 years (graduated 2021)
-- **Seeking:** A role with real ownership and systems depth, at a company worth staying at for years. Domain-agnostic: the systems problems travel.
+- **Seeking:** A role with real ownership and systems depth. Domain-agnostic: the systems problems travel.
 
 **Themes:**
 
@@ -284,8 +284,6 @@ My first project. Migrating a command protocol off protobuf and hardening how th
   <sub>source: eval:2026-04</sub>
 - Regular code, design and pair-review contributor across teams, including for projects outside my own  
   <sub>source: eval:2026-04</sub>
-- Presented internal tech talks, including one on federated learning  
-  <sub>source: eval:2025-05</sub>
 
 ### Earlier roles
 
