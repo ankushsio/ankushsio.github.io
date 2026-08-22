@@ -90,7 +90,23 @@ def required(career: dict) -> list[tuple[str, str]]:
     for p in career.get("personal_projects", []):
         items.append(("personal project", p["title"]))
 
+
     return items
+
+
+def published(path: Path) -> str:
+    """A page's readable content, including the parts that live in attributes.
+
+    normalise() strips whole tags, so anything inside an attribute disappears with the
+    markup around it. That hid a whole class of published text: meta descriptions are
+    what a search snippet and a link unfurl display, and aria-label and alt carry the
+    only description a screen reader ever gets of the architecture diagrams. Appending
+    those values makes them checkable alongside body copy.
+    """
+    raw = path.read_text(encoding="utf-8", errors="ignore")
+    attrs = " ".join(
+        m.group(1) for m in re.finditer(r'(?:content|aria-label|alt)="([^"]*)"', raw))
+    return raw + "\n" + attrs
 
 
 def main() -> int:
@@ -102,8 +118,7 @@ def main() -> int:
     if not pages:
         sys.exit(f"ERROR: no HTML found under {DIST}")
 
-    haystack = normalise(
-        "\n".join(p.read_text(encoding="utf-8", errors="ignore") for p in pages))
+    haystack = normalise("\n".join(published(p) for p in pages))
 
     missing = [
         (label, needle) for label, needle in required(career)

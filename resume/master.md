@@ -80,8 +80,6 @@ The platform where clinical trial study teams design and run trials and particip
   <sub>source: eval:2026-04</sub>
 - Mapped business entitlements into an enterprise identity flow federated with Microsoft Entra, enforcing endpoint security and data-level response filtering through JWT claims  
   <sub>source: resume-draft</sub>
-- Migrated the GCP sandbox environment onto the client's internal cloud with no loss of service  
-  <sub>source: resume-draft</sub>
 
 **Tech:** Java, Spring Boot, Kotlin, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, Gradle, Microsoft Entra, JWT
 
@@ -105,9 +103,9 @@ A research system reconstructing 3D anatomy from intra-operative video for augme
   <sub>source: clarified</sub>
 - Refactored module boundaries and data flow across the reconstruction pipeline to make the in-memory migration possible  
   <sub>source: eval:2023-11</sub>
-- Shipped pipeline features weekly - multi-inference passes, multi-mesh views, error calculation, and robust handling of varied input data  
+- Shipped pipeline features - multi-inference passes, multi-mesh views, error calculation, and robust handling of varied input data  
   <sub>source: eval:2023-11</sub>
-- Onboarded two junior engineers and led the project through a stretch when senior engineers were unavailable, having become its most familiar contributor  
+- Onboarded two junior engineers and led the project through a stretch when tech leads were unavailable, having become its most familiar contributor  
   <sub>source: eval:2024-05</sub>
 - Brought graphics and geometry knowledge into a team new to it, sharing VTK and 3D fundamentals through internal brainstorming sessions  
   <sub>source: eval:2023-11</sub>
@@ -132,7 +130,7 @@ An Apra Labs network video recorder running headless on edge devices. Built on A
 
 **Highlights**
 
-- Took the recorder from an unstable state to a dependable one, debugging intermittent segmentation faults in frame decoding across edge hardware  
+- Took the recorder from an unstable state to a dependable one, debugging intermittent segmentation faults in frame decoding  
   <sub>source: eval:2024-05</sub>
 - Wrote the Node backend from scratch, managing the lifecycle of the C++ binaries and carrying inter-process communication over Redis key-value and Pub/Sub, so the whole system shared one source of truth  
   <sub>source: eval:2025-05</sub>
@@ -193,8 +191,6 @@ Current project. A FHIR-native platform for clinical protocols and surveys, mode
   <sub>source: timesheet:2026-06</sub>
 - Built a question bank letting users explore questions against standard clinical terminology instead of free-text entry  
   <sub>source: timesheet:2026-06</sub>
-- Produced a permission matrix across roles to determine the correct layer for access control  
-  <sub>source: timesheet:2026-07</sub>
 - Drove requirements with the client directly - converting whiteboard sessions and slide feedback into wireframed workflows and E2E implementation  
   <sub>source: timesheet:2026-07</sub>
 - Used AI-assisted and agent-orchestrated development for legacy-to-new migration and phased delivery, supervising and correcting output rather than accepting it  
@@ -276,7 +272,7 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 
 #### Across projects
 
-- Onboarded and mentored junior engineers across multiple projects, and served as a tech buddy for new joiners  
+- Onboarded and mentored junior engineers across multiple projects  
   <sub>source: eval:2026-04</sub>
 - Conducted technical interviews for the company  
   <sub>source: eval:2025-11</sub>
@@ -297,8 +293,8 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 
 ## Skills
 
-- **Languages:** Python, Java, Kotlin, JavaScript/Node.js, TypeScript
-- **Backend:** Spring Boot, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture, Flask
+- **Languages:** Python, Java, Kotlin, JavaScript, TypeScript
+- **Backend:** Spring Boot, Node.js, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture
 - **Databases:** PostgreSQL, SQL, Redis, Flyway (migrations)
 - **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, AWS (Lambda, Step Functions), Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), Observability (Sentry, Graylog)
 - **Domain:** HL7 FHIR, OMOP, LOINC, Service integration (EHR, surveys, scheduling), Clinical trial systems

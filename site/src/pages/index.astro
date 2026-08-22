@@ -10,7 +10,7 @@ const featured = company.projects.filter((p) => p.featured).slice(0, 3);
 
 <Base
   title="Backend Engineer"
-  description="Senior backend engineer with five years on distributed systems, service integration, access control and applied ML. Currently at Apra Labs."
+  description={`${career.person.name} — ${career.positioning.level}, five years on ${career.positioning.descriptor}. Currently at ${career.companies[0].name}.`}
   path="/"
 >
   <div class="hero">

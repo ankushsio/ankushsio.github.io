@@ -21,6 +21,7 @@
   },
   "positioning": {
     "level": "senior software engineer",
+    "descriptor": "distributed backends, service integration, access control and applied ML",
     "years_experience": 5,
     "graduated": 2021,
     "themes": [
@@ -31,7 +32,7 @@
       "Design ownership - high- and low-level design, and the client conversations that shape it"
     ],
     "seeking": "A role with real ownership and systems depth. Domain-agnostic: the systems problems travel.",
-    "arc": "One thread runs the whole way through: taking applied research into production - machinery nameplate OCR in 2021, a handwriting-recognition system in 2025, signal processing and spectral imaging in between. The other is that most of it happened in regulated, high-consequence settings, which is where the habits around access control, auditability and delivery discipline come from.",
+    "arc": "One thread keeps recurring: taking applied research into production - signal processing on retinal video, 3D reconstruction for surgical guidance, hyperspectral imaging, and a handwriting-recognition system built around a licensed model. The other is that most of it happened in regulated, high-consequence settings, which is where the habits around access control, auditability and delivery discipline come from.",
     "_domain_note": "Most of this work happened in regulated, high-consequence settings. That is where the habits came from - access control, auditability, delivery discipline - not a specialisation I am looking to continue."
   },
   "companies": [
@@ -148,12 +149,6 @@
               "text": "Mapped business entitlements into an enterprise identity flow federated with Microsoft Entra, enforcing endpoint security and data-level response filtering through JWT claims",
               "metric": false,
               "source": "resume-draft"
-            },
-            {
-              "id": "ctp-migration",
-              "text": "Migrated the GCP sandbox environment onto the client's internal cloud with no loss of service",
-              "metric": false,
-              "source": "resume-draft"
             }
           ]
         },
@@ -205,13 +200,13 @@
             },
             {
               "id": "ars-features",
-              "text": "Shipped pipeline features weekly - multi-inference passes, multi-mesh views, error calculation, and robust handling of varied input data",
+              "text": "Shipped pipeline features - multi-inference passes, multi-mesh views, error calculation, and robust handling of varied input data",
               "metric": false,
               "source": "eval:2023-11"
             },
             {
               "id": "ars-onboard",
-              "text": "Onboarded two junior engineers and led the project through a stretch when senior engineers were unavailable, having become its most familiar contributor",
+              "text": "Onboarded two junior engineers and led the project through a stretch when tech leads were unavailable, having become its most familiar contributor",
               "metric": false,
               "source": "eval:2024-05"
             },
@@ -272,7 +267,7 @@
           "highlights": [
             {
               "id": "nvr-stability",
-              "text": "Took the recorder from an unstable state to a dependable one, debugging intermittent segmentation faults in frame decoding across edge hardware",
+              "text": "Took the recorder from an unstable state to a dependable one, debugging intermittent segmentation faults in frame decoding",
               "metric": false,
               "source": "eval:2024-05"
             },
@@ -403,12 +398,6 @@
               "text": "Built a question bank letting users explore questions against standard clinical terminology instead of free-text entry",
               "metric": false,
               "source": "timesheet:2026-06"
-            },
-            {
-              "id": "rm-rbac",
-              "text": "Produced a permission matrix across roles to determine the correct layer for access control",
-              "metric": false,
-              "source": "timesheet:2026-07"
             },
             {
               "id": "rm-requirements",
@@ -566,7 +555,7 @@
       "cross_project_highlights": [
         {
           "id": "x-mentor",
-          "text": "Onboarded and mentored junior engineers across multiple projects, and served as a tech buddy for new joiners",
+          "text": "Onboarded and mentored junior engineers across multiple projects",
           "source": "eval:2026-04"
         },
         {
@@ -770,17 +759,17 @@
       "Python",
       "Java",
       "Kotlin",
-      "JavaScript/Node.js",
+      "JavaScript",
       "TypeScript"
     ],
     "backend": [
       "Spring Boot",
+      "Node.js",
       "REST APIs",
       "Server-Sent Events (SSE)",
       "RabbitMQ",
       "Google Cloud Pub/Sub",
-      "Event-driven architecture",
-      "Flask"
+      "Event-driven architecture"
     ],
     "databases": [
       "PostgreSQL",
@@ -865,6 +854,20 @@
           "url": "https://github.com/ankushsio/entertoescape"
         }
       ]
+    }
+  ],
+  "personal_sketches": [
+    {
+      "slug": "gift-wrapping",
+      "title": "Gift wrapping",
+      "editor_id": "dD7ueHr9U",
+      "blurb": "Jarvis march finding the convex hull of 40 random points. It tests one candidate per frame, so you watch the pivot swing around the boundary rather than see the answer appear."
+    },
+    {
+      "slug": "prim-mst",
+      "title": "Prim's minimum spanning tree",
+      "editor_id": "HMaIFKp3s",
+      "blurb": "Grows a tree from a single vertex, each step taking the shortest edge to a vertex it has not reached yet. Click anywhere to add a point and it rebuilds around it."
     }
   ]
 }

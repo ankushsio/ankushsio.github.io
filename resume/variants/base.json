@@ -102,7 +102,7 @@
         "Python",
         "Java",
         "Kotlin",
-        "TypeScript/Node.js",
+        "TypeScript",
         "SQL"
       ]
     },
@@ -110,6 +110,7 @@
       "label": "Backend & data",
       "items": [
         "Spring Boot",
+        "Node.js",
         "REST",
         "Server-Sent Events",
         "RabbitMQ",

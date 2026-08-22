@@ -40,7 +40,7 @@ const fmt = periodLong;
 
 <Base
   title="Résumé"
-  description="Ankush Jain's résumé — senior backend engineer, five years on distributed systems, service integration, access control and applied ML."
+  description={`${career.person.name}'s résumé — ${career.positioning.level}, five years on ${career.positioning.descriptor}.`}
   path="/resume"
 >
   <section class="section">
@@ -151,11 +151,17 @@ const fmt = periodLong;
                 {job.role}, {job.company}
                 <span class="mono when">{job.dates}</span>
               </h4>
-              <ul class="bullets measure">
-                {job.highlights.map((h) => (
-                  <li>{h.text}</li>
-                ))}
-              </ul>
+              {/* The summary describes the problem space; highlights claim work done in
+                  it. An internship can legitimately have the first without the second,
+                  so render the summary rather than leaving an empty bullet list. */}
+              {job.summary && <p class="measure intern-summary">{job.summary}</p>}
+              {job.highlights.length > 0 && (
+                <ul class="bullets measure">
+                  {job.highlights.map((h) => (
+                    <li>{h.text}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
@@ -361,5 +367,10 @@ const fmt = periodLong;
       grid-template-columns: 1fr;
       gap: 4px;
     }
+  }
+
+  .intern-summary {
+    color: var(--muted);
+    margin: 4px 0 0;
   }
 </style>
