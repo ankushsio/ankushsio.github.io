@@ -10,21 +10,34 @@
       "bullets": [
         {
           "id": "ctp-adapters",
-          "text": "Built the integration hub's base adapter modules, turning each new integration from a bespoke build into a repeatable pattern"
+          "text": "Built the integration hub's base adapter modules, turning every new integration from a bespoke build into a pattern"
         },
         {
           "id": "ctp-rbac",
-          "text": "Designed and shipped a full RBAC system: admin-only endpoint restriction, per-role response filtering and pre-authorization checks"
+          "text": "Designed and shipped a full RBAC system: admin-only endpoints, per-role response filtering and pre-authorization checks"
         },
         {
-          "id": "ctp-entra"
+          "id": "ctp-entra",
+          "text": "Mapped business entitlements onto Microsoft Entra identity, enforcing endpoint and data-level access through JWT claims"
+        },
+        {
+          "id": "ctp-security",
+          "text": "Remediated static-analysis security findings and led a security overhaul separating study-team and participant concerns"
+        },
+        {
+          "id": "ctp-sse"
         },
         {
           "id": "ctp-deploy",
           "text": "Cut the backend deploy pipeline from 26m33s to 18m07s (-32%)"
         },
         {
-          "id": "ctp-cost"
+          "id": "ctp-image",
+          "text": "Reduced a service container image from 450 MB to 290 MB (-36%) by eliminating unneeded dependencies"
+        },
+        {
+          "id": "ctp-cost",
+          "text": "Eliminated $200+/month (~$2.4k/year) of idle cloud spend by decommissioning legacy services, then added a billing review"
         }
       ]
     },
@@ -34,10 +47,11 @@
       "bullets": [
         {
           "id": "rm-fhir",
-          "text": "Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC terminology; implemented change logs via FHIR provenance"
+          "text": "Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC terminology; change logs via FHIR provenance"
         },
         {
-          "id": "rm-requirements"
+          "id": "rm-requirements",
+          "text": "Drove requirements directly with the client, turning whiteboard sessions into wireframed workflows and E2E implementation"
         }
       ]
     },
@@ -50,7 +64,11 @@
           "text": "Cut the deployable image from 19 GB to 5.28 GB (-72%) through packaging design"
         },
         {
-          "id": "p2p-license"
+          "id": "p2p-license",
+          "text": "Designed the codebase so the third-party model ships with the system and its licence swaps on expiry without a rebuild"
+        },
+        {
+          "id": "p2p-mentor"
         }
       ]
     },
@@ -72,6 +90,10 @@
         },
         {
           "id": "ars-onnx"
+        },
+        {
+          "id": "ars-onboard",
+          "text": "Onboarded two junior engineers and led the project through a stretch when tech leads were unavailable"
         }
       ]
     }
@@ -92,7 +114,8 @@
       "bl-mathsteps"
     ],
     "Deloitte USI": [
-      "dl-statemachine"
+      "dl-statemachine",
+      "dl-rollout"
     ]
   },
   "skill_rows": [
@@ -117,7 +140,6 @@
         "GCP Pub/Sub",
         "PostgreSQL",
         "Redis",
-        "Event-driven architecture",
         "HL7 FHIR"
       ]
     },
@@ -155,6 +177,8 @@
   ],
   "prior_text": {
     "bl-observability": "Built out monitoring and log management: Graylog for structured logging, Sentry APM across the Flask and Node.js services",
-    "bl-mathsteps": "Core maintainer of the open-source mathsteps library; added complex expression support and improved parsing accuracy"
+    "bl-mathsteps": "Core maintainer of the open-source mathsteps library; added complex expression support and improved parsing accuracy",
+    "dl-statemachine": "Extended the integration layer of an AWS Step Functions state machine, building the API calls and Lambda functions behind it",
+    "dl-rollout": "Built the integrations each additional US state needed to move onto the new platform, which made the rollouts faster"
   }
 }

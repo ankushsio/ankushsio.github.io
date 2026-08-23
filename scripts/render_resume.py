@@ -210,6 +210,14 @@ def build_data(career: dict, variant: dict, tag: str = "cv") -> dict:
     education = career.get("education", {})
     education_rows = education if isinstance(education, list) else []
 
+    # Achievements render verbatim from career.json. Unlike a bullet there is no id to
+    # anchor a reworded version to, so a variant may only opt out -- "achievements":
+    # false, for a tailored copy that needs the two lines back -- never restate them.
+    achievements = []
+    if variant.get("achievements", True):
+        achievements = [f"{a['text']} ({a['year']})"
+                        for a in career.get("achievements", [])]
+
     return {
         "name": person["name"],
         "title": variant.get("target_role", person["title"]),
@@ -218,6 +226,7 @@ def build_data(career: dict, variant: dict, tag: str = "cv") -> dict:
         "experience": experience,
         "skills": skills,
         "education": education_rows,
+        "achievements": achievements,
     }
 
 

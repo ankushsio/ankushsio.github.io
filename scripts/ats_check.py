@@ -44,6 +44,23 @@ including include includes across within while also well across per via etc
 TECH_HINT = re.compile(
     r"^[a-z0-9][a-z0-9+#./_-]{1,}$", re.I)
 
+# lowercase immediately followed by an uppercase letter, inside a single token.
+GLUED = re.compile(r"^[A-Za-z]*[a-z]{2}[A-Z][a-z]{2}[A-Za-z]*$")
+
+# Legitimate internal capitals. Camel-cased product and library names are normal on a
+# resume, so the check needs an allowlist or it fires on every one of them.
+#
+# This is the maintenance cost of the check: a new camel-cased tool shows up as a FAIL
+# until it is added here. That is the right way round -- a false positive is one word in
+# this list, a false negative is a resume that silently stops matching a keyword search.
+# Every camel-cased term currently in content/career.json is covered.
+GLUED_OK = frozenset("""
+ByteLearn PostgreSQL TypeScript JavaScript GitHub LinkedIn PyTorch TensorRT RabbitMQ
+ApraPipes MongoDB GraphQL OpenCV NumPy SciPy TensorFlow OpenAPI WebSocket WebSockets
+DevOps GitLab OAuth MySQL SQLite DynamoDB CloudRun CodeChef FastAPI SpringBoot
+NodeJS DataFrame GraphViz PowerShell OpenShift JupyterLab
+""".split())
+
 
 def extract_text(pdf: Path) -> tuple[str, int]:
     from pypdf import PdfReader
@@ -86,6 +103,21 @@ def lint(text: str, pages: int, limit: int) -> list[str]:
     if "�" in text:
         problems.append("replacement characters present — font encoding is not "
                         "extracting cleanly")
+
+    # Two words fused into one token, e.g. "PresentSoftware". This is what a layout
+    # collision looks like in the TEXT layer: when two lines overlap, the PDF can emit
+    # them with no separator, and a recruiter's keyword search for the second word then
+    # misses that occurrence entirely. It is invisible on screen and invisible to every
+    # other check here -- the page still looks like one column with clean headings.
+    # Caught once for real: -0.55em of negative leading collapsed the two role rows of
+    # a promotion and shipped "May 2026 - PresentSoftware Engineer".
+    glued = [w for w in re.findall(r"[A-Za-z]{4,}", text)
+             if GLUED.match(w) and w not in GLUED_OK]
+    if glued:
+        problems.append(
+            f"words fused together in the extracted text: "
+            f"{', '.join(sorted(set(glued))[:5])} — two lines are probably overlapping, "
+            f"so a keyword search will not match the second word")
 
     if re.search(r"TODO", text):
         problems.append("placeholder 'TODO' text is still in the document")

@@ -78,18 +78,25 @@
     #v(-0.30em)
     // One row per title. Where a promotion happened this shows both, dated, so the
     // progression is visible rather than just the latest label.
-    #for r in job.roles [
+    //
+    // The negative space goes BEFORE each row after the first. Applied after every
+    // row it also lands between them, and -0.55em against 0.58em of paragraph
+    // spacing left ~0.03em of leading -- with one role that is invisible, with the
+    // two rows of a promotion they collide and the date dashes cut through the line
+    // above. Keep this tied to the gap it is closing.
+    #for (i, r) in job.roles.enumerate() [
+      #if i > 0 [ #v(-0.42em) ]
       #grid(
         columns: (1fr, auto),
         align: (left, right),
         text(size: 10.2pt, style: "italic")[#r.title],
         text(size: 9.4pt, fill: rgb("#444444"))[#r.dates],
       )
-      #v(-0.55em)
     ]
-    #v(0.30em)
+    // No #linebreak() here: the note already starts a new paragraph, so a break on
+    // top of it opened the largest gap on the page for no reason.
     #if job.note != "" [
-      #linebreak()
+      #v(0.24em)
       #text(size: 9.5pt, fill: rgb("#444444"))[#job.note]
     ]
   ]
@@ -134,4 +141,13 @@
       text(size: 9.8pt)[#e.dates],
     )
   ]
+]
+
+// --- achievements -----------------------------------------------------------
+
+// One joined paragraph, not a row per item: three awards as three lines would spend
+// more of the page on labels than on the awards.
+#if data.achievements.len() > 0 [
+  #section("Achievements")
+  #data.achievements.join("; ")
 ]
