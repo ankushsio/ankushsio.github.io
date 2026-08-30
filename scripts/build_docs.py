@@ -143,8 +143,11 @@ def master_resume(c: dict) -> str:
 # ------------------------------------------------------------------- linkedin
 
 def linkedin_headline(c: dict) -> str:
+    # Tech stays left of the mentoring clause: it is the primary filter, and the first
+    # ~60 characters are what a search result actually shows.
     return ("Senior Software Engineer at Apra Labs | Distributed systems, event-driven "
-            "architecture, access control | Java/Kotlin, Python, GCP")
+            "architecture, access control | Java/Kotlin, Python, GCP | "
+            "Mentoring & design review")
 
 
 def linkedin_about(c: dict) -> str:
@@ -172,12 +175,16 @@ def linkedin_about(c: dict) -> str:
         "$200+/month of idle cloud spend found and decommissioned.",
         "• Own design end to end - high- and low-level design, then the implementation, "
         "security hardening and CI/CD that ships it.",
+        "• Bring people onto the work - onboarded and mentored engineers across projects, "
+        "led one through a stretch when its tech leads were unavailable, "
+        "and introduced patterns (server-sent events, message brokers) that several other "
+        "teams now use.",
         "",
         "I work mostly in Java/Kotlin, Python, Node and C++, on GCP, with Pub/Sub, "
-        "RabbitMQ, Redis, PostgreSQL, Docker and Terraform. I also spend real time on the things "
-        "around the code: onboarding people, reviewing designs rather than only diffs, "
-        "and making project setup simple enough that a new developer needs the source "
-        "and nothing else.",
+        "RabbitMQ, Redis, PostgreSQL, Docker and Terraform. I also spend real time on the "
+        "things around the code: mentoring the people who join a project, interviewing "
+        "candidates, reviewing designs rather than only diffs, and making project setup "
+        "simple enough that a new developer needs the source and nothing else.",
         "",
         "Client work is described without naming clients.",
         "",
@@ -212,6 +219,13 @@ def linkedin_experience_senior(c: dict) -> str:
         "• Used AI-assisted and agent-orchestrated development for legacy-to-new UI "
         "migration and phased delivery, supervising and correcting the output rather "
         "than accepting it.",
+        "",
+        "ACROSS PROJECTS",
+        "• Onboard and mentor the engineers joining a project, and review code and design "
+        "for teams other than my own.",
+        "• Conduct technical interviews for the company.",
+        "• Introduced server-sent events and message-broker patterns that several other "
+        "teams now use.",
     ])
 
 
@@ -252,7 +266,8 @@ def linkedin_experience_engineer(c: dict) -> str:
         "and devised a compute-once-and-reuse technique, removing over 80% of the time "
         "it took per frame.",
         "• Migrated the reconstruction pipeline from file-based to in-memory; onboarded "
-        "two junior engineers.",
+        "two junior engineers and led the project through a stretch when its tech leads "
+        "were unavailable.",
     ])
 
 

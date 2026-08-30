@@ -35,6 +35,7 @@ Senior software engineer with five years on distributed backends where correctne
 - Performance and delivery engineering - latency, image size, CI/CD pipelines
 - Applied research into production - computer vision, signal processing, OCR
 - Design ownership - high- and low-level design, and the client conversations that shape it
+- Bringing people onto the work - onboarding and mentoring engineers, code and design review for teams other than my own, and patterns those teams then adopt
 
 ---
 
@@ -280,6 +281,10 @@ My first project. Migrating a command protocol off protobuf and hardening how th
   <sub>source: eval:2026-04</sub>
 - Regular code, design and pair-review contributor across teams, including for projects outside my own  
   <sub>source: eval:2026-04</sub>
+- Brought an engineer onto the integration hub and backend codebase, teaching the pub/sub, Terraform and cloud build pieces it runs on  
+  <sub>source: eval:2025-11</sub>
+- Taught another team how message brokers and Docker work, then reviewed their code and design against good practice at both high and low level  
+  <sub>source: eval:2025-11</sub>
 
 ### Earlier roles
 

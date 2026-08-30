@@ -2,7 +2,7 @@
   "label": "base",
   "target_role": "Senior Software Engineer",
   "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json — the renderer fails on unknown ids, which is what stops invented claims. This base variant is DOMAIN-NEUTRAL: healthcare standards are trimmed to one item. For a healthcare role, copy it and add the 'domain' skills group and the FHIR/OMOP highlights back.",
-  "summary": "Senior software engineer, five years on distributed backends where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control and applied ML. Owns systems from design to the CI/CD that ships them.",
+  "summary": "Senior software engineer, five years on distributed backends where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control and applied ML. Owns systems from design to the CI/CD that ships them, and mentors the engineers who build on them.",
   "sections": [
     {
       "project": "clinical-trial-platform",
@@ -10,34 +10,31 @@
       "bullets": [
         {
           "id": "ctp-adapters",
-          "text": "Built the integration hub's base adapter modules, turning every new integration from a bespoke build into a pattern"
+          "text": "Built the integration hub's base adapter modules, turning each new integration from a bespoke build into a pattern"
         },
         {
           "id": "ctp-rbac",
-          "text": "Designed and shipped a full RBAC system: admin-only endpoints, per-role response filtering and pre-authorization checks"
+          "text": "Designed and shipped a full RBAC system: admin-only endpoints, per-role response filtering, pre-auth checks"
         },
         {
           "id": "ctp-entra",
-          "text": "Mapped business entitlements onto Microsoft Entra identity, enforcing endpoint and data-level access through JWT claims"
+          "text": "Mapped business entitlements onto Microsoft Entra, enforcing endpoint and data-level access via JWT claims"
         },
         {
           "id": "ctp-security",
           "text": "Remediated static-analysis security findings and led a security overhaul separating study-team and participant concerns"
         },
         {
-          "id": "ctp-sse"
+          "id": "ctp-sse",
+          "text": "Introduced server-sent events for real-time feedback across the platform"
         },
         {
           "id": "ctp-deploy",
           "text": "Cut the backend deploy pipeline from 26m33s to 18m07s (-32%)"
         },
         {
-          "id": "ctp-image",
-          "text": "Reduced a service container image from 450 MB to 290 MB (-36%) by eliminating unneeded dependencies"
-        },
-        {
           "id": "ctp-cost",
-          "text": "Eliminated $200+/month (~$2.4k/year) of idle cloud spend by decommissioning legacy services, then added a billing review"
+          "text": "Eliminated $200+/month (~$2.4k/yr) of idle cloud spend by decommissioning legacy services"
         }
       ]
     },
@@ -51,7 +48,7 @@
         },
         {
           "id": "rm-requirements",
-          "text": "Drove requirements directly with the client, turning whiteboard sessions into wireframed workflows and E2E implementation"
+          "text": "Drove requirements with the client, turning whiteboard sessions into wireframes and an E2E implementation"
         }
       ]
     },
@@ -77,7 +74,8 @@
       "label": "Headless Video Recording Platform",
       "bullets": [
         {
-          "id": "nvr-node"
+          "id": "nvr-node",
+          "text": "Wrote the Node backend from scratch, driving the C++ binaries over Redis so the whole system shared one source of truth"
         }
       ]
     },
@@ -86,14 +84,30 @@
       "label": "AR Surgical Navigation",
       "bullets": [
         {
-          "id": "ars-sdf"
-        },
-        {
-          "id": "ars-onnx"
+          "id": "ars-sdf",
+          "text": "Cut pipeline latency from 22s to 2s by moving reconstruction in-memory and eliminating a per-frame signed distance field"
         },
         {
           "id": "ars-onboard",
           "text": "Onboarded two junior engineers and led the project through a stretch when tech leads were unavailable"
+        }
+      ]
+    },
+    {
+      "label": "Beyond project work",
+      "_note": "No project slug: this group spans all of them, so it renders without dates.",
+      "bullets": [
+        {
+          "id": "x-mentor",
+          "text": "Onboard and mentor the engineers joining a project, across several of them"
+        },
+        {
+          "id": "x-interviews",
+          "text": "Conduct technical interviews for the company"
+        },
+        {
+          "id": "x-knowledge",
+          "text": "Introduced server-sent events and message-broker patterns now used by several other teams"
         }
       ]
     }
@@ -114,8 +128,7 @@
       "bl-mathsteps"
     ],
     "Deloitte USI": [
-      "dl-statemachine",
-      "dl-rollout"
+      "dl-statemachine"
     ]
   },
   "skill_rows": [
@@ -173,12 +186,21 @@
         "Signal processing (FFT/DFT)",
         "OCR/HTR"
       ]
+    },
+    {
+      "label": "Practices",
+      "items": [
+        "System design (HLD/LLD)",
+        "Code & design review",
+        "Mentoring",
+        "Technical interviewing"
+      ]
     }
   ],
   "prior_text": {
-    "bl-observability": "Built out monitoring and log management: Graylog for structured logging, Sentry APM across the Flask and Node.js services",
+    "bl-observability": "Built out monitoring and logging: Graylog structured logs, Sentry APM across the Flask and Node.js services",
     "bl-mathsteps": "Core maintainer of the open-source mathsteps library; added complex expression support and improved parsing accuracy",
-    "dl-statemachine": "Extended the integration layer of an AWS Step Functions state machine, building the API calls and Lambda functions behind it",
+    "dl-statemachine": "Extended the integration layer of an AWS Step Functions state machine and the Lambda functions behind it",
     "dl-rollout": "Built the integrations each additional US state needed to move onto the new platform, which made the rollouts faster"
   }
 }

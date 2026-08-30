@@ -15,6 +15,7 @@ resumes honest: the phrasing is free, the underlying claim is not.
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -116,10 +117,15 @@ def build_data(career: dict, variant: dict, tag: str = "cv") -> dict:
     # --- experience -----------------------------------------------------------
     groups = []
     for section in variant["sections"]:
-        project = projects.get(section["project"])
-        if project is None:
-            sys.exit(f"ERROR: variant references unknown project "
-                     f"'{section['project']}'")
+        # A section without a project is a cross-project group ("Beyond project work"):
+        # it carries no dates because it spans all of them. Its bullet ids still have to
+        # resolve against career.json, so the anti-invention rule is unchanged.
+        slug = section.get("project")
+        project = None
+        if slug is not None:
+            project = projects.get(slug)
+            if project is None:
+                sys.exit(f"ERROR: variant references unknown project '{slug}'")
         bullets = []
         for entry in section["bullets"]:
             hid = entry["id"]
@@ -129,8 +135,8 @@ def build_data(career: dict, variant: dict, tag: str = "cv") -> dict:
             # A variant may rewrite wording for a JD; the claim stays anchored.
             bullets.append(entry.get("text") or highlights[hid]["text"])
         groups.append({
-            "label": section.get("label", project["title"]),
-            "dates": fmt_range(project["period"]),
+            "label": section.get("label") or (project["title"] if project else ""),
+            "dates": fmt_range(project["period"]) if project else section.get("dates", ""),
             "bullets": bullets,
         })
 
@@ -252,12 +258,17 @@ def main() -> int:
     variant = json.loads(variant_path.read_text(encoding="utf-8"))
 
     if with_phone:
+        # Locally the number comes from the gitignored private.json. On a deploy there is
+        # no such file -- the repo is public -- so RESUME_PHONE is read from the build
+        # environment instead. Either way the number is never in a tracked file.
         private_path = RESUME / "private.json"
-        if not private_path.exists():
-            sys.exit(f"ERROR: --phone needs {private_path} (gitignored)")
-        private = json.loads(private_path.read_text(encoding="utf-8"))
-        career["person"]["phone"] = private["phone"]
-        print("including phone (do NOT publish this build to the site)")
+        phone = os.environ.get("RESUME_PHONE", "").strip()
+        if private_path.exists():
+            phone = json.loads(private_path.read_text(encoding="utf-8"))["phone"]
+        if not phone:
+            sys.exit(f"ERROR: --phone needs {private_path} (gitignored) or $RESUME_PHONE")
+        career["person"]["phone"] = phone
+        print("including phone (this build must not be committed)")
 
     out_dir = RESUME / "build" / name
     out_dir.mkdir(parents=True, exist_ok=True)

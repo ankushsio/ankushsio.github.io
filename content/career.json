@@ -29,10 +29,11 @@
       "Access control and security - RBAC, authentication and authorization, static-analysis remediation",
       "Performance and delivery engineering - latency, image size, CI/CD pipelines",
       "Applied research into production - computer vision, signal processing, OCR",
-      "Design ownership - high- and low-level design, and the client conversations that shape it"
+      "Design ownership - high- and low-level design, and the client conversations that shape it",
+      "Bringing people onto the work - onboarding and mentoring engineers, code and design review for teams other than my own, and patterns those teams then adopt"
     ],
     "seeking": "A role with real ownership and systems depth. Domain-agnostic: the systems problems travel.",
-    "arc": "One thread keeps recurring: taking applied research into production - signal processing on retinal video, 3D reconstruction for surgical guidance, hyperspectral imaging, and a handwriting-recognition system built around a licensed model. The other is that most of it happened in regulated, high-consequence settings, which is where the habits around access control, auditability and delivery discipline come from.",
+    "arc": "Five years, and barely two of these projects shared a stack: Java and Kotlin services, a C++ media pipeline on edge devices, 3D reconstruction from surgical video, FHIR modelling, a handwriting-recognition system built around a licensed model. What they had in common was the setting rather than the subject - most of it regulated and high-consequence, which is where the habits around access control, auditability and delivery discipline come from.",
     "_domain_note": "Most of this work happened in regulated, high-consequence settings. That is where the habits came from - access control, auditability, delivery discipline - not a specialisation I am looking to continue."
   },
   "companies": [
@@ -571,6 +572,16 @@
           "id": "x-reviews",
           "text": "Regular code, design and pair-review contributor across teams, including for projects outside my own",
           "source": "eval:2026-04"
+        },
+        {
+          "id": "x-onboard-hub",
+          "text": "Brought an engineer onto the integration hub and backend codebase, teaching the pub/sub, Terraform and cloud build pieces it runs on",
+          "source": "eval:2025-11"
+        },
+        {
+          "id": "x-teach-brokers",
+          "text": "Taught another team how message brokers and Docker work, then reviewed their code and design against good practice at both high and low level",
+          "source": "eval:2025-11"
         }
       ],
       "location": "Bengaluru, India",
@@ -856,6 +867,20 @@
           "url": "https://github.com/ankushsio/entertoescape"
         }
       ]
+    }
+  ],
+  "personal_sketches": [
+    {
+      "slug": "gift-wrapping",
+      "title": "Gift wrapping",
+      "editor_id": "dD7ueHr9U",
+      "blurb": "Jarvis march finding the convex hull of 40 random points. It tests one candidate per frame, so you watch the pivot swing around the boundary rather than see the answer appear."
+    },
+    {
+      "slug": "prim-mst",
+      "title": "Prim's minimum spanning tree",
+      "editor_id": "HMaIFKp3s",
+      "blurb": "Grows a tree from a single vertex, each step taking the shortest edge to a vertex it has not reached yet. Click anywhere to add a point and it rebuilds around it."
     }
   ]
 }

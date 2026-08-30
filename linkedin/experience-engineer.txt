@@ -17,4 +17,4 @@ HEADLESS VIDEO RECORDING PLATFORM (Apr - Oct 2024)
 
 AR SURGICAL NAVIGATION (Aug 2023 - Apr 2024)
 • Identified a signed distance field computation as the pipeline bottleneck and devised a compute-once-and-reuse technique, removing over 80% of the time it took per frame.
-• Migrated the reconstruction pipeline from file-based to in-memory; onboarded two junior engineers.
+• Migrated the reconstruction pipeline from file-based to in-memory; onboarded two junior engineers and led the project through a stretch when its tech leads were unavailable.
