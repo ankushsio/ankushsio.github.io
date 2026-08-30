@@ -134,6 +134,28 @@ build → coverage) and it keeps `ankushsio.github.io` fresh as a fallback. `sit
 was deleted, because leaving it would have GitHub Pages contend for a domain Cloudflare now
 owns.
 
+## 13. The hosted résumé carries a phone number, injected at deploy (2026-08-31)
+
+Decision 11 kept the phone out of the published PDF entirely. That has been reversed on
+purpose: a recruiter holding the site should be able to call, and the expected cost — some
+volume of spam calls — is one Ankush is willing to pay and can stop at any time.
+
+What did *not* change is where the number is allowed to live. `site/public/` is tracked in a
+public repo, so committing a `--phone` build would write the number into the history for
+good; taking it off the site later would stop new downloads and nothing else. So the number
+never enters git. `RESUME_PHONE` is set in the Cloudflare Workers Builds environment, and
+`scripts/publish_resume_pdf.sh` runs **after** the site build, re-renders with `--phone`, and
+overwrites the PDF inside the gitignored `site/dist/` that wrangler uploads. It touches
+nothing tracked, so the privacy gate keeps working unchanged and no ordering constraint
+exists between the two.
+
+Takedown is therefore real: delete the build variable, redeploy, and the committed
+phone-free PDF ships instead. Nothing has to be scrubbed.
+
+Typst is pinned (0.15.1) and fetched during the build, because the render has to happen on
+the build machine and an unpinned toolchain quietly relaying out a one-page résumé is drift
+nobody would notice.
+
 ---
 
 # Open items — these need you
