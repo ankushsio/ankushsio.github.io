@@ -67,7 +67,12 @@ def ensure_typst() -> str:
         for member in tar.getmembers():
             if Path(member.name).name == "typst":
                 member.name = "typst"
-                tar.extract(member, TYPST_DIR)
+                # filter="data" is the 3.14 default and silences its DeprecationWarning;
+                # keyword-guarded because it does not exist before 3.12.
+                try:
+                    tar.extract(member, TYPST_DIR, filter="data")
+                except TypeError:
+                    tar.extract(member, TYPST_DIR)
                 break
         else:
             sys.exit(f"{TAG} ERROR - no typst binary inside {url}")
