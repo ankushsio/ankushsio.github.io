@@ -49,5 +49,5 @@ venv/
 # Resume render output (the shipped PDF is copied into site/public/)
 resume/build/
 
-# Typst binary fetched by scripts/publish_resume_pdf.sh on a deploy
+# Typst binary fetched by scripts/publish_resume_pdf.py on a deploy
 .typst/

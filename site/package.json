@@ -10,7 +10,8 @@
     "prebuild": "npm run sync",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "postbuild": "python ../scripts/publish_resume_pdf.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

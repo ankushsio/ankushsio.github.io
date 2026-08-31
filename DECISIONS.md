@@ -144,10 +144,18 @@ What did *not* change is where the number is allowed to live. `site/public/` is 
 public repo, so committing a `--phone` build would write the number into the history for
 good; taking it off the site later would stop new downloads and nothing else. So the number
 never enters git. `RESUME_PHONE` is set in the Cloudflare Workers Builds environment, and
-`scripts/publish_resume_pdf.sh` runs **after** the site build, re-renders with `--phone`, and
-overwrites the PDF inside the gitignored `site/dist/` that wrangler uploads. It touches
-nothing tracked, so the privacy gate keeps working unchanged and no ordering constraint
-exists between the two.
+`scripts/publish_resume_pdf.py` re-renders with `--phone` and overwrites the PDF inside the
+gitignored `site/dist/` that wrangler uploads. It touches nothing tracked, so the privacy
+gate keeps working unchanged and no ordering constraint exists between the two.
+
+**It runs as `site/package.json`'s `postbuild` hook, not as a step in the Cloudflare build
+command.** The first version was a step in that command, and four consecutive builds --
+including one after an overnight gap -- ran with a stale copy of the command that did not
+contain it, so the step never executed. The dashboard showed the updated command the whole
+time. `npm --prefix site run build` appears in every build including the stale one, so a
+hook hanging off it cannot be missed, and the dashboard now only has to supply the
+variable. It prints `RESUME_PHONE visible to build: yes|no` on every build, because the
+failure mode here is a build that succeeds while quietly shipping the wrong PDF.
 
 Takedown is therefore real: delete the build variable, redeploy, and the committed
 phone-free PDF ships instead. Nothing has to be scrubbed.

@@ -23,10 +23,12 @@ links to — re-copy it after a change.
 
 **Never copy a `--phone` build into `site/public/`.** That file is tracked in a public repo,
 so the number would be in the history permanently and a takedown could not reach it. The
-hosted PDF gets its phone number at deploy time instead: `scripts/publish_resume_pdf.sh`
-runs after the site build, renders with `--phone` from the `RESUME_PHONE` build variable and
-overwrites the copy in the gitignored `site/dist/`. Unset `RESUME_PHONE` and redeploy to take
-it down.
+hosted PDF gets its phone number at deploy time instead: `scripts/publish_resume_pdf.py`
+runs as `site/package.json`'s `postbuild` hook, renders with `--phone` from the
+`RESUME_PHONE` build variable and overwrites the copy in the gitignored `site/dist/`. Unset
+`RESUME_PHONE` and redeploy to take it down. Every build logs
+`publish_resume_pdf: RESUME_PHONE visible to build: yes|no`, so a misconfigured deploy says
+so instead of silently shipping the phone-free PDF.
 
 ## Tailoring for a job description
 
