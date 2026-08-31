@@ -179,9 +179,11 @@ rather than of the content. The trims in that commit bought the margin back.
 consecutive builds ran a stale copy of it while the dashboard displayed the new one, and a
 retried build replays its own creation-time snapshot, so only a fresh commit ever tests a
 change. The step now runs as `site/package.json`'s `postbuild` hook: `npm --prefix site run
-build` appears in every version of that command, stale included. `publish_resume_pdf.sh`
-survives as a shim because the command still names it, and deleting it failed a build whose
-real work had already succeeded.
+build` appears in every version of that command, stale included. A `publish_resume_pdf.sh`
+shim lived here briefly, because deleting the shell script while the command still named it
+failed a build whose real work had already succeeded; it was removed once the command dropped
+the step. The field was then found clobbered to a bare `scripts/privacy_gate.py`, which
+`/bin/sh` tried to execute directly — a second reason not to keep logic in it.
 
 Both failures shared a shape: a green build that quietly shipped the wrong artifact. That is
 why the script prints `RESUME_PHONE visible to build: yes|no` unconditionally, and why it
