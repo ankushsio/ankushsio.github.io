@@ -11,6 +11,11 @@ Writes:
     linkedin/experience-engineer.txt  2,000 char limit (SWE, May 2023 - May 2026)
     linkedin/projects/*.txt   per-project blurbs for the Projects section
 
+The per-project blurbs are deliberately NOT on the profile: the Projects section competes
+with the experience entries for a reader's attention and mostly restates them. They are
+generated and kept in source control anyway, because the decision may reverse and
+regenerating them from career.json is free. Do not delete them for being unused.
+
 LinkedIn strips markdown, so those files are plain text with bullet characters and real
 line breaks. Character limits are asserted, not assumed.
 """
@@ -142,27 +147,39 @@ def master_resume(c: dict) -> str:
 
 # ------------------------------------------------------------------- linkedin
 
+# LinkedIn's editor collapses ordinary line breaks, so the copy that reads correctly on
+# the profile needs explicit blank lines: one between the lines inside a block (a heading
+# and its bullets, or one bullet and the next), three between blocks. Ankush arrived at
+# this by pasting and proofreading on the profile itself; it is encoded here so
+# regenerating does not silently undo it.
+IN_BLOCK = "\n\n"
+BETWEEN_BLOCKS = "\n\n\n\n"
+
+
+def linkedin_layout(blocks: list[list[str]]) -> str:
+    return BETWEEN_BLOCKS.join(IN_BLOCK.join(block) for block in blocks)
+
+
 def linkedin_headline(c: dict) -> str:
-    # Tech stays left of the mentoring clause: it is the primary filter, and the first
-    # ~60 characters are what a search result actually shows.
-    return ("Senior Software Engineer at Apra Labs | Distributed systems, event-driven "
-            "architecture, access control | Java/Kotlin, Python, GCP | "
-            "Mentoring & design review")
+    # As published. The employer is dropped because LinkedIn already shows it beside the
+    # headline, and the mentoring clause because the headline was better tight -- that
+    # keyword lives in About and in both experience entries instead.
+    return ("Senior Software Engineer | Distributed systems, event-driven architecture, "
+            "access control | Java/Kotlin, Python, GCP")
 
 
 def linkedin_about(c: dict) -> str:
     company = c["companies"][0]
-    lines = [
+    blocks = [[
         "I build backends for systems where being wrong is expensive.",
-        "",
+    ], [
         "For the last three years at Apra Labs that has meant service integration, "
         "event-driven architecture, access control and the delivery pipelines that ship "
         "them - mostly in settings where a mistake is costly: clinical trials, surgical "
         "imaging, video infrastructure running on edge hardware. Before that, two "
         "engineering roles and three internships after graduating in 2021.",
-        "",
+    ], [
         "What I tend to do on a project:",
-        "",
         "• Turn one-off integrations into a repeatable pattern - I built the base "
         "adapter modules for an integration hub so each new service connection "
         "follows one shape instead of becoming a bespoke build.",
@@ -179,18 +196,20 @@ def linkedin_about(c: dict) -> str:
         "led one through a stretch when its tech leads were unavailable, "
         "and introduced patterns (server-sent events, message brokers) that several other "
         "teams now use.",
-        "",
+    ], [
         "I work mostly in Java/Kotlin, Python, Node and C++, on GCP, with Pub/Sub, "
         "RabbitMQ, Redis, PostgreSQL, Docker and Terraform. I also spend real time on the "
         "things around the code: mentoring the people who join a project, interviewing "
         "candidates, reviewing designs rather than only diffs, and making project setup "
         "simple enough that a new developer needs the source and nothing else.",
-        "",
+    ], [
         "Client work is described without naming clients.",
-        "",
-        "Portfolio: me.entertoescape.com",
-    ]
-    return "\n".join(lines)
+    ], [
+        # ?r= tags the arrival so LinkedIn traffic is separable from resume traffic
+        # in the visit log. Same mechanism as the resume renderer's --tag.
+        "Portfolio: me.entertoescape.com/?r=LinkedIn",
+    ]]
+    return linkedin_layout(blocks)
 
 
 def linkedin_experience_senior(c: dict) -> str:
@@ -204,10 +223,10 @@ def linkedin_experience_senior(c: dict) -> str:
     clinical-trial highlight carries a `source` evaluation dated before May 2026, so
     that work belongs to the earlier role even though the project is still running.
     """
-    return "\n".join([
+    return linkedin_layout([[
         "Engineering services across healthcare, medical devices and imaging. "
         "Clients are not named.",
-        "",
+    ], [
         "MEDICINE DATA PLATFORM (May 2026 - present)",
         "• Modelled clinical protocols and surveys on FHIR resources with OMOP/LOINC "
         "terminology; implemented change logs purely through FHIR provenance.",
@@ -219,22 +238,21 @@ def linkedin_experience_senior(c: dict) -> str:
         "• Used AI-assisted and agent-orchestrated development for legacy-to-new UI "
         "migration and phased delivery, supervising and correcting the output rather "
         "than accepting it.",
-        "",
+    ], [
         "ACROSS PROJECTS",
         "• Onboard and mentor the engineers joining a project, and review code and design "
         "for teams other than my own.",
         "• Conduct technical interviews for the company.",
         "• Introduced server-sent events and message-broker patterns that several other "
         "teams now use.",
-    ])
-
+    ]])
 
 def linkedin_experience_engineer(c: dict) -> str:
     """Software Engineer, May 2023 - May 2026. Everything up to the promotion."""
-    return "\n".join([
+    return linkedin_layout([[
         "Engineering services across healthcare, medical devices and imaging. "
         "Clients are not named.",
-        "",
+    ], [
         "CLINICAL TRIAL MANAGEMENT PLATFORM (Nov 2024 - present)",
         "• Built the integration hub's base adapter modules, turning each new "
         "integration from a bespoke build into a repeatable pattern; implemented the "
@@ -248,19 +266,19 @@ def linkedin_experience_engineer(c: dict) -> str:
         "from 450 MB to 290 MB.",
         "• Eliminated $200+/month of idle cloud spend by auditing and decommissioning "
         "legacy services, and set up billing review to catch the next one.",
-        "",
+    ], [
         "DOCUMENT AI / HANDWRITING RECOGNITION (May - Nov 2025)",
         "• Owned high- and low-level design of an end-to-end OCR system around a "
         "licensed third-party model.",
         "• Designed packaging so the model ships with the system and its licence can be "
         "swapped on expiry; cut the deployable from 19 GB to 5.28 GB.",
-        "",
+    ], [
         "HEADLESS VIDEO RECORDING PLATFORM (Apr - Oct 2024)",
         "• Wrote the Node backend from scratch and made Redis the single ground truth "
         "shared with the C++ core; added SSE for real-time updates.",
         "• Took the recorder from unstable to dependable, debugging intermittent "
         "segmentation faults across edge hardware.",
-        "",
+    ], [
         "AR SURGICAL NAVIGATION (Aug 2023 - Apr 2024)",
         "• Identified a signed distance field computation as the pipeline bottleneck "
         "and devised a compute-once-and-reuse technique, removing over 80% of the time "
@@ -268,8 +286,7 @@ def linkedin_experience_engineer(c: dict) -> str:
         "• Migrated the reconstruction pipeline from file-based to in-memory; onboarded "
         "two junior engineers and led the project through a stretch when its tech leads "
         "were unavailable.",
-    ])
-
+    ]])
 
 def linkedin_project(p: dict) -> str:
     parts = [p["title"], "", p["summary"], "", "What I did:", p["approach"], "",
