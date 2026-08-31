@@ -1,7 +1,7 @@
 {
   "label": "base",
   "target_role": "Senior Software Engineer",
-  "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json — the renderer fails on unknown ids, which is what stops invented claims. This base variant is DOMAIN-NEUTRAL: healthcare standards are trimmed to one item. For a healthcare role, copy it and add the 'domain' skills group and the FHIR/OMOP highlights back.",
+  "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json \u2014 the renderer fails on unknown ids, which is what stops invented claims. This base variant is DOMAIN-NEUTRAL: healthcare standards are trimmed to one item. For a healthcare role, copy it and add the 'domain' skills group and the FHIR/OMOP highlights back.",
   "summary": "Senior software engineer, five years on distributed backends where correctness is not optional: service integration, event-driven architecture, access control, applied ML. Owns systems from design to the CI/CD that ships them, and mentors the engineers on them.",
   "sections": [
     {
@@ -72,6 +72,10 @@
         {
           "id": "nvr-node",
           "text": "Wrote the Node backend from scratch, driving the C++ binaries over Redis so the whole system shared one source of truth"
+        },
+        {
+          "id": "nvr-stability",
+          "text": "Took the recorder from unstable to dependable, debugging intermittent segmentation faults in frame decoding"
         }
       ]
     },
@@ -117,6 +121,7 @@
     "security",
     "ml_imaging"
   ],
+  "achievements_line": "ACM ICPC Regionals - Kharagpur 2019, Kolkata-Kanpur 2018; 3rd place, Codeutsava hackathon, NIT Raipur (2020)",
   "max_pages": 1,
   "prior": {
     "ByteLearn": [

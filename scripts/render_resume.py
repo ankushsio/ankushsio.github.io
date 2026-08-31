@@ -220,9 +220,22 @@ def build_data(career: dict, variant: dict, tag: str = "cv") -> dict:
     # anchor a reworded version to, so a variant may only opt out -- "achievements":
     # false, for a tailored copy that needs the two lines back -- never restate them.
     achievements = []
+    career_achievements = career.get("achievements", [])
     if variant.get("achievements", True):
-        achievements = [f"{a['text']} ({a['year']})"
-                        for a in career.get("achievements", [])]
+        # A variant may supply `achievements_line`: one compressed string in place of the
+        # per-award lines, for when this section is costing three lines that bullets could
+        # use. Guarded rather than free-form -- every year in career.json must appear in
+        # it, so an award cannot silently vanish and a year cannot be invented.
+        line = variant.get("achievements_line")
+        if line:
+            missing = [str(a["year"]) for a in career_achievements
+                       if str(a["year"]) not in line]
+            if missing:
+                sys.exit(f"ERROR: achievements_line omits year(s) {missing}. Every "
+                         f"achievement in career.json must still be represented.")
+            achievements = [line]
+        else:
+            achievements = [f"{a['text']} ({a['year']})" for a in career_achievements]
 
     return {
         "name": person["name"],
