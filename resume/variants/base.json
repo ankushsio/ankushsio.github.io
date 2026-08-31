@@ -25,12 +25,12 @@
           "text": "Remediated static-analysis security findings and led a security overhaul separating study-team and participant concerns"
         },
         {
-          "id": "ctp-sse",
-          "text": "Introduced server-sent events for real-time feedback across the platform"
-        },
-        {
           "id": "ctp-deploy",
           "text": "Cut the backend deploy pipeline from 26m33s to 18m07s (-32%)"
+        },
+        {
+          "id": "ctp-cost",
+          "text": "Eliminated $200+/month (~$2.4k/yr) of idle cloud spend by decommissioning legacy services"
         }
       ]
     },
