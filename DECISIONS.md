@@ -163,6 +163,30 @@ phone-free PDF ships instead. Nothing has to be scrubbed.
 Typst is pinned (0.15.1) and fetched during the build, because the render has to happen on
 the build machine and an unpinned toolchain quietly relaying out a one-page résumé is drift
 nobody would notice.
+## 14. Résumé fonts are pinned, and the publish step left the dashboard (2026-08-31)
+
+Two findings from getting the phone number onto the hosted PDF, both worth keeping.
+
+**The render depended on the host's fonts.** The template asked for Calibri, which exists on
+Windows and not on the Linux builder, so typst fell back to a wider embedded font and the
+one-page assertion failed at two pages. Carlito now ships in `resume/fonts` and the render
+passes `--font-path` with `--ignore-system-fonts`. The sharper version of the finding: Carlito
+is metric-compatible with Calibri and swapping to it *still* overflowed, which means the fit
+had no slack left and the page count of the PDF being served was a property of one laptop
+rather than of the content. The trims in that commit bought the margin back.
+
+**The Cloudflare build-command field cannot be trusted as the place a step lives.** Four
+consecutive builds ran a stale copy of it while the dashboard displayed the new one, and a
+retried build replays its own creation-time snapshot, so only a fresh commit ever tests a
+change. The step now runs as `site/package.json`'s `postbuild` hook: `npm --prefix site run
+build` appears in every version of that command, stale included. `publish_resume_pdf.sh`
+survives as a shim because the command still names it, and deleting it failed a build whose
+real work had already succeeded.
+
+Both failures shared a shape: a green build that quietly shipped the wrong artifact. That is
+why the script prints `RESUME_PHONE visible to build: yes|no` unconditionally, and why it
+verifies the number is really in the rendered PDF instead of assuming the render worked.
+
 
 ---
 
