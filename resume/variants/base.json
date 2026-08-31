@@ -1,8 +1,8 @@
 {
   "label": "base",
   "target_role": "Senior Software Engineer",
-  "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json \u2014 the renderer fails on unknown ids, which is what stops invented claims. This base variant is DOMAIN-NEUTRAL: healthcare standards are trimmed to one item. For a healthcare role, copy it and add the 'domain' skills group and the FHIR/OMOP highlights back.",
-  "summary": "Senior software engineer, five years on distributed backends where correctness is not optional: service integration, event-driven architecture, access control, applied ML. Owns systems from design to the CI/CD that ships them, and mentors the engineers on them.",
+  "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json \u2014 the renderer fails on unknown ids, which is what stops invented claims. This base variant is DOMAIN-NEUTRAL: healthcare standards are trimmed to one item. For a healthcare role, copy it and add the 'domain' skills group and the FHIR/OMOP highlights back. For an ML, inference or model-deployment role, add 'ars-onnx' back first (PyTorch to ONNX and TensorRT) - it is the only claim about taking models to deployment, it was cut from this variant for space, and only the skills row carries it here.",
+  "summary": "Senior software engineer, five years on distributed backends where correctness is not optional: service integration, event-driven architecture, access control, applied ML. Owns systems from design to the CI/CD that ships them, and mentors those who build them.",
   "sections": [
     {
       "project": "clinical-trial-platform",
@@ -94,12 +94,12 @@
       ]
     },
     {
-      "label": "Beyond project work",
+      "label": "Across projects",
       "_note": "No project slug: this group spans all of them, so it renders without dates.",
       "bullets": [
         {
           "id": "x-mentor",
-          "text": "Onboard and mentor the engineers joining a project, across several of them"
+          "text": "Onboard and mentor engineers joining a project"
         },
         {
           "id": "x-interviews",
