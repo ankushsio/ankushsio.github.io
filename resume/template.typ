@@ -23,7 +23,9 @@
 )
 
 #set text(
-  font: ("Calibri", "Carlito", "Liberation Sans", "Arial"),
+  // Carlito ships in resume/fonts and is metric-compatible with Calibri; the render
+  // ignores system fonts entirely so CI and a laptop agree. See render_resume.py.
+  font: ("Carlito", "Calibri", "Liberation Sans", "Arial"),
   size: 10.2pt,
   lang: "en",
 )

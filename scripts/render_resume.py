@@ -277,8 +277,15 @@ def main() -> int:
     shutil.copyfile(TEMPLATE, out_dir / "template.typ")
 
     pdf = out_dir / "resume.pdf"
+    # --font-path plus --ignore-system-fonts makes the render deterministic. Without it
+    # the PDF depends on whatever the host happens to have installed: this template
+    # asked for Calibri, which exists on Windows and not on the Linux build machine, so
+    # the same content came out one page locally and two pages in CI. Carlito is
+    # metric-compatible with Calibri, so the layout is the one that was proofread.
     result = subprocess.run(
-        [typst_bin(), "compile", "template.typ", "resume.pdf"],
+        [typst_bin(), "compile",
+         "--font-path", str(RESUME / "fonts"), "--ignore-system-fonts",
+         "template.typ", "resume.pdf"],
         cwd=out_dir, capture_output=True, text=True)
     if result.returncode != 0:
         print(result.stdout)

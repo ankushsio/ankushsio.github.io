@@ -2,7 +2,7 @@
   "label": "base",
   "target_role": "Senior Software Engineer",
   "_note": "The default one-pager. Copy this file to <company>.json and tune `summary`, the chosen bullet ids, and any `text` overrides for a specific job description. Every bullet id must exist in content/career.json — the renderer fails on unknown ids, which is what stops invented claims. This base variant is DOMAIN-NEUTRAL: healthcare standards are trimmed to one item. For a healthcare role, copy it and add the 'domain' skills group and the FHIR/OMOP highlights back.",
-  "summary": "Senior software engineer, five years on distributed backends where correctness is not optional - service integration, event-driven architecture, cloud infrastructure, access control and applied ML. Owns systems from design to the CI/CD that ships them, and mentors the engineers who build on them.",
+  "summary": "Senior software engineer, five years on distributed backends where correctness is not optional: service integration, event-driven architecture, access control, applied ML. Owns systems from design to the CI/CD that ships them, and mentors the engineers on them.",
   "sections": [
     {
       "project": "clinical-trial-platform",
@@ -31,10 +31,6 @@
         {
           "id": "ctp-deploy",
           "text": "Cut the backend deploy pipeline from 26m33s to 18m07s (-32%)"
-        },
-        {
-          "id": "ctp-cost",
-          "text": "Eliminated $200+/month (~$2.4k/yr) of idle cloud spend by decommissioning legacy services"
         }
       ]
     },
