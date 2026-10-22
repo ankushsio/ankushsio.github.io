@@ -70,6 +70,7 @@
             "Kotlin",
             "Google Cloud Pub/Sub",
             "Cloud Run",
+            "Microservices",
             "Terraform",
             "FHIR / HAPI",
             "Docker",
@@ -382,6 +383,7 @@
             "LOINC",
             "RBAC",
             "Docker Compose",
+            "AWS ECS",
             "Playwright",
             "AI-assisted development",
             "Requirements & architecture design"
@@ -668,6 +670,7 @@
           "AWS Lambda",
           "AWS Step Functions",
           "Serverless",
+          "Microservices",
           "API integration",
           "CI/CD"
         ]
@@ -782,7 +785,8 @@
       "Server-Sent Events (SSE)",
       "RabbitMQ",
       "Google Cloud Pub/Sub",
-      "Event-driven architecture"
+      "Event-driven architecture",
+      "Microservices"
     ],
     "databases": [
       "PostgreSQL",
@@ -793,7 +797,7 @@
     "cloud_devops": [
       "Google Cloud Platform (GCP)",
       "Cloud Run",
-      "AWS (Lambda, Step Functions)",
+      "AWS (Lambda, Step Functions, ECS)",
       "Terraform",
       "Docker",
       "CI/CD pipelines",
