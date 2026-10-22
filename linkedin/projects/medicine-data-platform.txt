@@ -8,4 +8,4 @@ Modelled protocols, surveys and their relationships on FHIR resources, using OMO
 Outcome:
 Delivered phased implementations against a product plan, ran client demos, and shifted the project's requirements from discussions to wireframed workflows and E2E implementation.
 
-Tech: FHIR, OMOP, LOINC, RBAC, Docker Compose, Playwright, AI-assisted development, Requirements & architecture design
+Tech: FHIR, OMOP, LOINC, RBAC, Docker Compose, AWS ECS, Playwright, AI-assisted development, Requirements & architecture design

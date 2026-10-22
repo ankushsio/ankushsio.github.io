@@ -82,7 +82,7 @@ The platform where clinical trial study teams design and run trials and particip
 - Mapped business entitlements into an enterprise identity flow federated with Microsoft Entra, enforcing endpoint security and data-level response filtering through JWT claims  
   <sub>source: resume-draft</sub>
 
-**Tech:** Java, Spring Boot, Kotlin, Google Cloud Pub/Sub, Cloud Run, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, Gradle, Microsoft Entra, JWT
+**Tech:** Java, Spring Boot, Kotlin, Google Cloud Pub/Sub, Cloud Run, Microservices, Terraform, FHIR / HAPI, Docker, Server-Sent Events, RBAC, Microsoft Graph API, Flyway, Gradle, Microsoft Entra, JWT
 
 
 #### AR Surgical Navigation
@@ -199,7 +199,7 @@ Current project. A FHIR-native platform for clinical protocols and surveys, mode
 - Simplified environment setup so a new developer needs only the source and terminology files, with everything else provisioned automatically  
   <sub>source: timesheet:2026-06</sub>
 
-**Tech:** FHIR, OMOP, LOINC, RBAC, Docker Compose, Playwright, AI-assisted development, Requirements & architecture design
+**Tech:** FHIR, OMOP, LOINC, RBAC, Docker Compose, AWS ECS, Playwright, AI-assisted development, Requirements & architecture design
 
 
 #### Retinal Video Biomarker Research
@@ -299,9 +299,9 @@ My first project. Migrating a command protocol off protobuf and hardening how th
 ## Skills
 
 - **Languages:** Python, Java, Kotlin, JavaScript, TypeScript
-- **Backend:** Spring Boot, Node.js, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture
+- **Backend:** Spring Boot, Node.js, REST APIs, Server-Sent Events (SSE), RabbitMQ, Google Cloud Pub/Sub, Event-driven architecture, Microservices
 - **Databases:** PostgreSQL, SQL, Redis, Flyway (migrations)
-- **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, AWS (Lambda, Step Functions), Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), Observability (Sentry, Graylog)
+- **Cloud Devops:** Google Cloud Platform (GCP), Cloud Run, AWS (Lambda, Step Functions, ECS), Terraform, Docker, CI/CD pipelines, Infrastructure as code (IaC), Observability (Sentry, Graylog)
 - **Domain:** HL7 FHIR, OMOP, LOINC, Service integration (EHR, surveys, scheduling), Clinical trial systems
 - **Security:** Role-based access control (RBAC), Authentication & authorization, OAuth / token-based auth, Microsoft Graph API, Static analysis remediation, Microsoft Entra, JWT
 - **Ml Imaging:** Computer vision, Image registration, Signal processing (FFT/DFT), Hyperspectral imaging, OCR / handwriting recognition, VTK, PyTorch, ONNX, TensorRT
