@@ -32,13 +32,25 @@ so instead of silently shipping the phone-free PDF.
 
 ## Tailoring for a job description
 
+Job-specific variants are gitignored (`resume/variants/*`, except `base.json`): they name
+the employer being applied to, and this repo is public. Keep them local.
+
 ```bash
 cp resume/variants/base.json resume/variants/acme.json
 # edit summary, choose bullets, rewrite wording to match the JD
 python scripts/render_resume.py acme
 python scripts/ats_check.py acme path/to/jd.txt
+python scripts/diff_resume.py acme          # side-by-side diff vs the PDF the site ships
 cp resume/build/acme/resume.pdf ~/applications/acme.pdf
 ```
+
+`diff_resume.py` opens a side-by-side view in the browser
+(`resume/build/<variant>/vs-<other>.html`): what the page actually says, pulled back out of
+both rendered PDFs, one bullet per row. Reworded bullets sit on one row with the changed
+words marked, moved bullets are tagged as moved, and "changes only" hides the rest.
+`--against base` compares to another variant, `--live` to the PDF on the site right now,
+`--git` also prints a terminal diff, and `--no-open` skips the browser. A plain
+`vs-<other>.diff` is saved alongside.
 
 **This is not pure selection.** Lifting bullets verbatim from `career.json` would both
 overflow one page and read generically. `career.json` is the *evidence base*; a variant may

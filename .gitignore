@@ -49,5 +49,10 @@ venv/
 # Resume render output (the shipped PDF is copied into site/public/)
 resume/build/
 
+# Job-specific resume variants stay local: they name the employer being applied to.
+# Only the base variant, which renders the PDF the site ships, is tracked.
+resume/variants/*
+!resume/variants/base.json
+
 # Typst binary fetched by scripts/publish_resume_pdf.py on a deploy
 .typst/
